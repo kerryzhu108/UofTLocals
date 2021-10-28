@@ -1,0 +1,79 @@
+.App {
+    text-align: center;
+    margin-left: 300px;
+    margin-right: 300px;
+    height: 100%;
+    padding-bottom: 50px;
+  }
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  #nav h3{
+    float: left;
+  }
+  #nav ul{
+    float: right;
+  }
+  .bold {
+    font-weight: bold;
+  }
+  #banner {
+    width: 100%;
+    top: 800px;
+    left: 0;
+  }
+  #bannerDesc {
+    position: absolute;
+    background-color: rgb(31, 56, 122);
+    color: white;
+    opacity: 0.9;
+    top: 150px;
+    left: 60px;
+    border-radius: 30px;
+    padding: 30px;
+    text-align: left;
+  }
+  #bannerDesc h3 {
+    font-size: 50px;
+    line-height: 0.8;
+    font-weight: bold;
+    margin-bottom: 1px;
+  }
+  #bannerDesc p {
+    margin-top: 10px;
+  }
+  #browseLabel {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 3px;
+  }
+  #browseContainer {
+    border: 2px solid;
+    margin-left: 100px;
+    margin-right: 100px;
+    overflow: hidden;
+    padding-right: 40px;
+  }
+  #filterBar {
+    float: middle;
+    padding: 20px;
+  }
+  #filter {
+    height: 30px;
+    width: 30px;
+    float: left;
+    margin: 10px;
+  }
+  .catagories {
+    float: left;
+    margin: 10px;
+    padding: 5px;
+  }
+  
