@@ -1,0 +1,12 @@
+.announcement-box {
+    padding: 20px;
+    width: 50px;
+    flex-grow: 1;
+}
+
+.announcement-box .header h1 {
+    font-size: 16pt;
+    padding: 0px;
+    text-transform: uppercase;
+    color: #141414;
+}

@@ -1,0 +1,18 @@
+.header {
+    height: 60px;
+    width: 100%;
+    display: inline-block;
+}
+
+.header .logo {
+    float: left;
+    text-transform: uppercase;
+    line-height: 60px;
+    margin: 0px;
+    padding-left: 20px;
+}
+
+.header .links {
+    float: right;
+    height: 60px;
+}
