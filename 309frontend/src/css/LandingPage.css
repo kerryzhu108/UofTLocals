@@ -15,6 +15,9 @@
     font-size: calc(10px + 2vmin);
     color: white;
   }
+  #bannerWrapper {
+    position: relative;
+  }
   #nav h3{
     float: left;
   }

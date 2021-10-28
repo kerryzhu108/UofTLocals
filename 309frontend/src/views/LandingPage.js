@@ -26,7 +26,7 @@ class LandingPage extends React.Component {
                     <ul>Login / SignUp</ul>
                     <ul style={{fontWeight: 'bold'}}>Browse</ul>
                 </div>
-                <div style={{position: "relative"}}>
+                <div id='bannerWrapper'>
                     <img id='banner' src={bannerImg} alt="resturant"/>
                     <div id='bannerDesc'>
                     <h3> UOFT <br/> LOCALS</h3>
