@@ -1,0 +1,39 @@
+label {
+	float:left;
+	color: grey;
+}
+
+input {
+	width: 200px;
+	float:left
+}
+
+.loginElements {
+	border: 2px solid #cccccc;
+	background-color: white;
+	padding: 10px;
+	margin:auto;
+	margin-top:10px;
+	width: 500px;
+}
+
+#confirmButton {
+	width:210px;
+	height: 30px;
+}
+
+.blue {
+	color: #002451;
+}
+
+.red {
+	color: red;
+}
+
+.grey {
+	color: grey;
+}
+
+.small {
+	font-size: 10px;
+}

@@ -1,0 +1,43 @@
+.loginElements {
+	border: 2px solid #cccccc;
+	background-color: white;
+	padding: 10px;
+	margin:auto;
+	margin-top:10px;
+	width: 500px;
+	text-align: center;
+}
+
+#confirmButtonBusiness {
+	background-color: #f1592a;
+	color: white;
+	height:30px;
+	width: 210px;
+}
+
+#confirmButtonStudent {
+	background-color: #8cc63f;
+	color: white;
+	height:30px;
+	width: 210px;
+}
+
+.small {
+	font-size: 10px;
+}
+
+.orange {
+	color: #f1592a;
+}
+
+.green {
+	color: #8cc63f;
+}
+
+.red {
+	color: red;
+}
+
+.grey {
+	color: grey;
+}

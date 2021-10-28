@@ -1,0 +1,17 @@
+label {
+	float:left;
+	color: grey;
+}
+
+input {
+	width: 200px;
+	float:left
+}
+
+.red {
+	color: red;
+}
+
+.grey {
+	color: grey;
+}

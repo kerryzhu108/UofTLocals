@@ -1,0 +1,78 @@
+
+h5 {
+	font-size: 12px;
+}
+
+.loginElements {
+	border: 2px solid #cccccc;
+	background-color: white;
+	padding: 10px;
+	margin:auto;
+	margin-top:10px;
+	width: 500px;
+	text-align: center;
+}
+
+#businessConfirmButton {
+	background-color: #f1592a;
+	color: white;
+	height:50px;
+	width: 210px;
+}
+
+#studentConfirmButton {
+	background-color: #8cc63f;
+	color: white;
+	height:50px;
+	width: 210px;
+}
+
+.small {
+	font-size: 10px;
+}
+
+.content {
+    font-size: 12px;
+}
+
+.orange {
+	color: #f1592a;
+}
+
+.green {
+	color: #8cc63f;
+}
+
+.post {
+	background-color: white;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px; 
+	padding: 20px;
+	text-align:left;
+	border: 2px solid lightgrey;
+}
+
+.postsContainer {
+	float:left;
+	border: 2px solid #cccccc;
+	background-color: white;
+	padding: 10px;
+	margin:auto;
+	margin-top:10px;
+	width: 500px;
+	text-align: center;
+	margin-left:40px;
+}
+
+.grey {
+	color: grey;
+}
+
+.removeButton {
+	background-color: red;
+	color:white;
+	width:auto;
+	float:right
+}
