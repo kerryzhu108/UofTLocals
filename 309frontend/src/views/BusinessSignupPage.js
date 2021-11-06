@@ -6,8 +6,9 @@ import Link from "../components/Link";
 class SignupPage extends React.Component {
 
     state = {
-        firstname: "",
-        lastname: "",
+        name: "",
+        category: "",
+        location: "",
         username: "",
         password: "",
         confirmation: "",
@@ -23,8 +24,8 @@ class SignupPage extends React.Component {
         })
     }
 
-    addStudent = (event) => {
-        /* this function will contain code to add a student to the system */
+    addBusiness = (event) => {
+        /* this function will contain code to add a business to the system */
         if (this.state.password !== this.state.confirmation) {
             this.setState({ message: "Passwords do not match." })
         } else {
@@ -41,12 +42,16 @@ class SignupPage extends React.Component {
                 <div className="loginElements">
                     <table>
                         <tr>
-                            <td><label>First name: <span className="red">*</span></label></td>
-                            <td><input name="firstname" value={ this.state.firstname } onChange={ this.handleInputChange}/></td>
+                            <td><label>Name: <span className="red">*</span></label></td>
+                            <td><input name="firstname" value={ this.state.name } onChange={ this.handleInputChange}/></td>
                         </tr>
                         <tr>
-                            <td><label>Last name: <span className="red">*</span></label></td>
-                            <td><input name="lastname" value={ this.state.lastname } onChange={ this.handleInputChange}/></td>
+                            <td><label>Location: <span className="red">*</span></label></td>
+                            <td><input name="lastname" value={ this.state.location } onChange={ this.handleInputChange}/></td>
+                        </tr>
+                        <tr>
+                            <td><label>Category: <span className="red">*</span></label></td>
+                            <td><input name="lastname" value={ this.state.category } onChange={ this.handleInputChange}/></td>
                         </tr>
                         <tr>
                             <td><label>Username: <span className="red">*</span></label></td>
@@ -66,19 +71,19 @@ class SignupPage extends React.Component {
                                     <span className="red">*</span> required information
                                 </p>
                             </td>
-                            <td><input  id="confirmButtonStudent" type="submit" value="Sign up as a student" onClick={ this.addStudent }/></td>
+                            <td><input  id="confirmButtonBusiness" type="submit" value="Sign up as a business" onClick={ this.addBusiness }/></td>
                         </tr>
                         <tr>
                             <td/>
                             <td><label><span className="red small"> {this.state.message}</span></label></td>
                         </tr>
                         <tr>
-                            <td colSpan="2">
+                            <td colspan="2">
                                 <span className="small">Already a member?
                                     <a href="/login">Login</a>
                                 </span>
-                                <span className="small">Not a student?
-                                    <a href="/businessSignup">Sign up as a business</a>
+                                <span className="small">Not a business?
+                                    <a href="/signup">Sign up as a student</a>
                                 </span>
                             </td>
                         </tr>

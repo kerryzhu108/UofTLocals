@@ -6,6 +6,7 @@ import LoginPage from './views/LoginPage.js';
 import SignupPage from './views/SignupPage.js';
 import StudentProfile from './views/StudentProfilePage.js';
 import AdminPanel from './views/AdminPanelPage.js';
+import BusinessSignupPage from "./views/BusinessSignupPage";
 
 function App() {
     return (
@@ -21,10 +22,13 @@ function App() {
                     <LoginPage/>
                 </Route>
                 <Route path="/signup">
-                    <SignupPage></SignupPage>
+                    <SignupPage/>
+                </Route>
+                <Route path="/businessSignup">
+                    <BusinessSignupPage/>
                 </Route>
                 <Route path="/student-profile">
-                    <StudentProfile></StudentProfile>
+                    <StudentProfile/>
                 </Route>
                 <Route path="/admin-panel">
                     <AdminPanel></AdminPanel>

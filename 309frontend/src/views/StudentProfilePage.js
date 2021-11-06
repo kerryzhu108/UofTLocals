@@ -38,9 +38,9 @@ class StudentProfile extends React.Component {
             <div>
                 <Header>
                     <Link active="true" name="Browse" />
-                    <Link name="Login/Signup" />
+                    <a href="/login">Login/Signup</a>
                 </Header>
-                <div class='postsContainer'>
+                <div className='postsContainer'>
                     <h2> PROFILE INFORMATION </h2>
                     <form>
                         <table className='inputable'>
@@ -83,18 +83,22 @@ class StudentProfile extends React.Component {
                     </form>
                 </div>
                 <div>
-                    <div class='postsContainer'>
+                    <div className='postsContainer'>
                         <h2>COMMENTS / REVIEWS</h2>
-                        <Comment username={this.state.posts[0].user} profile={defaultProfile} content={this.state.posts[0].content} />
-
-                        <div class='post'>
-                            <input class="removeButton" type="submit" value="X"></input>
-                            <h3>{ this.state.posts[0].title }</h3>
-                            <h5>Reviewed: { this.state.posts[0].business }</h5>
-                            <h5>Posted by: { this.state.posts[0].user }</h5>
-                            <h5>Date: { this.state.posts[0].date }</h5>
-                            <span class="grey content">{ this.state.posts[0].content }</span>
-                        </div>
+                        <Comment username={this.state.posts[0].user}
+                                 profile={defaultProfile}
+                                 content={this.state.posts[0].content}/>
+                        <Comment username={this.state.posts[0].user}
+                                 profile={defaultProfile}
+                                 content={this.state.posts[0].content}/>
+                        {/*<div className='post'>*/}
+                        {/*    <input className="removeButton" type="submit" value="X"/>*/}
+                        {/*    <h3>{ this.state.posts[0].title }</h3>*/}
+                        {/*    <h5>Reviewed: { this.state.posts[0].business }</h5>*/}
+                        {/*    <h5>Posted by: { this.state.posts[0].user }</h5>*/}
+                        {/*    <h5>Date: { this.state.posts[0].date }</h5>*/}
+                        {/*    <span className="grey content">{ this.state.posts[0].content }</span>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>
