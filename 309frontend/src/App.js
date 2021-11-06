@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginPage from './views/LoginPage.js';
 import SignupPage from './views/SignupPage.js';
 import StudentProfile from './views/StudentProfilePage.js';
+import AdminPanel from './views/AdminPanelPage.js';
 
 function App() {
     return (
@@ -24,6 +25,9 @@ function App() {
                 </Route>
                 <Route path="/student-profile">
                     <StudentProfile></StudentProfile>
+                </Route>
+                <Route path="/admin-panel">
+                    <AdminPanel></AdminPanel>
                 </Route>
             </Switch>
         </Router>
