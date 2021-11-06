@@ -30,3 +30,13 @@ export const removeBusiness = (panel, business) => {
         businesses: filteredBus
     })
 }
+
+export const removePost = (panel, post) => {
+    const filteredPost = panel.state.posts.filter(b => {
+        return b !== post
+    });
+
+    panel.setState({
+        posts: filteredPost
+    })
+}
