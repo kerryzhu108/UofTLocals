@@ -95,7 +95,7 @@ class AdminPanel extends React.Component {
                         <div>
                             <strong className="subcontainer_title">BUSINESS APPLICATIONS</strong>
                             <SelectButton onChange={this.state.business_applications.sort(function(a,b){
-                                return a.name.localCompare(b.name)
+                                return a.name.localeCompare(b.name)
                             })}></SelectButton>
                             <SearchForm name="Businesses-Search" value="SEARCH" onChange={this.filterApps.bind(this)} classType="search_form"></SearchForm>
                         </div>
@@ -106,7 +106,7 @@ class AdminPanel extends React.Component {
                         <div>
                             <strong className="subcontainer_title">BUSINESSES</strong>
                             <SelectButton onChange={this.state.business_applications.sort(function(a,b){
-                                return a.name.localCompare(b.name)
+                                return a.name.localeCompare(b.name)
                             })}></SelectButton>
                             <SearchForm name="Businesses-Search" value="SEARCH" onChange={this.filterBus.bind(this)} classType="search_form"></SearchForm>
                         </div>
@@ -117,7 +117,7 @@ class AdminPanel extends React.Component {
                         <div>
                             <strong className="subcontainer_title">POSTS</strong>
                             <SelectButton onChange={this.state.business_applications.sort(function(a,b){
-                                return a.name.localCompare(b.name)
+                                return a.name.localeCompare(b.name)
                             })}></SelectButton>
                             <SearchForm name="Businesses-Search" value="SEARCH" onChange={this.filterPosts.bind(this)} classType="search_form2"></SearchForm>
                             <Post name={this.state.posts[0].name} message={this.state.posts[0].content}></Post>
