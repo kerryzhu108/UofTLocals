@@ -3,16 +3,6 @@ h5 {
 	font-size: 12px;
 }
 
-/*.loginElements {*/
-/*	border: 2px solid #cccccc;*/
-/*	background-color: white;*/
-/*	padding: 10px;*/
-/*	margin:auto;*/
-/*	margin-top:10px;*/
-/*	width: 500px;*/
-/*	text-align: center;*/
-/*}*/
-
 #businessConfirmButton {
 	background-color: #f1592a;
 	color: white;
@@ -27,9 +17,9 @@ h5 {
 	width: 210px;
 }
 
-/*.small {*/
-/*	font-size: 10px;*/
-/*}*/
+.small {
+	font-size: 10px;
+}
 
 .content {
     font-size: 12px;
@@ -43,27 +33,17 @@ h5 {
 	color: #8cc63f;
 }
 
-.post {
-	background-color: white;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px; 
-	padding: 20px;
-	text-align:left;
-	border: 2px solid lightgrey;
-}
-
 .postsContainer {
 	float:left;
 	border: 2px solid #cccccc;
 	background-color: white;
 	padding: 10px;
-	margin:auto;
-	margin-top:10px;
 	width: 500px;
 	text-align: center;
-	margin-left:40px;
+	margin: 10px auto auto 40px;
+	border-radius: 15px;
+	overflow: auto;
+	box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
 }
 
 .grey {

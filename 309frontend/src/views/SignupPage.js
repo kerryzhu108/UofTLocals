@@ -11,9 +11,11 @@ class SignupPage extends React.Component {
         username: "",
         password: "",
         confirmation: "",
-        message: ""
+        message: "",
+        current_usernames: ["user", "user2", "admin"]
     }
 
+    /* Update the state when user types in information. */
     handleInputChange = (event) => {
         const target = event.target;
         const value = target.value;
@@ -23,10 +25,12 @@ class SignupPage extends React.Component {
         })
     }
 
+    /* This function will contain code to add a student to the system */
     addStudent = (event) => {
-        /* this function will contain code to add a student to the system */
         if (this.state.password !== this.state.confirmation) {
             this.setState({ message: "Passwords do not match." })
+        } else if (this.state.current_usernames.includes(this.state.username)) {
+            this.setState({ message: "Username already taken." })
         } else {
             window.location.href = "/"  // for now, just redirect to the homepage.
         }

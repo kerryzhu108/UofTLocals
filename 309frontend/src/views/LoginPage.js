@@ -7,9 +7,24 @@ class LoginPage extends React.Component {
     state = {
         username: "",
         password: "",
-        message: ""
+        message: "",
+        existing_users: [
+            {
+                username: "user",
+                password: "user"
+            },
+            {
+                username: "user2",
+                password: "user2"
+            },
+            {
+                username: "admin",
+                password: "admin"
+            }
+        ]
     }
 
+    /* Update the state when user types in information. */
     handleInputChange = (event) => {
         const target = event.target;
         const value = target.value;
@@ -19,13 +34,18 @@ class LoginPage extends React.Component {
         })
     }
 
+    /* Validate the username and password inputted by the user. */
     validate = (event) => {
         event.preventDefault()
-        if (this.state.username === "user" && this.state.password === "user") {
-            console.log("success")
+        const results = (this.state.existing_users.map((user) => {
+            if (this.state.username === user.username && this.state.password === user.password) {
+                return 1
+            }
+            return 0
+        }))
+        if (results.includes(1)) {
             window.location.href = "/"
         } else {
-            console.log("fail")
             this.setState({message: "Invalid login credentials. Please try again."})
         }
     }
