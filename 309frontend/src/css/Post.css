@@ -1,0 +1,23 @@
+.post {
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    min-height: 75px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-right:20px;
+    width: 916px;
+    float:left;
+}
+
+.post_header {
+    width: 100%;
+    height: 36px;
+    text-align: left;
+}
+
+.app_header_span {
+    position: absolute;
+    padding: 8px;
+    font-weight: bold;
+    background-color: lightgray;
+}
