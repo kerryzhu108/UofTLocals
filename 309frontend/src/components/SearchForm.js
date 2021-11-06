@@ -7,7 +7,7 @@ class SearchForm extends React.Component {
         const {name, value, onChange, classType} = this.props
         return (
             <form className={classType}>
-                <input className="search_form_text" type="text" id="search_var" name={name} value={value} onChange={onChange}></input>
+                <input className="search_form_text" name={name} value={value} onChange={onChange} placeholder="SEARCH"></input>
             </form>
         );
     }
