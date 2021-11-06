@@ -7,7 +7,7 @@ import Businesses from "../components/Businesses"
 import Post from "../components/Post";
 import SelectButton from "../components/SelectButton";
 import SearchForm from "../components/SearchForm";
-import { acceptApp, denyApp, removeBusiness } from "../actions/AdminPosts";
+import { acceptApp, denyApp, removeBusiness, removePost } from "../actions/AdminPosts";
 
 class AdminPanel extends React.Component {
 
@@ -67,15 +67,15 @@ class AdminPanel extends React.Component {
     }
 
     filterApps(event) {
-        this.setState({apps_search: event.target.value});
+        this.setState({ apps_search: event.target.value });
     }
 
     filterBus(event) {
-        this.setState({businesses_search: event.target.value});
+        this.setState({ businesses_search: event.target.value });
     }
 
     filterPosts(event) {
-        this.setState({posts_search: event.target.value});
+        this.setState({ posts_search: event.target.value });
     }
 
 
@@ -88,40 +88,49 @@ class AdminPanel extends React.Component {
                     <Link name="Login/Signup" />
                 </Header>
                 <div className="panel_title">
-                    <STRONG className="panel_title_text">ADMIN PANEL</STRONG>
+                    <strong className="panel_title_text">ADMIN PANEL</strong>
                 </div>
                 <div className="panel_container">
                     <div className="panel_subcontainer_left">
                         <div>
                             <strong className="subcontainer_title">BUSINESS APPLICATIONS</strong>
-                            <SelectButton onChange={this.state.business_applications.sort(function(a,b){
+                            <SelectButton onChange={this.state.business_applications.sort(function (a, b) {
                                 return a.name.localeCompare(b.name)
                             })}></SelectButton>
-                            <SearchForm name="Businesses-Search" value="SEARCH" onChange={this.filterApps.bind(this)} classType="search_form"></SearchForm>
+                            <SearchForm name="Businesses-Search" value={this.state.apps_search} onChange={this.filterApps.bind(this)} classType="search_form"></SearchForm>
                         </div>
-                        <BusinessApp name={this.state.business_applications[0].name} message={this.state.business_applications[0].content} removeApp={()=>denyApp(this)} addApp={()=>acceptApp(this)}></BusinessApp>
-                        <BusinessApp name={this.state.business_applications[1].name} message={this.state.business_applications[1].content} removeApp={()=>denyApp(this)} addApp={()=>acceptApp(this)}></BusinessApp>
+                        {this.state.business_applications.map((business) => {
+                            if (business.name.toLocaleLowerCase().includes(this.state.apps_search.toLowerCase())) {
+                                return <BusinessApp name={business.name} message={business.content} removeApp={() => denyApp(this, business)} addApp={() => acceptApp(this, business)} />
+                            }
+                        })}
                     </div>
                     <div className="panel_subcontainer_right">
                         <div>
                             <strong className="subcontainer_title">BUSINESSES</strong>
-                            <SelectButton onChange={this.state.business_applications.sort(function(a,b){
+                            <SelectButton onChange={this.state.businesses.sort(function (a, b) {
                                 return a.name.localeCompare(b.name)
                             })}></SelectButton>
-                            <SearchForm name="Businesses-Search" value="SEARCH" onChange={this.filterBus.bind(this)} classType="search_form"></SearchForm>
+                            <SearchForm name="Businesses-Search" value={this.state.businesses_search} onChange={this.filterBus.bind(this)} classType="search_form"></SearchForm>
                         </div>
-                        <Businesses> name={this.state.businesses[0].name} message={this.state.businesses[0].content} email={this.state.businesses[0].email} removeBus={()=>removeBusiness(this)}</Businesses>
-                        <Businesses> name={this.state.businesses[1].name} message={this.state.businesses[1].content} email={this.state.businesses[1].email} removeBus={()=>removeBusiness(this)}</Businesses>
+                        {this.state.businesses.map((business) => {
+                            if (business.name.toLocaleLowerCase().includes(this.state.businesses_search.toLowerCase())) {
+                                return <Businesses name={business.name} message={business.content} email={business.email} removeBus={() => removeBusiness(this, business)} />
+                            }
+                        })}
                     </div>
                     <div className="posts_div">
                         <div>
                             <strong className="subcontainer_title">POSTS</strong>
-                            <SelectButton onChange={this.state.business_applications.sort(function(a,b){
+                            <SelectButton onChange={this.state.posts.sort(function (a, b) {
                                 return a.name.localeCompare(b.name)
                             })}></SelectButton>
-                            <SearchForm name="Businesses-Search" value="SEARCH" onChange={this.filterPosts.bind(this)} classType="search_form2"></SearchForm>
-                            <Post name={this.state.posts[0].name} message={this.state.posts[0].content}></Post>
-                            <Post name={this.state.posts[1].name} message={this.state.posts[1].content}></Post>
+                            <SearchForm name="Businesses-Search" value={this.state.posts_search} onChange={this.filterPosts.bind(this)} classType="search_form2"></SearchForm>
+                            {this.state.posts.map((post) => {
+                                if (post.name.toLocaleLowerCase().includes(this.state.posts_search.toLowerCase())) {
+                                    return <Post name={post.name} message={post.content} removePost={() => removePost(this, post)}/>
+                                }
+                            })}
                         </div>
                     </div>
                 </div>
