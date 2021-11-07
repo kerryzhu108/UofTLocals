@@ -8,7 +8,7 @@
 
 **Postings Usage:** this interface allows for the admin to manage postings on the site. Here, all postings are listed and can be sorted by name or date, or searched specifically by name. The postings can also be removed.
 
-**Header:** as per all other views, there is a header which routes to the browse page. Login/Signup pages are not accessible as someone viewing this page is already logged in as an admin.
+**Header:** as per all other views, there is a header which routes to the browse page keeping the admin logged in as a user. Login/Signup pages are not accessible as someone viewing this page is already logged in as an admin. There is also a logout route, which logs the user out and goes back to the landing page.
 
 **Other Information:** the admin panel is directly accessed upon logging in as an admin.
 
