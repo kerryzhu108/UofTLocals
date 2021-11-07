@@ -9,6 +9,8 @@ import StudentProfile from './views/StudentProfilePage.js';
 import AdminPanel from './views/AdminPanelPage.js';
 import BusinessProfileUserDummy from './views/BusinessProfileUserDummy.js';
 import BusinessProfileBusinessDummy from './views/BusinessProfileBusinessDummy.js';
+import LandingPageBusinessDummy from './views/LandingPageBusinessDummy.js';
+import LandingPageUserDummy from './views/LandingPageUserDummy.js';
 
 function App() {
     return (
@@ -41,6 +43,13 @@ function App() {
                 <Route path="/admin-panel">
                     <AdminPanel></AdminPanel>
                 </Route>
+                <Route path="/landing-business">
+                    <LandingPageBusinessDummy/>
+                </Route>
+                <Route path="/landing-user">
+                    <LandingPageUserDummy />
+                </Route>
+
             </Switch>
         </Router>
     );

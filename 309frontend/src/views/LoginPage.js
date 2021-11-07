@@ -37,9 +37,9 @@ class LoginPage extends React.Component {
         }))
         // hard-coded redirection based on which of the three users signed in.
         if (results[0] === 1) {
-            window.location.href = "/"                 // normal user
+            window.location.href = "/landing-user"                 // normal user
         } else if (results[1] === 1) {
-            window.location.href = "/"                 // business user
+            window.location.href = "/landing-business"                 // business user
         } else if (results[2] === 1) {
             window.location.href = "/admin-panel"      // admin
         } else {
