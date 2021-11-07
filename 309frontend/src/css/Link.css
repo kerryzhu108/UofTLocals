@@ -1,4 +1,4 @@
-a {
+a.link {
     line-height: 60px;
     text-transform: uppercase;
     text-decoration: none;
@@ -11,7 +11,7 @@ a {
     transition: opacity 0.1s ease;
 }
 
-a:hover {
+a.link:hover {
     opacity: 1;
 }
 

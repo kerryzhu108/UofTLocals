@@ -4,7 +4,7 @@ import "../css/Link.css";
 function Link(props) {
 
     return (
-        <a href={props.href}> {props.name}</a >
+        <a class="link" href={props.href}> {props.name}</a >
     );
 }
 
