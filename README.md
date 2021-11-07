@@ -48,7 +48,7 @@ information to be given. They are accessible at `/signup` and `/business-signup`
 for issues, such as a duplicate username. Links at the bottom of the page allow 
 navigation between the two sign up pages, and the login page mentioned above.
 
-Both the login and sign up pages can be accessed using links in the header throughout the app.
+Both the login and sign up pages can be accessed using links in the header on the landing page.
 
 ## Student Profile
 

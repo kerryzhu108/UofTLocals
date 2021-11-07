@@ -112,7 +112,7 @@ class StudentProfile extends React.Component {
             <div>
                 <Header>
                     <Link href="/" name="Browse"/>
-                    <Link name="Signed in as: user"/>
+                    <Link name="user"/>
                 </Header>
 
                 <div className='postsContainer'>

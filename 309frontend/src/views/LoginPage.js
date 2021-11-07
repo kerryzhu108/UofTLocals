@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from "../components/Header";
 import LoginInput from "../components/LoginInput";
+import Link from "../components/Link";
 
 class LoginPage extends React.Component {
 
@@ -33,11 +34,11 @@ class LoginPage extends React.Component {
         }))
         // hard-coded redirection based on which of the three users signed in.
         if (results[0] === 1) {
-            window.location.href = "/landing-user"                 // normal user
+            window.location.href = "/landing-user"      // normal user
         } else if (results[1] === 1) {
-            window.location.href = "/landing-business"                 // business user
+            window.location.href = "/landing-business"  // business user
         } else if (results[2] === 1) {
-            window.location.href = "/admin-panel"      // admin
+            window.location.href = "/admin-panel"       // admin
         } else {
             this.setState({username: "", password: "", message: "Invalid login credentials. Please try again."})
         }
@@ -63,7 +64,9 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
-                <Header/>
+                <Header>
+                    <Link href="/" name="Browse" />
+                </Header>
                 <div className="loginElements">
                     <p>Please login to continue.</p>
                     <LoginInput username={this.state.username}
