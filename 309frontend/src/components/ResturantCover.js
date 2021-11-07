@@ -17,12 +17,20 @@ function ResturantCover(props) {
             padding: '3px',
             marginRight: '10px'
         },
-        resturantName: {
-            float: 'left',
-            marginTop: '5px',
-            marginBottom: '1px',
+        businessHeaders: {
+            marginTop: '10px',
         },
-        resturantDesc: {
+        businessTitle: {
+            float: 'left',
+            margin: '1px',
+        },
+        businessType: {
+            float: 'right',
+            margin: '1px',
+            marginRight: '5px',
+            fontSize: '10px',
+        },
+        businessDesc: {
             float: 'left',
             marginTop: '-5px',
         }
@@ -32,9 +40,12 @@ function ResturantCover(props) {
     return (
         <div style={styles.wrapper}>
             <img src={props.img} style={styles.img} alt='Resturant'></img>
-            <h3 style={styles.resturantName}>{props.name}</h3>
+            <div style={styles.businessHeaders}>
+                <h3 style={styles.businessTitle}>{props.name}</h3>
+                <h3 style={styles.businessType}>{props.businessType}</h3>
+            </div>
             <br/><br/>
-            <p style={styles.resturantDesc}>{props.desc}</p>
+            <p style={styles.businessDesc}>{props.desc}</p>
         </div>
     );
 }

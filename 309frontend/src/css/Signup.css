@@ -1,18 +1,11 @@
-.loginElements {
-	border: 2px solid #cccccc;
-	background-color: white;
-	padding: 10px;
-	margin:auto;
-	margin-top:10px;
-	width: 500px;
-	text-align: center;
-}
-
 #confirmButtonBusiness {
 	background-color: #f1592a;
 	color: white;
 	height:30px;
 	width: 210px;
+	border-radius: 5px;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 #confirmButtonStudent {
@@ -20,11 +13,21 @@
 	color: white;
 	height:30px;
 	width: 210px;
+	border-radius: 5px;
+	font-weight: bold;
+	cursor: pointer;
 }
 
-.small {
-	font-size: 10px;
+#confirmButtonStudent:hover {
+	box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
 }
+
+#confirmButtonBusiness:hover {
+	box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+}
+
+
+/* Useful colours */
 
 .orange {
 	color: #f1592a;
@@ -34,10 +37,10 @@
 	color: #8cc63f;
 }
 
-.red {
-	color: red;
-}
-
 .grey {
 	color: grey;
+}
+
+.red {
+	color: red;
 }
