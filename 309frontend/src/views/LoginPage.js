@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "../components/Header";
 import "../css/Login.css"
+import LoginInput from "../components/LoginInput";
 
 class LoginPage extends React.Component {
 
@@ -9,18 +10,9 @@ class LoginPage extends React.Component {
         password: "",
         message: "",
         existing_users: [
-            {
-                username: "user",
-                password: "user"
-            },
-            {
-                username: "user2",
-                password: "user2"
-            },
-            {
-                username: "admin",
-                password: "admin"
-            }
+            { username: "user", password: "user" },
+            { username: "user2", password: "user2"},
+            { username: "admin", password: "admin"}
         ]
     }
 
@@ -55,33 +47,19 @@ class LoginPage extends React.Component {
             <div>
                 <Header/>
                 <div className="loginElements">
-                    <table>
-                        <tr>
-                            <td><label>Username: </label></td>
-                            <td><input name="username" value={ this.state.username } onChange={ this.handleInputChange}/></td>
-                        </tr>
-                        <tr>
-                            <td><label>Password: </label></td>
-                            <td><input name="password" value={ this.state.password } onChange={ this.handleInputChange}/></td>
-                        </tr>
-                        <tr>
-                            <td/>
-                            <td><input  id="confirmButton" type="submit" value="LOGIN" onClick={ this.validate }/></td>
-                        </tr>
-                        <tr>
-                            <td/>
-                            <td><label><span className="red small"> {this.state.message}</span></label></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <span className="small">New member? Sign up as a
-                                    <a href="/signup">student</a> or
-                                    <a href="/businessSignup"> business</a>
-                                </span>
-                            </td>
-                        </tr>
-                    </table>
+                    <p>Please login to continue.</p>
+                    <LoginInput username={ this.state.username }
+                                password={ this.state.password }
+                                onChange={ this.handleInputChange }
+                                onClick={ this.validate }/>
+                    <span className="red small"> { this.state.message }</span>
+                    <br/>
+                    <span className="small">New member? Sign up as a
+                        <a href="/signup">student</a> or
+                        <a href="/businessSignup"> business</a>
+                    </span>
                 </div>
+
             </div>
         )
     }
