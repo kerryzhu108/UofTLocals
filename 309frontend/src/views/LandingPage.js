@@ -9,9 +9,25 @@ class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            resturantNames: ["John's", "Daniel's", "Jack's", "Lee's"],
+            resturants: [],
             search: ''
         };
+    }
+
+    componentDidMount() {
+        window.addEventListener('load', this.fetchResturants.bind(this));
+    }
+
+    fetchResturants() {
+        // fetch all active resturants and their descriptions from server
+        this.setState({
+            resturants: [
+                {name: "John's", desc: 'Some desc1'},
+                {name: "Dan's", desc: 'Some desc2'},
+                {name: "Lee's", desc: 'Some desc3'},
+                {name: "Jack's", desc: 'Some desc4'},
+            ]
+        })
     }
 
     filterEvents(event) {
@@ -44,9 +60,9 @@ class LandingPage extends React.Component {
                     </select>
                     <input placeholder='Search Names' class='catagories' onChange={this.filterEvents.bind(this)}></input>
                     </div>
-                    {this.state.resturantNames.map((names, id)=>{
-                        if (names.toLocaleLowerCase().includes(this.state.search.toLowerCase())) {
-                            return <ResturantCover key={id} img={sampleStoreImg} name={names} desc='some description'/>
+                    {this.state.resturants.map((resturant, id)=>{
+                        if (resturant['name'].toLocaleLowerCase().includes(this.state.search.toLowerCase())) {
+                            return <ResturantCover key={id} img={sampleStoreImg} name={resturant['name']} desc={resturant['desc']}/>
                         }
                     })}
                 </div> 
