@@ -9,11 +9,7 @@ class LoginPage extends React.Component {
         username: "",
         password: "",
         message: "",
-        existing_users: [
-            {username: "user", password: "user"},
-            {username: "user2", password: "user2"},
-            {username: "admin", password: "admin"}
-        ]
+        existing_users: []
     }
 
     /* Update the state when user types in information. */
@@ -43,8 +39,25 @@ class LoginPage extends React.Component {
         } else if (results[2] === 1) {
             window.location.href = "/admin-panel"      // admin
         } else {
-            this.setState({message: "Invalid login credentials. Please try again."})
+            this.setState({username: "", password: "", message: "Invalid login credentials. Please try again."})
         }
+    }
+
+    /* Set the state variables upon loading. */
+    componentDidMount() {
+        window.addEventListener('load', this.getExistingUsers.bind(this));
+    }
+
+    /* Get all <username>, <password> combos currently in the system. */
+    getExistingUsers() {
+        // for phase 2 this information will come from a server
+        this.setState({
+            existing_users: [
+                {username: "user", password: "user"},
+                {username: "user2", password: "user2"},
+                {username: "admin", password: "admin"}
+            ]
+        })
     }
 
     render() {

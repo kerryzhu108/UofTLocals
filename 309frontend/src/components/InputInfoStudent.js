@@ -32,7 +32,7 @@ class InputInfoStudent extends React.Component {
                     </tr>
                     <tr>
                         <td><p className="grey small"><span className="red">*</span> required information</p></td>
-                        <td><input id="confirmButton" type="submit" value="Submit" onClick={onClick}/></td>
+                        <td><input id="confirmButtonStudent" type="submit" value="Submit" onClick={onClick}/></td>
                     </tr>
                     </tbody>
                 </table>

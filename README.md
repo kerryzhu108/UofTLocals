@@ -27,3 +27,36 @@
 There are three hard-coded version of this page located at `/business-profile`, `/business-profile-user` and `business-profile-user2` which displays the appropriate version of the page depending on whichever user is logged in.
 
 Users can access this page from the browse section (in the landing page). Business users can also access their pages from their profile in the header (once they're logged in).
+
+## Login and Sign up
+
+**Description**: provides the ability for users to sign up and log in.
+
+**Usage**: three different users are hard-coded into the app. They are:
+
+* `username: user, password: user` a regular student user.
+* `username: user2, password: user2` a business user.
+* `username: admin, password: admin` an admin user.
+
+Each level of user account will have different privileges, as outlined in other sections. 
+Upon entering credentials to at the login page, located at `/login`, a simple verification will be done to check whether 
+the given credentials match one of the three hard-coded users mentioned above. If so, the user will be redirected as 
+appropriate. If not, a message will outline the error encountered.
+
+**Sign up**: two separate sign up pages are included -- one for students and one for businesses. They require different 
+information to be given. They are accessible at `/signup` and `/business-signup`. The given information will be checked 
+for issues, such as a duplicate username. Links at the bottom of the page allow 
+navigation between the two sign up pages, and the login page mentioned above.
+
+Both the login and sign up pages can be accessed using links in the header throughout the app.
+
+## Student Profile
+
+**Description**: a dashboard page where student users can edit their profile information, and view their past comments 
+and reviews.
+
+**Usage**: the student profile is accessible at `/student-profile`. Once on the page, 
+the method to edit information is similar to the sign up page -- although, the given password will be verified before 
+making changes to the student's information. 
+
+This hard-coded sample student profile page is accessible when logged-in as the student user, `username: user, password: user`.
