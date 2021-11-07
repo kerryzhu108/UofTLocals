@@ -35,7 +35,7 @@ class BusinessProfileBusinessDummy extends React.Component {
         return (
             <div>
                 <Header>
-                    <Link href="/" active="true" name="Browse" />
+                    <Link href="/landing-business" active="true" name="Browse" />
                     <Link href="/business-profile-user2" name="user2" />
                 </Header>
                 <Container>
