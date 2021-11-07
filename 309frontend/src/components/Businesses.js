@@ -18,7 +18,8 @@ class Businesses extends React.Component {
                     </button>
                 </div>
                 <p className="business_app_text">
-                    {message}
+                    {message}<br/>
+                    Email: {email}
                 </p>
             </div>
         );

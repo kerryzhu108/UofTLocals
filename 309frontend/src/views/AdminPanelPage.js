@@ -94,21 +94,21 @@ class AdminPanel extends React.Component {
                     <div className="panel_subcontainer_left">
                         <div>
                             <strong className="subcontainer_title">BUSINESS APPLICATIONS</strong>
-                            <SelectButton onChange={this.state.business_applications.sort(function (a, b) {
+                            <SelectButton change={this.state.business_applications.sort(function (a, b) {
                                 return a.name.localeCompare(b.name)
                             })}></SelectButton>
                             <SearchForm name="Businesses-Search" value={this.state.apps_search} onChange={this.filterApps.bind(this)} classType="search_form"></SearchForm>
                         </div>
                         {this.state.business_applications.map((business) => {
                             if (business.name.toLocaleLowerCase().includes(this.state.apps_search.toLowerCase())) {
-                                return <BusinessApp name={business.name} message={business.content} removeApp={() => denyApp(this, business)} addApp={() => acceptApp(this, business)} />
+                                return <BusinessApp name={business.name} message={business.content} removeApp={() => denyApp(this, business)} addApp={() => acceptApp(this, business)} email={business.email}/>
                             }
                         })}
                     </div>
                     <div className="panel_subcontainer_right">
                         <div>
                             <strong className="subcontainer_title">BUSINESSES</strong>
-                            <SelectButton onChange={this.state.businesses.sort(function (a, b) {
+                            <SelectButton change={this.state.businesses.sort(function (a, b) {
                                 return a.name.localeCompare(b.name)
                             })}></SelectButton>
                             <SearchForm name="Businesses-Search" value={this.state.businesses_search} onChange={this.filterBus.bind(this)} classType="search_form"></SearchForm>
@@ -122,7 +122,7 @@ class AdminPanel extends React.Component {
                     <div className="posts_div">
                         <div>
                             <strong className="subcontainer_title">POSTS</strong>
-                            <SelectButton onChange={this.state.posts.sort(function (a, b) {
+                            <SelectButton change={this.state.posts.sort(function (a, b) {
                                 return a.name.localeCompare(b.name)
                             })}></SelectButton>
                             <SearchForm name="Businesses-Search" value={this.state.posts_search} onChange={this.filterPosts.bind(this)} classType="search_form2"></SearchForm>
