@@ -11,3 +11,19 @@
 **Header:** as per all other views, there is a header which routes to the browse page. Login/Signup pages are not accessible as someone viewing this page is already logged in as an admin.
 
 **Other Information:** the admin panel is directly accessed upon logging in as an admin.
+
+## Business Profile
+**Description**: Displays information for a given business: cover photo, description, business announcements, user comments.
+
+**How to use**:
+
+* If this business belongs to the business user, they have the ability to add announcements to their announcements box.
+
+* Students have the ability to add comments to the comments box of a particular business page.
+
+* Guests do not have the ability to post announcements or comments and may only view comments and announcements posted by other users.
+
+**How to access**:
+There are three hard-coded version of this page located at `/business-profile`, `/business-profile-user` and `business-profile-user2` which displays the appropriate version of the page depending on whichever user is logged in.
+
+Users can access this page from the browse section (in the landing page). Business users can also access their pages from their profile in the header (once they're logged in).
