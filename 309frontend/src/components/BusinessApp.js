@@ -12,10 +12,10 @@ class BusinessApp extends React.Component {
                 <div className="app_header">
                     <span className="app_header_span">{name}</span>
                     <button type="button" className="business_app_buttons" onClick={removeApp}>
-                        <img className='images' src={x} />
+                        <img className='images' src={x} alt=""/>
                     </button>
                     <button type="button" className="business_app_buttons" onClick={addApp}>
-                        <img className='images' src={checkmark} />
+                        <img className='images' src={checkmark} alt=""/>
                     </button>
                 </div>
                 <p className="business_app_text">
