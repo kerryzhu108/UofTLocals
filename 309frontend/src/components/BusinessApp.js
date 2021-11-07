@@ -6,7 +6,7 @@ import x from "../images/x.png";
 
 class BusinessApp extends React.Component {
     render() {
-        const { name, message, removeApp, addApp, email} = this.props
+        const { name, message, removeApp, addApp, email, date} = this.props
         return (
             <div className="business_app">
                 <div className="app_header">
@@ -20,7 +20,8 @@ class BusinessApp extends React.Component {
                 </div>
                 <p className="business_app_text">
                     {message} <br/>
-                    Email: {email}
+                    Email: {email} <br/>
+                    Date Applied: {date}
                 </p>
 
             </div>

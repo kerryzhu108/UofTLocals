@@ -5,7 +5,7 @@ import x from "../images/x.png";
 
 class Businesses extends React.Component {
     render() {
-        const { name, message, email, removeBus, link} = this.props
+        const { name, message, email, removeBus, link, date} = this.props
         return (
             <div className="business_app">
                 <div className="app_header">
@@ -19,7 +19,8 @@ class Businesses extends React.Component {
                 </div>
                 <p className="business_app_text">
                     {message}<br/>
-                    Email: {email}
+                    Email: {email} <br/>
+                    Date Applied: {date}
                 </p>
             </div>
         );

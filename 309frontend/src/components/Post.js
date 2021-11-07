@@ -6,7 +6,7 @@ import x from "../images/x.png";
 
 class Post extends React.Component {
     render() {
-        const { name, message, removePost } = this.props
+        const { name, message, removePost, date } = this.props
         return (
             <div className="post">
                 <div className="post_header">
@@ -16,7 +16,8 @@ class Post extends React.Component {
                     </button>
                 </div>
                 <p className="business_app_text">
-                    {message}
+                    {message} <br/>
+                    Date Posted: {date}
                 </p>
             </div>
         );

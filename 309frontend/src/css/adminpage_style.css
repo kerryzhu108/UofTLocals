@@ -66,6 +66,8 @@ a {
     border-radius: 25px;
     overflow: auto;
     display: inline-block;
+    box-shadow: 0 0px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+
 }
 
 .panel_subcontainer_left {
@@ -79,6 +81,8 @@ a {
     min-height: 100px;
     border-radius: 10px;
     margin-left: 20px;
+    box-shadow: 0 0px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+
 }
 
 .panel_subcontainer_right {
@@ -92,6 +96,8 @@ a {
     min-height: 100px;
     border-radius: 10px;
     margin-right: 20px;
+    box-shadow: 0 0px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+
 }
 
 .subcontainer_title {
@@ -114,6 +120,8 @@ a {
     border-radius: 4px;
     font-weight: bold;
     text-align: center;
+    box-shadow: 0 0px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+    cursor: pointer;
 }
 
 .app_header {
@@ -138,6 +146,8 @@ a {
     margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 10px;
+    box-shadow: 0 0px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+
 }
 
 .post {
@@ -149,6 +159,8 @@ a {
     margin-right:20px;
     width: 916px;
     float:left;
+    box-shadow: 0 0px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+
 }
 
 .post_header {

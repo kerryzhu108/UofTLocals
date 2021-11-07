@@ -16,14 +16,14 @@ class AdminPanel extends React.Component {
             {
                 name: "Tom's Turntable",
                 email: "turntable@gmail.com",
-                date: "October 26, 2021",
+                date: "Oct 26 2021",
                 content: "Studies have shown that majority of students rely on music in order to help them through the day, and Tom's Turntable has you covered! We offer a handy selection of various genres and music devices, from vinyls to CDs. Music is just one of the many ways people can express themselves, and we aim to bring out the true colours in all students!",
                 link: "/business-profile"
             },
             {
                 name: "Slurpy Slushies",
                 email: "slushies@yahoo.ca",
-                date: "October 26, 2021",
+                date: "Oct 26 2021",
                 content: "Slurpy Slushies are your local cold drink experts! From slushies to smoothies, we cover all the bases, offering clients a wide selection of flavours and combinations. As an up and coming business, we aim to provide students with door dropping discounts when they advertise their experience at our location on social media!",
                 link: "/business-profile"
             }
@@ -32,15 +32,22 @@ class AdminPanel extends React.Component {
             {
                 name: "U of T Bookstore",
                 email: "bookstore@utoronto.ca",
-                date: "October 10, 2021",
+                date: "Oct 10 2021",
                 content: "The number one shopping spot for UofT students looking for all their textbooks! Founded as a sublet of the University of Toronto Press in 1934, the shop has since been the one stop location for all books, supplies, and school merchandise that any student would require. Located at 214 College Street, Toronto, Ontario, Postal Code M5T 3A1.",
                 link: "/business-profile"
             },
             {
                 name: "Medical Science Cafeteria",
                 email: "medsci@utoronto.ca",
-                date: "October 10, 2021",
+                date: "Oct 10 2021",
                 content: "Located on the Southeast side of campus, the Medical Science Cafeteria is one of the highest volume catering locations at UofT. Here, students can enjoy a wide selection of foods freshly served from our local providers. Located at 1 King's College Circle, Toronto, Ontario, Postal Code M5S 1A8.",
+                link: "/business-profile"
+            },
+            {
+                name: "Chatime College Street",
+                email: "chatime@customer_service.com",
+                date: "Nov 1 2021",
+                content: "Introducing our newest location: Chatime at College Street! Chatime is renouned globally for being one of the most successful bubble tea providers out there. Our newest location intends to provide students on campus with easily accessible bubble tea whenever they are craving it! Located at 199 College Street, Toronto, Ontario.",
                 link: "/business-profile"
             }
         ],
@@ -48,12 +55,16 @@ class AdminPanel extends React.Component {
             {
                 name: "U of T Bookstore",
                 content: "Year opening sale! Students can get 25% off of all varisty mechandising! Furthermore, textbooks are promoted at buy one get one 10% off! Valid while supplies last and for the first 2 weeks of class.",
-                date: "October 15th, 2021"
+                date: "Oct 15 2021"
             },
             {
                 name: "Medical Science Cafeteria",
                 content: "Eat healthy! Students can enjoy a buy one get one 50% off discount on selected products marked \"Healthy\". Promotion valid once per purchase per student.",
-                date: "October 20th, 2021"
+                date: "Oct 20 2021"
+            }, {
+                name: "Chatime College Street",
+                content: "Our 'Grand Opening 2.0' deal! Now that we are back from COVID, buy one large tea and get a voucher for a free medium tea upon future visit. Limit one per customer.",
+                date: "Nov 1 2021"
             }
         ],
         apps_search: '',
@@ -84,26 +95,43 @@ class AdminPanel extends React.Component {
     }
 
     filterType(event) {
-        this.setState({type: event.target.value});
-        if (event.target.value === "(A-Z)") {
+        this.setState({ type: event.target.value });
+        const val = event.target.value;
+        if (val === "(A-Z)") {
             if (event.target.id === "apps") {
-                this.state.business_applications.sort((a,b) => a.name.localeCompare(b.name))
+                this.state.business_applications.sort((a, b) => a.name.localeCompare(b.name))
             } else if (event.target.id === "bus") {
-                this.state.businesses.sort((a,b) => a.name.localeCompare(b.name))
+                this.state.businesses.sort((a, b) => a.name.localeCompare(b.name))
             } else if (event.target.id === "posts") {
-                this.state.posts.sort((a,b) => a.name.localeCompare(b.name))
+                this.state.posts.sort((a, b) => a.name.localeCompare(b.name))
             }
-        } else {
+        } else if (val === "(Z-A)") {
             if (event.target.id === "apps") {
-                this.state.business_applications.sort((a,b) => a.name.localeCompare(b.name))
+                this.state.business_applications.sort((a, b) => a.name.localeCompare(b.name))
                 this.state.business_applications.reverse()
             } else if (event.target.id === "bus") {
-                this.state.businesses.sort((a,b) => a.name.localeCompare(b.name))
+                this.state.businesses.sort((a, b) => a.name.localeCompare(b.name))
                 this.state.businesses.reverse()
             } else if (event.target.id === "posts") {
-                this.state.posts.sort((a,b) => a.name.localeCompare(b.name))
+                this.state.posts.sort((a, b) => a.name.localeCompare(b.name))
                 this.state.posts.reverse()
-            } 
+            }
+        } else if (val === "DateNew") {
+            if (event.target.id === "apps") {
+                this.state.business_applications.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
+            } else if (event.target.id === "bus") {
+                this.state.businesses.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
+            } else if (event.target.id === "posts") {
+                this.state.posts.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
+            }
+        } else if (val === "DateOld") {
+            if (event.target.id === "apps") {
+                this.state.business_applications.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
+            } else if (event.target.id === "bus") {
+                this.state.businesses.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
+            } else if (event.target.id === "posts") {
+                this.state.posts.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
+            }
         }
     }
 
@@ -127,12 +155,14 @@ class AdminPanel extends React.Component {
                                 <option value="Default" disabled>ORDER BY</option>
                                 <option value="(A-Z)">Name (A-Z)</option>
                                 <option value="(Z-A)">Name (Z-A)</option>
+                                <option value="DateNew">Date (Newest to Oldest)</option>
+                                <option value="DateOld">Date (Oldest to Newest)</option>
                             </select>
                             <SearchForm name="Businesses-Search" value={this.state.apps_search} onChange={this.filterApps.bind(this)} classType="search_form"></SearchForm>
                         </div>
                         {this.state.business_applications.map((business) => {
                             if (business.name.toLocaleLowerCase().includes(this.state.apps_search.toLowerCase())) {
-                                return <BusinessApp name={business.name} message={business.content} removeApp={() => denyApp(this, business)} addApp={() => acceptApp(this, business)} email={business.email} />
+                                return <BusinessApp name={business.name} message={business.content} removeApp={() => denyApp(this, business)} addApp={() => acceptApp(this, business)} email={business.email} date={business.date} />
                             }
                             return null;
                         })}
@@ -144,12 +174,14 @@ class AdminPanel extends React.Component {
                                 <option value="Default" disabled>ORDER BY</option>
                                 <option value="(A-Z)">Name (A-Z)</option>
                                 <option value="(Z-A)">Name (Z-A)</option>
+                                <option value="DateNew">Date (Newest to Oldest)</option>
+                                <option value="DateOld">Date (Oldest to Newest)</option>
                             </select>
                             <SearchForm name="Businesses-Search" value={this.state.businesses_search} onChange={this.filterBus.bind(this)} classType="search_form"></SearchForm>
                         </div>
                         {this.state.businesses.map((business) => {
                             if (business.name.toLocaleLowerCase().includes(this.state.businesses_search.toLowerCase())) {
-                                return <Businesses name={business.name} message={business.content} email={business.email} removeBus={() => removeBusiness(this, business)} link={business.link} />
+                                return <Businesses name={business.name} message={business.content} email={business.email} removeBus={() => removeBusiness(this, business)} link={business.link} date={business.date} />
                             }
                             return null;
                         })}
@@ -161,11 +193,13 @@ class AdminPanel extends React.Component {
                                 <option value="Default" disabled>ORDER BY</option>
                                 <option value="(A-Z)">Name (A-Z)</option>
                                 <option value="(Z-A)">Name (Z-A)</option>
+                                <option value="DateNew">Date (Newest to Oldest)</option>
+                                <option value="DateOld">Date (Oldest to Newest)</option>
                             </select>
                             <SearchForm name="Businesses-Search" value={this.state.posts_search} onChange={this.filterPosts.bind(this)} classType="search_form2"></SearchForm>
                             {this.state.posts.map((post) => {
                                 if (post.name.toLocaleLowerCase().includes(this.state.posts_search.toLowerCase())) {
-                                    return <Post name={post.name} message={post.content} removePost={() => removePost(this, post)} />
+                                    return <Post name={post.name} message={post.content} removePost={() => removePost(this, post)} date={post.date} />
                                 }
                                 return null;
                             })}
