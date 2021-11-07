@@ -48,7 +48,8 @@ information to be given. They are accessible at `/signup` and `/business-signup`
 for issues, such as a duplicate username. Links at the bottom of the page allow 
 navigation between the two sign up pages, and the login page mentioned above.
 
-Both the login and sign up pages can be accessed using links in the header on the landing page.
+Both the login and sign up pages can be accessed using links in the header on the landing page. From logged-in pages, 
+there will be an option to log out, which will redirect the user to the homepage.
 
 ## Student Profile
 

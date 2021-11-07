@@ -113,6 +113,7 @@ class StudentProfile extends React.Component {
                 <Header>
                     <Link href="/" name="Browse"/>
                     <Link name="user"/>
+                    <Link href="/" name="logout"/>
                 </Header>
 
                 <div className='postsContainer'>
