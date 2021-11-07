@@ -21,11 +21,11 @@
   #nav h3{
     float: left;
   }
-  #browse{
-    font-weight: bold;
-  }
   .bold {
     font-weight: bold;
+  }
+  .textRight {
+    text-align: right;
   }
   #banner {
     width: 100%;
@@ -45,7 +45,7 @@
     width: 20%;
     height: 20%;
     padding: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 60px;
     overflow: hidden;
   }
   #bannerDesc h3 {
@@ -68,7 +68,7 @@
   }
   #browseContainer {
     border: 2px solid;
-    min-width: 500px;
+    min-width: 400px;
     margin-left: 100px;
     margin-right: 100px;
     overflow: hidden;

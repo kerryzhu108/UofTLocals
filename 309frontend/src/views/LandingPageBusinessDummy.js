@@ -3,6 +3,7 @@ import '../css/LandingPage.css';
 import bannerImg from '../images/banner.jpeg'
 import filter from '../images/filter.png'
 import ResturantCover from '../components/ResturantCover';
+import Link from '../components/Link.js';
 import sampleStoreImg from '../images/sampleStoreImg.jpeg';
 
 class LandingPage extends React.Component {
@@ -23,10 +24,10 @@ class LandingPage extends React.Component {
         // fetch all active resturants and their descriptions from server
         this.setState({
             resturants: [
-                {name: "John's", type:"Resturant/Bar", desc: 'Some desc1'},
-                {name: "Dan's", type:"Grocery", desc: 'Some desc2'},
-                {name: "Lee's", type:"Activity", desc: 'Some desc3'},
-                {name: "Jack's", type:"Resturant/Bar", desc: 'Some desc4'},
+                {name: "John's", type:"Resturant/Bar", desc: 'Some desc1', route: '/business-profile-user2'},
+                {name: "Dan's", type:"Grocery", desc: 'Some desc2', route: '/business-profile-user2'},
+                {name: "Lee's", type:"Activity", desc: 'Some desc3', route: '/business-profile-user2'},
+                {name: "Jack's", type:"Resturant/Bar", desc: 'Some desc4', route: '/business-profile-user2'},
             ]
         })
     }
@@ -44,8 +45,9 @@ class LandingPage extends React.Component {
             <div className="App">
                 <div id='nav'>
                     <h3>UofT locals</h3>
-                    <div style={{"text-align": "right"}}>
-                        <a href="/business-profile-user2">Edit Business Profile</a>
+                    <div class='textRight'>
+                        <Link href="/business-profile-user2" name='Edit Business Profile' />
+                        <Link href="/" name='Logout' />
                     </div>
                 </div>
                 <div id='bannerWrapper'>
@@ -69,9 +71,15 @@ class LandingPage extends React.Component {
                     </div>
                     {this.state.resturants.map((resturant, id)=>{
                         const searchFilterCheck = resturant['name'].toLowerCase().includes(this.state.search.toLowerCase());
-                        const typeFilterCheck = resturant['type'].toLowerCase().includes(this.state.type.toLocaleLowerCase());
+                        const typeFilterCheck = resturant['type'].toLowerCase().includes(this.state.type.toLowerCase()) || this.state.type == 'Any';
                         if (searchFilterCheck && typeFilterCheck) {
-                            return <ResturantCover key={id} img={sampleStoreImg} name={resturant['name']} businessType={resturant['type']} desc={resturant['desc']}/>
+                            return <ResturantCover key={id} 
+                                img={sampleStoreImg} 
+                                name={resturant['name']} 
+                                businessType={resturant['type']}
+                                desc={resturant['desc']}
+                                route={resturant['route']}
+                            />
                         }
                         return null
                     })}

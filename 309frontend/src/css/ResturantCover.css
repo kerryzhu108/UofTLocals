@@ -1,0 +1,43 @@
+.wrapper {
+    background-color: #e0e0e0;
+    overflow: hidden;
+    margin: 5px 20px 5px 20px;
+    float: left;
+    width: 100%;
+    margin-right: 20px;
+}
+.imageLink {
+    float: 'left';
+    margin: 0;
+    padding: 0; 
+    text-decoration: none;
+}
+
+.img {
+    height: 180px;
+    width: 200px;
+    padding: 3px;
+    margin-right: 10px;
+    float: left;
+}
+
+.businessHeaders {
+    margin-top: 10px;
+}
+
+.businessTitle {
+    float: left;
+    margin: 1px;
+}
+
+.businessType {
+    float: right;
+    margin: 1px;
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+.businessDesc {
+    float: left;
+    margin-top: -5px;
+}
