@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import ProfileInformation from "../components/ProfileInformation";
 import Comment from '../components/Comment';
 import defaultProfile from "../images/default-profile.png";
-import StudentInputInfo from "../components/StudentInputInfo";
+import InputInfoStudent from "../components/InputInfoStudent";
 
 class StudentProfile extends React.Component {
 
@@ -86,14 +86,14 @@ class StudentProfile extends React.Component {
                     business: "Business 1",
                     user: "user",
                     date: "October 26, 2021",
-                    content: "*placeholder*"
+                    content: "*placeholder -- review #1*"
                 },
                 {
                     title: "Review 2",
                     business: "Business 2",
                     user: "user",
                     date: "November 7, 2021",
-                    content: "*placeholder*"
+                    content: "*placeholder -- review #2*"
                 }
             ]
         })
@@ -121,7 +121,7 @@ class StudentProfile extends React.Component {
                                         lastname={this.state.user.lastname}
                                         username={this.state.user.username}/>
                     <h3>EDIT PROFILE</h3>
-                    <StudentInputInfo firstname={this.state.firstname}
+                    <InputInfoStudent firstname={this.state.firstname}
                                       lastname={this.state.lastname}
                                       username={this.state.username}
                                       password={this.state.password}

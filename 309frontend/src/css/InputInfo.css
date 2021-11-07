@@ -1,0 +1,90 @@
+.infoLabel {
+    color: grey;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.infoInput {
+    margin: 10px;
+    height: 30px;
+    border-radius: 5px;
+    width: 210px;
+}
+
+.infoSelect {
+    margin: 10px;
+    height: 30px;
+    border-radius: 5px;
+    width: 220px;
+}
+
+.loginElements {
+    border: 2px solid #cccccc;
+    background-color: white;
+    margin: 10px auto auto;
+    padding: 50px;
+    width: 500px;
+    border-radius: 15px;
+    overflow: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+}
+
+#loginButton {
+    width:210px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #002451;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#loginButton:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+}
+
+#confirmButtonBusiness {
+    background-color: #f1592a;
+    color: white;
+    height:30px;
+    width: 210px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#confirmButtonStudent {
+    background-color: #8cc63f;
+    color: white;
+    height:30px;
+    width: 210px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#confirmButtonStudent:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+}
+
+#confirmButtonBusiness:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+}
+
+/* Useful colours */
+
+.orange {
+    color: #f1592a;
+}
+
+.green {
+    color: #8cc63f;
+}
+
+.grey {
+    color: grey;
+}
+
+.red {
+    color: red;
+}

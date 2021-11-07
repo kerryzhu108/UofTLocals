@@ -3,8 +3,6 @@ import React from 'react';
 import Header from "../components/Header";
 import LoginInput from "../components/LoginInput";
 
-import "../css/Login.css"
-
 class LoginPage extends React.Component {
 
     state = {
@@ -39,9 +37,9 @@ class LoginPage extends React.Component {
         }))
         // hard-coded redirection based on which of the three users signed in.
         if (results[0] === 1) {
-            window.location.href = "/"      // normal user
+            window.location.href = "/"                 // normal user
         } else if (results[1] === 1) {
-            window.location.href = "/"      // business user
+            window.location.href = "/"                 // business user
         } else if (results[2] === 1) {
             window.location.href = "/admin-panel"      // admin
         } else {
@@ -63,7 +61,7 @@ class LoginPage extends React.Component {
                     <br/>
                     <span className="small">New member? Sign up as a
                         <a href="/signup">student</a> or
-                        <a href="/businessSignup"> business</a>
+                        <a href="/business-signup"> business</a>
                     </span>
                 </div>
 

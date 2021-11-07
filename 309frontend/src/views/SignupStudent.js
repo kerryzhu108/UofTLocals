@@ -2,12 +2,9 @@ import React from 'react';
 
 import Header from "../components/Header";
 import Link from "../components/Link";
-import StudentInputInfo from "../components/StudentInputInfo";
+import InputInfoStudent from "../components/InputInfoStudent";
 
-import "../css/Signup.css"
-
-
-class SignupPage extends React.Component {
+class SignupStudent extends React.Component {
 
     state = {
         firstname: "",
@@ -63,21 +60,21 @@ class SignupPage extends React.Component {
                 </Header>
                 <div className="loginElements">
                     <p>Please provide the following information to create a student account.</p>
-                    <StudentInputInfo   firstname={ this.state.firstname }
-                                        lastname={ this.state.lastname }
-                                        username={ this.state.username }
-                                        password={ this.state.password }
-                                        confirmation={ this.state.confirmation }
-                                        onChange={ this.handleInputChange }
-                                        onClick={ this.addStudent }/>
+                    <InputInfoStudent firstname={ this.state.firstname }
+                                      lastname={ this.state.lastname }
+                                      username={ this.state.username }
+                                      password={ this.state.password }
+                                      confirmation={ this.state.confirmation }
+                                      onChange={ this.handleInputChange }
+                                      onClick={ this.addStudent }/>
                     <span className="red small"> { this.state.message }</span>
                     <br/>
                     <span className="small">Already a member?<a href="/login">Login</a></span>
-                    <span className="small">Not a student?<a href="/businessSignup">Sign up as a business</a></span>
+                    <span className="small">Not a student?<a href="/business-signup">Sign up as a business</a></span>
                 </div>
             </div>
         )
     }
 }
 
-export default SignupPage;
+export default SignupStudent;
