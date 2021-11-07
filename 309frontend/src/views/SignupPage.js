@@ -1,8 +1,11 @@
 import React from 'react';
+
 import Header from "../components/Header";
-import "../css/Signup.css"
 import Link from "../components/Link";
 import StudentInputInfo from "../components/StudentInputInfo";
+
+import "../css/Signup.css"
+
 
 class SignupPage extends React.Component {
 
@@ -13,9 +16,7 @@ class SignupPage extends React.Component {
         password: "",
         confirmation: "",
         message: "",
-
-        /* for phase 2, we will instead need to get a list of all current usernames from the server */
-        current_usernames: ["user", "user2", "admin"]
+        current_usernames: []
     }
 
     /* Update the state when user types in information. */
@@ -28,15 +29,30 @@ class SignupPage extends React.Component {
         })
     }
 
-    /* This function will contain code to add a student to the system, sending data to the server */
+    /* This function will contain code to add a student to the system, sending data to the server. Uses the data
+    * currently in the state variable. */
     addStudent = (event) => {
+        event.preventDefault()
         if (this.state.password !== this.state.confirmation) {
             this.setState({ message: "Passwords do not match." })
         } else if (this.state.current_usernames.includes(this.state.username)) {
             this.setState({ message: "Username already taken." })
         } else {
-            window.location.href = "/login"
+            window.location.href = "/login"     // just redirect to the login page for now
         }
+    }
+
+    /* Set the state variables upon loading. */
+    componentDidMount() {
+        window.addEventListener('load', this.getAllUsers.bind(this));
+    }
+
+    /* Get all usernames currently in the system. */
+    getAllUsers() {
+        // for phase 2 this information will come from a server
+        this.setState({
+            current_usernames: ["user", "user2", "admin"]
+        })
     }
 
     render() {

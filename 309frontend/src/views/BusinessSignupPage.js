@@ -1,6 +1,6 @@
 import React from 'react';
+
 import Header from "../components/Header";
-import "../css/Signup.css"
 import Link from "../components/Link";
 import BusinessInputInfo from "../components/BusinessInputInfo";
 
@@ -13,7 +13,8 @@ class SignupPage extends React.Component {
         username: "",
         password: "",
         confirmation: "",
-        message: ""
+        message: "",
+        current_usernames: []
     }
 
     handleInputChange = (event) => {
@@ -25,13 +26,30 @@ class SignupPage extends React.Component {
         })
     }
 
+    /* This function will contain code to add a business to the system, sending data to the server. Uses the data
+    * currently in the state variable. */
     addBusiness = (event) => {
-        /* this function will contain code to add a business to the system */
+        event.preventDefault()
         if (this.state.password !== this.state.confirmation) {
-            this.setState({ message: "Passwords do not match." })
+            this.setState({message: "Passwords do not match."})
+        } else if (this.state.current_usernames.includes(this.state.username)) {
+            this.setState({ message: "Username already taken." })
         } else {
-            window.location.href = "/"  // for now, just redirect to the homepage.
+            window.location.href = "/login"      // just redirect to the login page for now
         }
+    }
+
+    /* Set the state variables upon loading. */
+    componentDidMount() {
+        window.addEventListener('load', this.getAllUsers.bind(this));
+    }
+
+    /* Get all usernames currently in the system. */
+    getAllUsers() {
+        // for phase 2 this information will come from a server
+        this.setState({
+            current_usernames: ["user", "user2", "admin"]
+        })
     }
 
     render() {

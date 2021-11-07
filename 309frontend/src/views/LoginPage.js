@@ -1,7 +1,9 @@
 import React from 'react';
+
 import Header from "../components/Header";
-import "../css/Login.css"
 import LoginInput from "../components/LoginInput";
+
+import "../css/Login.css"
 
 class LoginPage extends React.Component {
 

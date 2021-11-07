@@ -5,7 +5,7 @@ class BusinessInputInfo extends React.Component {
     render() {
         const { name, location, category, username, password, confirmation, onChange, onClick} = this.props
         return (
-            <div>
+            <form>
                 <table>
                     <tbody>
                         <tr>
@@ -26,11 +26,11 @@ class BusinessInputInfo extends React.Component {
                         </tr>
                         <tr>
                             <td><label>Password: <span className="red">*</span></label></td>
-                            <td><input name="password" value={ password } onChange={ onChange }/></td>
+                            <td><input type="password" name="password" value={ password } onChange={ onChange }/></td>
                         </tr>
                         <tr>
                             <td><label>Confirm password: <span className="red">*</span></label></td>
-                            <td><input name="confirmation" value={ confirmation } onChange={ onChange }/>
+                            <td><input type="password" name="confirmation" value={ confirmation } onChange={ onChange }/>
                             </td>
                         </tr>
                         <tr>
@@ -44,7 +44,7 @@ class BusinessInputInfo extends React.Component {
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </form>
         )
     }
 }

@@ -1,8 +1,8 @@
 import React from "react"
+
 import Link from "../components/Link";
 import Header from "../components/Header";
 import ProfileInformation from "../components/ProfileInformation";
-import "../css/StudentProfile.css"
 import Comment from '../components/Comment';
 import defaultProfile from "../images/default-profile.png";
 import StudentInputInfo from "../components/StudentInputInfo";
@@ -59,7 +59,6 @@ class StudentProfile extends React.Component {
 
     /* Set the state variables upon loading. */
     componentDidMount() {
-        console.log("here")
         window.addEventListener('load', this.getCurrentUser.bind(this));
         window.addEventListener('load', this.getPosts.bind(this));
         window.addEventListener('load', this.getAllUsers.bind(this));
