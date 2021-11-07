@@ -45,8 +45,9 @@ appropriate. If not, a message will outline the error encountered.
 
 **Sign up**: two separate sign up pages are included -- one for students and one for businesses. They require different 
 information to be given. They are accessible at `/signup` and `/business-signup`. The given information will be checked 
-for issues, such as a duplicate username. Links at the bottom of the page allow 
-navigation between the two sign up pages, and the login page mentioned above.
+for issues, such as a duplicate username. Note: signing up does not currently add a new user to the system -- only the 
+three hard-coded users above may be used. Links at the bottom of the page allow navigation between the two sign up 
+pages, and the login page mentioned above.
 
 Both the login and sign up pages can be accessed using links in the header on the landing page. From logged-in pages, 
 there will be an option to log out, which will redirect the user to the homepage.
