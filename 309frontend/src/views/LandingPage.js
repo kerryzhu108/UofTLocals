@@ -10,7 +10,8 @@ class LandingPage extends React.Component {
         super(props);
         this.state = {
             resturants: [],
-            search: ''
+            search: '',
+            type: '',
         };
     }
 
@@ -22,10 +23,10 @@ class LandingPage extends React.Component {
         // fetch all active resturants and their descriptions from server
         this.setState({
             resturants: [
-                {name: "John's", desc: 'Some desc1'},
-                {name: "Dan's", desc: 'Some desc2'},
-                {name: "Lee's", desc: 'Some desc3'},
-                {name: "Jack's", desc: 'Some desc4'},
+                {name: "John's", type:"Resturant/Bar", desc: 'Some desc1'},
+                {name: "Dan's", type:"Grocery", desc: 'Some desc2'},
+                {name: "Lee's", type:"Activity", desc: 'Some desc3'},
+                {name: "Jack's", type:"Resturant/Bar", desc: 'Some desc4'},
             ]
         })
     }
@@ -34,36 +35,47 @@ class LandingPage extends React.Component {
         this.setState({search: event.target.value});
     }
 
+    filterType(event) {
+        this.setState({type: event.target.value});
+    }
+
     render() {
         return (
             <div className="App">
                 <div id='nav'>
                     <h3>UofT locals</h3>
-                    <ul>Login / SignUp</ul>
-                    <ul style={{fontWeight: 'bold'}}>Browse</ul>
+                    <div style={{"text-align": "right"}}>
+                        <a href="/login">Login </a> 
+                        <a href="/signup">SignUp</a>
+                        <a href="/" id="browse">Browse</a>
+                    </div>
                 </div>
                 <div id='bannerWrapper'>
                     <img id='banner' src={bannerImg} alt="resturant"/>
                     <div id='bannerDesc'>
-                    <h3> UOFT <br/> LOCALS</h3>
-                    <p>Discover local businesses in the <br/> Toronto area.</p>
+                        <h3> UOFT <br/> LOCALS</h3>
+                        <p>Discover local businesses in the <br/> Toronto area.</p>
                     </div>
                 </div>
                 <p id='browseLabel'>BROWSE LOCAL BUSINESSES</p>
                 <div id='browseContainer'>
                     <div id='filterBar'>
                     <img id='filter' src={filter} alt=''></img>
-                    <select name="catagories" class='catagories'>
-                        <option value="Resturant/bars">Resturant/Bars</option>
-                        <option value="Grocery Stores">Grocery Stores</option>
-                        <option value="Activities">Activities</option>
+                    <select name="catagories" class='catagories' onChange={this.filterType.bind(this)}>
+                        <option value="Any">Any</option>
+                        <option value="Resturant/bar">Resturant/Bars</option>
+                        <option value="Grocery">Grocery Stores</option>
+                        <option value="Activity">Activities</option>
                     </select>
-                    <input placeholder='Search Names' class='catagories' onChange={this.filterEvents.bind(this)}></input>
+                    <input placeholder='Search Names' id='filterSearch' onChange={this.filterEvents.bind(this)}></input>
                     </div>
                     {this.state.resturants.map((resturant, id)=>{
-                        if (resturant['name'].toLocaleLowerCase().includes(this.state.search.toLowerCase())) {
-                            return <ResturantCover key={id} img={sampleStoreImg} name={resturant['name']} desc={resturant['desc']}/>
+                        const searchFilterCheck = resturant['name'].toLowerCase().includes(this.state.search.toLowerCase());
+                        const typeFilterCheck = resturant['type'].toLowerCase().includes(this.state.type.toLocaleLowerCase());
+                        if (searchFilterCheck && typeFilterCheck) {
+                            return <ResturantCover key={id} img={sampleStoreImg} name={resturant['name']} businessType={resturant['type']} desc={resturant['desc']}/>
                         }
+                        return null
                     })}
                 </div> 
             </div>
