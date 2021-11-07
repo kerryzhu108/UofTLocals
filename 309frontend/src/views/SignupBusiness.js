@@ -2,9 +2,9 @@ import React from 'react';
 
 import Header from "../components/Header";
 import Link from "../components/Link";
-import BusinessInputInfo from "../components/BusinessInputInfo";
+import InputInfoBusiness from "../components/InputInfoBusiness";
 
-class SignupPage extends React.Component {
+class SignupBusiness extends React.Component {
 
     state = {
         name: "",
@@ -60,14 +60,14 @@ class SignupPage extends React.Component {
                 </Header>
                 <div className="loginElements">
                     <p>Please provide the following information to create a business account.</p>
-                    <BusinessInputInfo  name={ this.state.name }
-                                        location={ this.state.location }
-                                        category={ this.state.category }
-                                        username={ this.state.username }
-                                        password={ this.state.password }
-                                        confirmation={ this.state.confirmation }
-                                        onChange={ this.handleInputChange }
-                                        onClick={ this.addBusiness }/>
+                    <InputInfoBusiness name={ this.state.name }
+                                       location={ this.state.location }
+                                       category={ this.state.category }
+                                       username={ this.state.username }
+                                       password={ this.state.password }
+                                       confirmation={ this.state.confirmation }
+                                       onChange={ this.handleInputChange }
+                                       onClick={ this.addBusiness }/>
                     <span className="red small"> { this.state.message }</span>
                     <br/>
                     <span className="small">Already a member?<a href="/login">Login</a></span>
@@ -78,4 +78,4 @@ class SignupPage extends React.Component {
     }
 }
 
-export default SignupPage;
+export default SignupBusiness;
