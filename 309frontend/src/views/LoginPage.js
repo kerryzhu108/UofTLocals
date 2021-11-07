@@ -10,9 +10,9 @@ class LoginPage extends React.Component {
         password: "",
         message: "",
         existing_users: [
-            { username: "user", password: "user" },
-            { username: "user2", password: "user2"},
-            { username: "admin", password: "admin"}
+            {username: "user", password: "user"},
+            {username: "user2", password: "user2"},
+            {username: "admin", password: "admin"}
         ]
     }
 
@@ -35,8 +35,13 @@ class LoginPage extends React.Component {
             }
             return 0
         }))
-        if (results.includes(1)) {
-            window.location.href = "/"
+        // hard-coded redirection based on which of the three users signed in.
+        if (results[0] === 1) {
+            window.location.href = "/"      // normal user
+        } else if (results[1] === 1) {
+            window.location.href = "/"      // business user
+        } else if (results[2] === 1) {
+            window.location.href = "/admin-panel"      // admin
         } else {
             this.setState({message: "Invalid login credentials. Please try again."})
         }
@@ -48,11 +53,11 @@ class LoginPage extends React.Component {
                 <Header/>
                 <div className="loginElements">
                     <p>Please login to continue.</p>
-                    <LoginInput username={ this.state.username }
-                                password={ this.state.password }
-                                onChange={ this.handleInputChange }
-                                onClick={ this.validate }/>
-                    <span className="red small"> { this.state.message }</span>
+                    <LoginInput username={this.state.username}
+                                password={this.state.password}
+                                onChange={this.handleInputChange}
+                                onClick={this.validate}/>
+                    <span className="red small"> {this.state.message}</span>
                     <br/>
                     <span className="small">New member? Sign up as a
                         <a href="/signup">student</a> or

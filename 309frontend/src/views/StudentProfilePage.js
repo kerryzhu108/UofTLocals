@@ -10,36 +10,15 @@ import StudentInputInfo from "../components/StudentInputInfo";
 class StudentProfile extends React.Component {
 
     state = {
-        // existing user data
-        user: {
-            firstname: "John",
-            lastname: "Smith",
-            username: "user",
-            password: "user"
-        },
-
-        // new user data
+        user: {},
         firstname: "",
         lastname: "",
         username: "",
         password: "",
-
-        // user posts (separate from user info)
-        posts: [
-            {
-                title: "Review 1",
-                business: "Business 1", 
-                user: "User 1", 
-                date: "October 26, 2021", 
-                content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id tristique libero, sit amet tempus ex. In egestas enim felis, vel dapibus dolor malesuada vitae. Praesent convallis massa lectus, at"
-            }
-        ],
-
         confirmation: "",
+        posts: [],
         message: "",
-
-        /* for phase 2, we will instead need to get a list of all current usernames from the server */
-        current_usernames: ["user", "user2", "admin"]
+        current_usernames: []
     }
 
     /* Update the state when user types in information. */
@@ -54,50 +33,110 @@ class StudentProfile extends React.Component {
 
     /* Updates the information of the current user. */
     updateInfo = (event) => {
-        if (this.state.password !== this.state.user.password)  {
-            this.setState({ message: "Invalid password."})
+        event.preventDefault()
+        if (this.state.password !== this.state.user.password || this.state.confirmation !== this.state.password) {
+            this.setState({message: "Invalid password."})
         } else if (this.state.username !== this.state.user.username &&
             this.state.current_usernames.includes(this.state.username)) {
-            this.setState({ message: "Username already taken." })
+            this.setState({message: "Username already taken."})
         } else {
             this.setState({
                 user: {
                     firstname: this.state.firstname,
                     lastname: this.state.lastname,
-                    username: this.state.username
-                }
+                    username: this.state.username,
+                    password: this.state.password
+                },
+                firstname: "",
+                lastname: "",
+                username: "",
+                password: "",
+                confirmation: "",
+                message: ""
             })
         }
+    }
+
+    /* Set the state variables upon loading. */
+    componentDidMount() {
+        console.log("here")
+        window.addEventListener('load', this.getCurrentUser.bind(this));
+        window.addEventListener('load', this.getPosts.bind(this));
+        window.addEventListener('load', this.getAllUsers.bind(this));
+    }
+
+    /* Get the current user's data. */
+    getCurrentUser() {
+        this.setState({
+            // for phase 2 this information will come from a server.
+            user: {
+                firstname: "John",
+                lastname: "Smith",
+                username: "user",
+                password: "user"
+            }
+        })
+    }
+
+    /* Get a list of all the current user's posts. */
+    getPosts() {
+        this.setState({
+            posts: [
+                {
+                    title: "Review 1",
+                    business: "Business 1",
+                    user: "user",
+                    date: "October 26, 2021",
+                    content: "*placeholder*"
+                },
+                {
+                    title: "Review 2",
+                    business: "Business 2",
+                    user: "user",
+                    date: "November 7, 2021",
+                    content: "*placeholder*"
+                }
+            ]
+        })
+    }
+
+    /* Get all usernames currently in the system. */
+    getAllUsers() {
+        // for phase 2 this information will come from a server
+        this.setState({
+            current_usernames: ["user", "user2", "admin"]
+        })
     }
 
     render() {
         return (
             <div>
                 <Header>
-                    <Link active="true" name="Browse" />
-                    <a href="/login">Login/Signup</a>
+                    <Link href="/" name="Browse"/>
+                    <Link name="Signed in as: user"/>
                 </Header>
 
                 <div className='postsContainer'>
                     <h3>CURRENT PROFILE INFORMATION</h3>
-                    <ProfileInformation firstname={ this.state.user.firstname }
-                                        lastname={ this.state.user.lastname }
-                                        username={ this.state.user.username}/>
+                    <ProfileInformation firstname={this.state.user.firstname}
+                                        lastname={this.state.user.lastname}
+                                        username={this.state.user.username}/>
                     <h3>EDIT PROFILE</h3>
-                    <StudentInputInfo   firstname={ this.state.firstname }
-                                        lastname={ this.state.lastname }
-                                        username={ this.state.username }
-                                        password={ this.state.password }
-                                        confirmation={ this.state.confirmation }
-                                        onChange={ this.handleInputChange }
-                                        onClick={ this.updateInfo }/>
-                    <span className="red small"> { this.state.message }</span>
+                    <StudentInputInfo firstname={this.state.firstname}
+                                      lastname={this.state.lastname}
+                                      username={this.state.username}
+                                      password={this.state.password}
+                                      confirmation={this.state.confirmation}
+                                      onChange={this.handleInputChange}
+                                      onClick={this.updateInfo}/>
+                    <span className="red small"> {this.state.message}</span>
                 </div>
                 <div>
                     <div className='postsContainer'>
-                        <h3>COMMENTS / REVIEWS</h3>
-                        <Comment username={this.state.posts[0].user} profile={defaultProfile} content={this.state.posts[0].content}/>
-                        <Comment username={this.state.posts[0].user} profile={defaultProfile} content={this.state.posts[0].content}/>
+                        <h3>MY COMMENTS / REVIEWS</h3>
+                        {this.state.posts.map((post) => {
+                            return <Comment username={post.user} profile={defaultProfile} content={post.content}/>
+                        })}
                     </div>
                 </div>
             </div>

@@ -28,14 +28,14 @@ class SignupPage extends React.Component {
         })
     }
 
-    /* This function will contain code to add a student to the system */
+    /* This function will contain code to add a student to the system, sending data to the server */
     addStudent = (event) => {
         if (this.state.password !== this.state.confirmation) {
             this.setState({ message: "Passwords do not match." })
         } else if (this.state.current_usernames.includes(this.state.username)) {
             this.setState({ message: "Username already taken." })
         } else {
-            window.location.href = "/"  // for now, just redirect to the homepage.
+            window.location.href = "/login"
         }
     }
 
@@ -43,7 +43,7 @@ class SignupPage extends React.Component {
         return (
             <div>
                 <Header>
-                    <Link active="true" name="Browse" />
+                    <Link href="/" name="Browse" />
                 </Header>
                 <div className="loginElements">
                     <p>Please provide the following information to create a student account.</p>

@@ -8,18 +8,20 @@ class ProfileInformation extends React.Component {
         return (
             <div>
                 <table className='infoContainer'>
-                    <tr>
-                        <td><label>First name:</label></td>
-                        <td><label>{ firstname }</label></td>
-                    </tr>
-                    <tr>
-                        <td><label>Last name:</label></td>
-                        <td><label>{ lastname }</label></td>
-                    </tr>
-                    <tr>
-                        <td><label>Username:</label></td>
-                        <td><label>{ username }</label></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td><label>First name:</label></td>
+                            <td><label>{ firstname }</label></td>
+                        </tr>
+                        <tr>
+                            <td><label>Last name:</label></td>
+                            <td><label>{ lastname }</label></td>
+                        </tr>
+                        <tr>
+                            <td><label>Username:</label></td>
+                            <td><label>{ username }</label></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         )
