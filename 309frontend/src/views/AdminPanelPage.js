@@ -6,7 +6,7 @@ import BusinessApp from "../components/BusinessApp"
 import Businesses from "../components/Businesses"
 import Post from "../components/Post";
 import SearchForm from "../components/SearchForm";
-import { acceptApp, denyApp, removeBusiness, removePost } from "../actions/AdminPosts";
+import { acceptApp, denyApp, removeBusiness, removePost, sortation } from "../actions/AdminPosts";
 
 
 class AdminPanel extends React.Component {
@@ -16,7 +16,7 @@ class AdminPanel extends React.Component {
             {
                 name: "Tom's Turntable",
                 email: "turntable@gmail.com",
-                date: "Oct 26 2021",
+                date: "Oct 28 2021",
                 content: "Studies have shown that majority of students rely on music in order to help them through the day, and Tom's Turntable has you covered! We offer a handy selection of various genres and music devices, from vinyls to CDs. Music is just one of the many ways people can express themselves, and we aim to bring out the true colours in all students!",
                 link: "/business-profile"
             },
@@ -32,7 +32,7 @@ class AdminPanel extends React.Component {
             {
                 name: "U of T Bookstore",
                 email: "bookstore@utoronto.ca",
-                date: "Oct 10 2021",
+                date: "Oct 12 2021",
                 content: "The number one shopping spot for UofT students looking for all their textbooks! Founded as a sublet of the University of Toronto Press in 1934, the shop has since been the one stop location for all books, supplies, and school merchandise that any student would require. Located at 214 College Street, Toronto, Ontario, Postal Code M5T 3A1.",
                 link: "/business-profile"
             },
@@ -97,42 +97,7 @@ class AdminPanel extends React.Component {
     filterType(event) {
         this.setState({ type: event.target.value });
         const val = event.target.value;
-        if (val === "(A-Z)") {
-            if (event.target.id === "apps") {
-                this.state.business_applications.sort((a, b) => a.name.localeCompare(b.name))
-            } else if (event.target.id === "bus") {
-                this.state.businesses.sort((a, b) => a.name.localeCompare(b.name))
-            } else if (event.target.id === "posts") {
-                this.state.posts.sort((a, b) => a.name.localeCompare(b.name))
-            }
-        } else if (val === "(Z-A)") {
-            if (event.target.id === "apps") {
-                this.state.business_applications.sort((a, b) => a.name.localeCompare(b.name))
-                this.state.business_applications.reverse()
-            } else if (event.target.id === "bus") {
-                this.state.businesses.sort((a, b) => a.name.localeCompare(b.name))
-                this.state.businesses.reverse()
-            } else if (event.target.id === "posts") {
-                this.state.posts.sort((a, b) => a.name.localeCompare(b.name))
-                this.state.posts.reverse()
-            }
-        } else if (val === "DateNew") {
-            if (event.target.id === "apps") {
-                this.state.business_applications.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
-            } else if (event.target.id === "bus") {
-                this.state.businesses.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
-            } else if (event.target.id === "posts") {
-                this.state.posts.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
-            }
-        } else if (val === "DateOld") {
-            if (event.target.id === "apps") {
-                this.state.business_applications.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
-            } else if (event.target.id === "bus") {
-                this.state.businesses.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
-            } else if (event.target.id === "posts") {
-                this.state.posts.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
-            }
-        }
+        sortation(val, event, this)
     }
 
 
@@ -142,7 +107,6 @@ class AdminPanel extends React.Component {
             <div>
                 <Header>
                     <Link href="/" name="Browse" />
-                    <Link href="/login" name="Login/Signup" />
                 </Header>
                 <div className="panel_title">
                     <strong className="panel_title_text">ADMIN PANEL</strong>

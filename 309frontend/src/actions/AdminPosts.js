@@ -40,3 +40,42 @@ export const removePost = (panel, post) => {
         posts: filteredPost
     })
 }
+
+export function sortation(val, event, panel) {
+    if (val === "(A-Z)") {
+        if (event.target.id === "apps") {
+            panel.state.business_applications.sort((a, b) => a.name.localeCompare(b.name))
+        } else if (event.target.id === "bus") {
+            panel.state.businesses.sort((a, b) => a.name.localeCompare(b.name))
+        } else if (event.target.id === "posts") {
+            panel.state.posts.sort((a, b) => a.name.localeCompare(b.name))
+        }
+    } else if (val === "(Z-A)") {
+        if (event.target.id === "apps") {
+            panel.state.business_applications.sort((a, b) => a.name.localeCompare(b.name))
+            panel.state.business_applications.reverse()
+        } else if (event.target.id === "bus") {
+            panel.state.businesses.sort((a, b) => a.name.localeCompare(b.name))
+            panel.state.businesses.reverse()
+        } else if (event.target.id === "posts") {
+            panel.state.posts.sort((a, b) => a.name.localeCompare(b.name))
+            panel.state.posts.reverse()
+        }
+    } else if (val === "DateNew") {
+        if (event.target.id === "apps") {
+            panel.state.business_applications.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
+        } else if (event.target.id === "bus") {
+            panel.state.businesses.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
+        } else if (event.target.id === "posts") {
+            panel.state.posts.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
+        }
+    } else if (val === "DateOld") {
+        if (event.target.id === "apps") {
+            panel.state.business_applications.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
+        } else if (event.target.id === "bus") {
+            panel.state.businesses.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
+        } else if (event.target.id === "posts") {
+            panel.state.posts.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
+        }
+    }
+}
