@@ -7,38 +7,36 @@ import Comment from '../components/Comment';
 import AnnouncementBox from '../components/AnnouncementBox';
 
 import defaultProfile from "../images/default-profile.png";
+import InputButtonCombo from '../components/InputButtonCombo';
 
 import "../css/RoundedBox.css";
 import "../css/BusinessProfilePage.css";
 
-class BusinessProfilePage extends React.Component {
+class BusinessProfileBusinessDummy extends React.Component {
+
+    state = {
+        comments: [],
+        announcements: [],
+        commentValue: {},
+        announcementValue: {}
+    };
+
+    handleAnnouncementChange = (event) => {
+        this.setState({ announcementValue: event.target.value });
+    }
+
+    submitAnnouncement = (event) => {
+        let announcements = this.state.announcements;
+        announcements.push({ username: "user2", content: this.state.announcementValue });
+        this.setState({ announcements: announcements });
+    }
 
     render() {
-
-        var customerComments = [
-            {
-                username: "Sleep Deprived UofT Student",
-                content: "Who needs time management when you have Caffeine Corner? Am I right or am I right?"
-            },
-            {
-                username: "Happy Customer",
-                content: "Hello there, just commenting on how much I absolutely love your business. It does everything and more!"
-            },
-            {
-                username: "Happy Customer #2",
-                content: "I'd just like to mention that this is the best business ever!"
-            }
-        ]
-
-        var announcements = [
-            "We'd just like to thank all of our loyal customers by granting 51% off all merchandise. Thanks for sticking with us!"
-        ]
-
         return (
             <div>
                 <Header>
-                    <Link active="true" name="Browse" />
-                    <Link href="/login" name="Login/Signup" />
+                    <Link href="/" active="true" name="Browse" />
+                    <Link href="/business-profile-user2" name="user2" />
                 </Header>
                 <Container>
                     <BusinessProfile name={this.props.name} image="https://images.unsplash.com/photo-1525193612562-0ec53b0e5d7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80">
@@ -49,12 +47,13 @@ class BusinessProfilePage extends React.Component {
                     </BusinessProfile>
                     <div className="info-section">
                         <AnnouncementBox name="Announcements">
-                            {announcements.map(comment => (
-                                <Comment username={this.props.name} profile={defaultProfile} content={comment} />
+                            <InputButtonCombo color="orange" onClick={this.submitAnnouncement} buttonName="Post" onChange={this.handleAnnouncementChange} />
+                            {this.state.announcements.slice(0).reverse().map(announcement => (
+                                <Comment username={announcement.username} profile={defaultProfile} content={announcement.content} />
                             ))}
                         </AnnouncementBox>
                         <AnnouncementBox name="Comments">
-                            {customerComments.map(comment => (
+                            {this.state.comments.slice(0).reverse().map(comment => (
                                 <Comment username={comment.username} profile={defaultProfile} content={comment.content} />
                             ))}
                         </AnnouncementBox>
@@ -65,4 +64,4 @@ class BusinessProfilePage extends React.Component {
     }
 }
 
-export default BusinessProfilePage;
+export default BusinessProfileBusinessDummy;

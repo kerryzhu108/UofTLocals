@@ -1,0 +1,46 @@
+.input-button-combo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-button-combo textarea {
+    height: 70px;
+    resize: none;
+    background-color: #EAEAEA;
+    border: none;
+    border-radius: 15px 15px 0px 0px;
+    outline: none;
+    padding: 20px;
+    font-family: 'Arial', 'Helvetica';
+    opacity: 0.5;
+}
+
+.input-button-combo textarea:focus {
+    opacity: 1;
+    outline: none;
+}
+
+.input-button-combo button {
+    border: none;
+    color: white;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    height: 50px;
+    border-radius: 0px 0px 15px 15px;
+    opacity: 0.5;
+}
+
+.input-button-combo button.orange {
+    background-color: #f1592a;
+}
+
+.input-button-combo button.green {
+    background-color: #8cc63f;
+}
+
+.input-button-combo button:hover {
+    cursor: pointer; 
+    opacity: 1;
+}
