@@ -37,7 +37,7 @@ class BusinessProfilePage extends React.Component {
         return (
             <div>
                 <Header>
-                    <Link active="true" name="Browse" />
+                    <Link href="/" active="true" name="Browse" />
                     <Link href="/login" name="Login/Signup" />
                 </Header>
                 <Container>
