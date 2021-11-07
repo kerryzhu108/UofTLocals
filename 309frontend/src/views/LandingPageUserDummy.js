@@ -71,7 +71,7 @@ class LandingPage extends React.Component {
                     </div>
                     {this.state.resturants.map((resturant, id) => {
                         const searchFilterCheck = resturant['name'].toLowerCase().includes(this.state.search.toLowerCase());
-                        const typeFilterCheck = resturant['type'].toLowerCase().includes(this.state.type.toLowerCase()) || this.state.type == 'Any';
+                        const typeFilterCheck = resturant['type'].toLowerCase().includes(this.state.type.toLowerCase()) || this.state.type === 'Any';
                         if (searchFilterCheck && typeFilterCheck) {
                             return <ResturantCover key={id}
                                 img={sampleStoreImg}
