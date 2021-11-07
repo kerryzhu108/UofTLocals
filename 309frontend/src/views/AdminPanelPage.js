@@ -18,14 +18,14 @@ class AdminPanel extends React.Component {
                 email: "turntable@gmail.com",
                 date: "Oct 28 2021",
                 content: "Studies have shown that majority of students rely on music in order to help them through the day, and Tom's Turntable has you covered! We offer a handy selection of various genres and music devices, from vinyls to CDs. Music is just one of the many ways people can express themselves, and we aim to bring out the true colours in all students!",
-                link: "/business-profile"
+                link: "/business-profile-user"
             },
             {
                 name: "Slurpy Slushies",
                 email: "slushies@yahoo.ca",
                 date: "Oct 26 2021",
                 content: "Slurpy Slushies are your local cold drink experts! From slushies to smoothies, we cover all the bases, offering clients a wide selection of flavours and combinations. As an up and coming business, we aim to provide students with door dropping discounts when they advertise their experience at our location on social media!",
-                link: "/business-profile"
+                link: "/business-profile-user"
             }
         ],
         businesses: [
@@ -34,21 +34,21 @@ class AdminPanel extends React.Component {
                 email: "bookstore@utoronto.ca",
                 date: "Oct 12 2021",
                 content: "The number one shopping spot for UofT students looking for all their textbooks! Founded as a sublet of the University of Toronto Press in 1934, the shop has since been the one stop location for all books, supplies, and school merchandise that any student would require. Located at 214 College Street, Toronto, Ontario, Postal Code M5T 3A1.",
-                link: "/business-profile"
+                link: "/business-profile-user"
             },
             {
                 name: "Medical Science Cafeteria",
                 email: "medsci@utoronto.ca",
                 date: "Oct 10 2021",
                 content: "Located on the Southeast side of campus, the Medical Science Cafeteria is one of the highest volume catering locations at UofT. Here, students can enjoy a wide selection of foods freshly served from our local providers. Located at 1 King's College Circle, Toronto, Ontario, Postal Code M5S 1A8.",
-                link: "/business-profile"
+                link: "/business-profile-user"
             },
             {
                 name: "Chatime College Street",
                 email: "chatime@customer_service.com",
                 date: "Nov 1 2021",
                 content: "Introducing our newest location: Chatime at College Street! Chatime is renouned globally for being one of the most successful bubble tea providers out there. Our newest location intends to provide students on campus with easily accessible bubble tea whenever they are craving it! Located at 199 College Street, Toronto, Ontario.",
-                link: "/business-profile"
+                link: "/business-profile-user"
             }
         ],
         posts: [
@@ -106,7 +106,8 @@ class AdminPanel extends React.Component {
         return (
             <div>
                 <Header>
-                    <Link href="/" name="Browse" />
+                    <Link href="/landing-user" name="Browse" />
+                    <Link href="/" name="Logout"/>
                 </Header>
                 <div className="panel_title">
                     <strong className="panel_title_text">ADMIN PANEL</strong>
