@@ -1,3 +1,4 @@
+// Functionality for denying the application; simply remove it from the application list
 export const denyApp = (panel, business) => {
     const filteredApps = panel.state.business_applications.filter(b => {
         return b !== business
@@ -8,6 +9,7 @@ export const denyApp = (panel, business) => {
     })
 }
 
+// Functionality for accepting the application; simply remove it from the application list and add to businesses list
 export const acceptApp = (panel, business) => {
     const filteredApps = panel.state.business_applications.filter(b => {
         return b !== business
@@ -21,6 +23,7 @@ export const acceptApp = (panel, business) => {
     })
 }
 
+// Functionality for removing a business; simply remove it from the business list
 export const removeBusiness = (panel, business) => {
     const filteredBus = panel.state.businesses.filter(b => {
         return b !== business
@@ -31,6 +34,7 @@ export const removeBusiness = (panel, business) => {
     })
 }
 
+// Functionality for removing a post; simply remove it from the post list
 export const removePost = (panel, post) => {
     const filteredPost = panel.state.posts.filter(b => {
         return b !== post
@@ -41,6 +45,7 @@ export const removePost = (panel, post) => {
     })
 }
 
+// Functionality for sorting the entries based on certain inputs
 export function sortation(val, event, panel) {
     if (val === "(A-Z)") {
         if (event.target.id === "apps") {

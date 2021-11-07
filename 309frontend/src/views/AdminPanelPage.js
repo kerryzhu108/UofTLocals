@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "../components/Link";
 import Header from "../components/Header";
-import "../css/adminpage_style.css";
+import "../css/AdminPageStyling.css";
 import BusinessApp from "../components/BusinessApp"
 import Businesses from "../components/Businesses"
 import Post from "../components/Post";
