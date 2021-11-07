@@ -1,39 +1,55 @@
+form {
+	text-align: center;
+	margin: auto;
+}
+
 label {
-	float:left;
 	color: grey;
+	font-weight: bold;
+	margin: 20px;
 }
 
 input {
-	width: 200px;
-	float:left
+	margin: 10px;
+	height: 30px;
+	border-radius: 5px;
+	width: 210px;
+
 }
 
 .loginElements {
 	border: 2px solid #cccccc;
 	background-color: white;
 	padding: 10px;
-	margin:auto;
-	margin-top:10px;
+	margin: 10px auto auto;
 	width: 500px;
+	border-radius: 15px;
+	overflow: auto;
+	box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
 }
 
 #confirmButton {
 	width:210px;
 	height: 30px;
+	border-radius: 5px;
+	background-color: #002451;
+	color: white;
+	font-weight: bold;
+	box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
 }
 
 .blue {
 	color: #002451;
 }
 
-.red {
-	color: red;
-}
-
 .grey {
 	color: grey;
 }
 
+.red {
+	color: red;
+}
+
 .small {
-	font-size: 10px;
+	font-size: 11px;
 }
