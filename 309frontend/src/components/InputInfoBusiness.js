@@ -18,7 +18,13 @@ class InputInfoBusiness extends React.Component {
                     </tr>
                     <tr>
                         <td><label className="infoLabel">Category: <span className="red">*</span></label></td>
-                        <td><select className="infoSelect" name="category" value={category} onChange={onChange}/></td>
+                        <td>
+                            <select className="infoSelect" name="category" value={category} onChange={onChange}>
+                                <option value="Restaurant/Bars">Restaurant/Bars</option>
+                                <option value="Grocery Stores">Grocery Stores</option>
+                                <option value="Activities">Activities</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td><label className="infoLabel">Username: <span className="red">*</span></label></td>

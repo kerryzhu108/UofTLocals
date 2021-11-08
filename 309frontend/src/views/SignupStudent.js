@@ -31,9 +31,9 @@ class SignupStudent extends React.Component {
     addStudent = (event) => {
         event.preventDefault()
         if (this.state.password !== this.state.confirmation) {
-            this.setState({ message: "Passwords do not match." })
+            this.setState({message: "Passwords do not match."})
         } else if (this.state.current_usernames.includes(this.state.username)) {
-            this.setState({ message: "Username already taken." })
+            this.setState({message: "Username already taken."})
         } else {
             window.location.href = "/login"     // just redirect to the login page for now
         }
@@ -56,21 +56,22 @@ class SignupStudent extends React.Component {
         return (
             <div>
                 <Header>
-                    <Link href="/" name="Browse" />
+                    <Link href="/" name="Browse"/>
                 </Header>
                 <div className="loginElements">
                     <p>Please provide the following information to create a student account.</p>
-                    <InputInfoStudent firstname={ this.state.firstname }
-                                      lastname={ this.state.lastname }
-                                      username={ this.state.username }
-                                      password={ this.state.password }
-                                      confirmation={ this.state.confirmation }
-                                      onChange={ this.handleInputChange }
-                                      onClick={ this.addStudent }/>
-                    <span className="red small"> { this.state.message }</span>
+                    <InputInfoStudent firstname={this.state.firstname}
+                                      lastname={this.state.lastname}
+                                      username={this.state.username}
+                                      password={this.state.password}
+                                      confirmation={this.state.confirmation}
+                                      onChange={this.handleInputChange}
+                                      onClick={this.addStudent}/>
+                    <span className="red small"> {this.state.message}</span>
                     <br/>
-                    <span className="small">Already a member?<a href="/login">Login</a></span>
-                    <span className="small">Not a student?<a href="/business-signup">Sign up as a business</a></span>
+                    <span className="small">Already a member?<Link href="/login" name="Login"/></span>
+                    <span className="small">Not a student?<Link href="/business-signup"
+                                                                name="Sign up as a business"/></span>
                 </div>
             </div>
         )

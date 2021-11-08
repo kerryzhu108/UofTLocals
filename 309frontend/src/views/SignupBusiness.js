@@ -33,7 +33,7 @@ class SignupBusiness extends React.Component {
         if (this.state.password !== this.state.confirmation) {
             this.setState({message: "Passwords do not match."})
         } else if (this.state.current_usernames.includes(this.state.username)) {
-            this.setState({ message: "Username already taken." })
+            this.setState({message: "Username already taken."})
         } else {
             window.location.href = "/login"      // just redirect to the login page for now
         }
@@ -56,22 +56,22 @@ class SignupBusiness extends React.Component {
         return (
             <div>
                 <Header>
-                    <Link active="true" name="Browse" />
+                    <Link active="true" name="Browse"/>
                 </Header>
                 <div className="loginElements">
                     <p>Please provide the following information to create a business account.</p>
-                    <InputInfoBusiness name={ this.state.name }
-                                       location={ this.state.location }
-                                       category={ this.state.category }
-                                       username={ this.state.username }
-                                       password={ this.state.password }
-                                       confirmation={ this.state.confirmation }
-                                       onChange={ this.handleInputChange }
-                                       onClick={ this.addBusiness }/>
-                    <span className="red small"> { this.state.message }</span>
+                    <InputInfoBusiness name={this.state.name}
+                                       location={this.state.location}
+                                       category={this.state.category}
+                                       username={this.state.username}
+                                       password={this.state.password}
+                                       confirmation={this.state.confirmation}
+                                       onChange={this.handleInputChange}
+                                       onClick={this.addBusiness}/>
+                    <span className="red small"> {this.state.message}</span>
                     <br/>
-                    <span className="small">Already a member?<a href="/login">Login</a></span>
-                    <span className="small">Not a business?<a href="/signup">Sign up as a student</a></span>
+                    <span className="small">Already a member?<Link href="/login" name="Login"/></span>
+                    <span className="small">Not a business?<Link href="/signup" name="Sign up as a student"/></span>
                 </div>
             </div>
         )

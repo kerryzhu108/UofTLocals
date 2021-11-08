@@ -111,7 +111,7 @@ class StudentProfile extends React.Component {
         return (
             <div>
                 <Header>
-                    <Link href="/" name="Browse"/>
+                    <Link href="/landing-user" name="Browse"/>
                     <Link name="user"/>
                     <Link href="/" name="logout"/>
                 </Header>

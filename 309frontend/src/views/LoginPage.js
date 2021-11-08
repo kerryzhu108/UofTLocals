@@ -76,8 +76,8 @@ class LoginPage extends React.Component {
                     <span className="red small"> {this.state.message}</span>
                     <br/>
                     <span className="small">New member? Sign up as a
-                        <a href="/signup">student</a> or
-                        <a href="/business-signup"> business</a>
+                        <Link href="/signup" name="student"/> or
+                        <Link href="/business-signup" name="business"/>
                     </span>
                 </div>
 
