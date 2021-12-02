@@ -3,12 +3,14 @@ const { mongoose } = require("./../db/mongoose");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
+// Hash password using bcrypt algorithm
 async function hashPassword(password) {
     const salt = await bcrypt.genSalt(10);
     const encrypted = await bcrypt.hash(password, salt);
     return encrypted;
 }
 
+// Check hashed password against received plaintext password
 async function checkPassword(password, hashed_password) {
     return await bcrypt.compare(password, hashed_password);
 }
