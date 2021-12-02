@@ -42,6 +42,8 @@ router.post(
     utils.checkDbConnection,
     body("email").isEmail(),
     body("password").isString(),
+    body("first_name").isString(),
+    body("last_name").isString(),
     utils.validationHandler,
     async function (req, res) {
         const password = await utils.hashPassword(req.body.password);
@@ -49,9 +51,14 @@ router.post(
         try {
             const student = new Student({
                 email: req.body.email,
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
                 password: password,
             });
-            student.save();
+            await student.save();
+
+            // TODO: Should not send hashed password back to user
+            // for security reasons.
             return res.send(student);
         } catch (error) {
             console.log(error);
