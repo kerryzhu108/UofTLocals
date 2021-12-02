@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import Link from "../components/Link";
 import InputInfoBusiness from "../components/InputInfoBusiness";
 
+import { registerBusiness } from '../actions/login'
+
 class SignupBusiness extends React.Component {
 
     state = {
@@ -35,7 +37,8 @@ class SignupBusiness extends React.Component {
         } else if (this.state.current_usernames.includes(this.state.username)) {
             this.setState({message: "Username already taken."})
         } else {
-            window.location.href = "/login"      // just redirect to the login page for now
+            console.log(registerBusiness(this.state.username, this.state.password, this.state.name))    
+            // window.location.href = "/login"      // just redirect to the login page for now
         }
     }
 

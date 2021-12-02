@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import Link from "../components/Link";
 import InputInfoStudent from "../components/InputInfoStudent";
 
+import { registerStudent } from '../actions/login'
+
 class SignupStudent extends React.Component {
 
     state = {
@@ -35,7 +37,8 @@ class SignupStudent extends React.Component {
         } else if (this.state.current_usernames.includes(this.state.username)) {
             this.setState({message: "Username already taken."})
         } else {
-            window.location.href = "/login"     // just redirect to the login page for now
+            console.log(registerStudent(this.state.username, this.state.password, this.state.firstname, this.state.lastname))
+            //window.location.href = "/login"     // just redirect to the login page for now
         }
     }
 

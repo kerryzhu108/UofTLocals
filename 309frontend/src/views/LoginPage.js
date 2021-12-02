@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import LoginInput from "../components/LoginInput";
 import Link from "../components/Link";
 
+import { login } from '../actions/login'
+
 class LoginPage extends React.Component {
 
     state = {
@@ -26,22 +28,23 @@ class LoginPage extends React.Component {
     /* Validate the username and password inputted by the user. */
     validate = (event) => {
         event.preventDefault()
-        const results = (this.state.existing_users.map((user) => {
-            if (this.state.username === user.username && this.state.password === user.password) {
-                return 1
-            }
-            return 0
-        }))
-        // hard-coded redirection based on which of the three users signed in.
-        if (results[0] === 1) {
-            window.location.href = "/landing-user"      // normal user
-        } else if (results[1] === 1) {
-            window.location.href = "/landing-business"  // business user
-        } else if (results[2] === 1) {
-            window.location.href = "/admin-panel"       // admin
-        } else {
-            this.setState({username: "", password: "", message: "Invalid login credentials. Please try again."})
-        }
+        console.log(login(this.state.username, this.state.password))    
+        // const results = (this.state.existing_users.map((user) => {
+        //     if (this.state.username === user.username && this.state.password === user.password) {
+        //         return 1
+        //     }
+        //     return 0
+        // }))
+        // // hard-coded redirection based on which of the three users signed in.
+        // if (results[0] === 1) {
+        //     window.location.href = "/landing-user"      // normal user
+        // } else if (results[1] === 1) {
+        //     window.location.href = "/landing-business"  // business user
+        // } else if (results[2] === 1) {
+        //     window.location.href = "/admin-panel"       // admin
+        // } else {
+        //     this.setState({username: "", password: "", message: "Invalid login credentials. Please try again."})
+        // }
     }
 
     /* Set the state variables upon loading. */
