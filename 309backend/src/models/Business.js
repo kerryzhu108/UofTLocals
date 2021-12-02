@@ -5,10 +5,14 @@ const mongoose = require("mongoose");
  */
 
 const businessSchema = new mongoose.Schema({
-    name: {type: String, required: true},
-    description: {type: String},
-    email: {type: String, required: true, unique: true},
-    password: {type: String}
+    name: { type: String, required: true },
+    description: { type: String },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    comments: { type: [mongoose.Types.ObjectId], ref: "Comment" }, // List of student comments on this business
+    announcements: { type: [mongoose.Types.ObjectId], ref: "Announcement" }, // List of announcements by this business
 });
 
-module.exports = businessSchema;
+const Business = mongoose.model("Business", businessSchema);
+
+module.exports = { Business };
