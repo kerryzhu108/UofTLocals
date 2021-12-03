@@ -5,11 +5,20 @@ import "../css/InputInfo.css"
 class LoginInput extends React.Component {
 
     render() {
-        const {username, password, onChange, onClick} = this.props
+        const {username, password, type, onChange, onClick} = this.props
         return (
             <form>
                 <table>
                     <tbody>
+                    <tr>
+                        <td><label className="infoLabel">Account type: </label></td>
+                        <td>
+                            <select className="infoSelect" name="type" value={type} onChange={onChange}>
+                                <option value="student">Student</option>
+                                <option value="business">Business</option>
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <td><label className="infoLabel">Username: </label></td>
                         <td><input className="infoInput" name="username" value={username} onChange={onChange}/></td>

@@ -10,7 +10,8 @@ class LoginPage extends React.Component {
 
     state = {
         username: "",
-        password: ""
+        password: "",
+        type: "student"
     }
     
     render() {

@@ -73,7 +73,13 @@ export const registerBusiness = (comp, event) => {
 /* A function to send a POST request to log a user in. */
 export const login = (comp, event) => {
     event.preventDefault()
-    fetch(`${API_HOST}/auth/login/student`, {
+    let url
+    if (comp.state.type === 'student') {
+        url = `${API_HOST}/auth/login/student`
+    } else {
+        url = `${API_HOST}/auth/login/business`
+    }
+    fetch(url, {
         method: 'POST',
         headers: { 
             'Accept': 'application/json',
