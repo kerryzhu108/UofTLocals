@@ -2,15 +2,15 @@
 
 import {domain, headers} from 'headers.js'
 
-export function signUp(firstName, lastName) {
+// Gets all approved businesses
+export function getBusinesses(bid) {
    return fetch(domain + 'signup', {
     method: 'POST',
     headers: headers,
     mode: 'cors',
     cache: 'default',
     body: JSON.stringify({
-      "firstname": firstName,
-      "last_name": lastName,
+      "businessID": bid,
     })
   }).then((response) => { return response; })
 }
