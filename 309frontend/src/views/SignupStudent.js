@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Link from "../components/Link";
 import InputInfoStudent from "../components/InputInfoStudent";
 
-import { updateLoginForm, registerStudent } from '../actions/Login'
+import { updateLoginForm, registerStudent } from '../actions/login'
 
 class SignupStudent extends React.Component {
 

@@ -77,11 +77,10 @@ export const registerBusiness = (comp, event) => {
         mode: 'cors',
         cache: 'default',
         body: JSON.stringify({
+            "name": comp.state.name,
             "email": comp.state.username,
             "password": comp.state.password,
-            "name": comp.state.name,
-            "location": comp.state.location, 
-            "type": comp.state.category
+            "desc": comp.state.description, 
         })
     }).then((response) => {
         if (response.status === 200) {

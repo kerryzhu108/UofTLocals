@@ -3,7 +3,7 @@ import React from "react";
 class InputInfoBusiness extends React.Component {
 
     render() {
-        const {name, location, category, username, password, confirmation, onChange, onClick} = this.props
+        const {name, username, password, confirmation, description, onChange, onClick} = this.props
         return (
             <form>
                 <table>
@@ -11,20 +11,6 @@ class InputInfoBusiness extends React.Component {
                     <tr>
                         <td><label className="infoLabel">Name: <span className="red">*</span></label></td>
                         <td><input className="infoInput" name="name" value={name} onChange={onChange}/></td>
-                    </tr>
-                    <tr>
-                        <td><label className="infoLabel">Location: <span className="red">*</span></label></td>
-                        <td><input className="infoInput" name="location" value={location} onChange={onChange}/></td>
-                    </tr>
-                    <tr>
-                        <td><label className="infoLabel">Category: <span className="red">*</span></label></td>
-                        <td>
-                            <select className="infoSelect" name="category" value={category} onChange={onChange}>
-                                <option value="Restaurant/Bars">Restaurant/Bars</option>
-                                <option value="Grocery Stores">Grocery Stores</option>
-                                <option value="Activities">Activities</option>
-                            </select>
-                        </td>
                     </tr>
                     <tr>
                         <td><label className="infoLabel">Username: <span className="red">*</span></label></td>
@@ -41,6 +27,20 @@ class InputInfoBusiness extends React.Component {
                                    onChange={onChange}/>
                         </td>
                     </tr>
+                    <tr>
+                        <td><label className="infoLabel">Description: <span className="red">*</span></label></td>
+                        <td><input className="infoInput" name="description" value={description} onChange={onChange}/></td>
+                    </tr>
+                    {/* <tr>
+                        <td><label className="infoLabel">Category: <span className="red">*</span></label></td>
+                        <td>
+                            <select className="infoSelect" name="category" value={category} onChange={onChange}>
+                                <option value="Restaurant/Bars">Restaurant/Bars</option>
+                                <option value="Grocery Stores">Grocery Stores</option>
+                                <option value="Activities">Activities</option>
+                            </select>
+                        </td>
+                    </tr> */}
                     <tr>
                         <td>
                             <p className="grey small">
