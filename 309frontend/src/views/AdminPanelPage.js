@@ -7,7 +7,7 @@ import Businesses from "../components/Businesses"
 import Post from "../components/Post";
 import SearchForm from "../components/SearchForm";
 import { acceptApp, denyApp, removeBusiness, removePost, sortation } from "../actions/AdminPosts";
-import { getBusinesses } from '../apis/business.js'
+import { getAnnouncements, getBusinesses } from '../apis/business.js'
 
 
 class AdminPanel extends React.Component {
@@ -67,6 +67,13 @@ class AdminPanel extends React.Component {
             activeBusinesses.push({name: business['name'], type: business['type'], content: business['description'], id: business['_id'], email: business['email'], date: business['dateCreated']})
         })
         this.setState({businesses: activeBusinesses})
+        let activePosts = []
+        const posts = await getAnnouncements()
+        console.log(posts)
+        posts.forEach((post) => {            
+            activePosts.push({name: post['poster_name'], content: post['content'], id: post['_id'], parent_id: post['poster'], date: post['date']})
+        })
+        this.setState({posts: activePosts})
     }
 
     handleInputChange = (event) => {

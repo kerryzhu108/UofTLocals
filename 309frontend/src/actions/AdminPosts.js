@@ -26,9 +26,14 @@ export const acceptApp = (panel, business) => {
 }
 
 // Functionality for removing a business; simply remove it from the business list
-export const removeBusiness = (panel, business) => {
+export async function removeBusiness (panel, business) {
     console.log(business.id)
-    deleteBusiness(business.id)
+    panel.state.posts.forEach((post) => {
+        if (post.parent_id === business.id) {
+            removePost(panel, post)
+        }
+    })
+    await deleteBusiness(business.id)
     const filteredBus = panel.state.businesses.filter(b => {
         return b !== business
     });
@@ -39,21 +44,28 @@ export const removeBusiness = (panel, business) => {
 }
 
 // Functionality for removing a post; simply remove it from the post list
-export const removePost = (panel, post) => {
-    for (var i = 0; i < panel.state.businesses.length; i++) {
-        if (panel.state.businesses[i].announcements.includes(post.content)) {
-            const ind = panel.state.businesses[i].announcements.indexOf(post.content)
-            deletePost(panel.state.businesses[i]._id, ind)
-            const filteredPost = panel.state.posts.filter(b => {
-                return b !== post
-            });
+export async function removePost (panel, post) {
+    // for (var i = 0; i < panel.state.businesses.length; i++) {
+    //     if (panel.state.businesses[i].announcements.includes(post.content)) {
+    //         const ind = panel.state.businesses[i].announcements.indexOf(post.content)
+    //         deletePost(panel.state.businesses[i]._id, ind)
+    //         const filteredPost = panel.state.posts.filter(b => {
+    //             return b !== post
+    //         });
 
-            panel.setState({
-                posts: filteredPost
-            })
-        }
-    }
+    //         panel.setState({
+    //             posts: filteredPost
+    //         })
+    //     }
+    // }
+    await deletePost(post.parent_id, post.id)
+    const filteredPost = panel.state.posts.filter(b => {
+        return b !== post
+    });
 
+    panel.setState({
+        posts: filteredPost
+    })
 }
 
 // Functionality for sorting the entries based on certain inputs

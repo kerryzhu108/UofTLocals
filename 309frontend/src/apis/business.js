@@ -16,7 +16,23 @@ export async function getBusinesses() {
   }
 }
 
-export function deleteBusiness(bid) {
+//Gets all approved announcements
+export async function getAnnouncements() {
+  try {
+    let response = await fetch(domain + 'business/allannouncements', {
+      method: 'GET',
+      headers: headers,
+      mode: 'cors',
+      cache: 'default',
+    })
+    response = await response.json()
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function deleteBusiness(bid) {
   fetch('http://localhost:5000/business/delete/' + bid, {
     method: 'DELETE'
   }).then((response) => {
@@ -24,7 +40,7 @@ export function deleteBusiness(bid) {
   })
 }
 
-export function deletePost(bid, pid) {
+export async function deletePost(bid, pid) {
   fetch('http://localhost:5000/business/delete/' + bid + '/' + pid, {
     method: 'DELETE'
   }).then((response) => {

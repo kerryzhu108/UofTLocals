@@ -31,11 +31,15 @@ const seedDatabase = async () =>{
         const announcement1 = await new Announcement({
             content: "Buy one get one free pizza for students",
             poster: business,
+            poster_name: business.name,
+            date: new Date().toLocaleString().split(',')[0]
         }).save()
 
         const announcement2 = await new Announcement({
             content: "Buy one medium pizza and get 2 free toppings",
             poster: business,
+            poster_name: business.name,
+            date: new Date().toLocaleString().split(',')[0]
         }).save()
 
         const student = await new Student({
