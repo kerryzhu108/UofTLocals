@@ -7,6 +7,7 @@ import Businesses from "../components/Businesses"
 import Post from "../components/Post";
 import SearchForm from "../components/SearchForm";
 import { acceptApp, denyApp, removeBusiness, removePost, sortation } from "../actions/AdminPosts";
+import { getBusinesses } from '../apis/business.js'
 
 
 class AdminPanel extends React.Component {
@@ -37,24 +38,35 @@ class AdminPanel extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/business/all', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            cache: 'default',
-            body: JSON.stringify()
-        }).then((response) => response.json()).then(bus_list => {
-            // Should work?
-            for (var i = 0; i < bus_list.length; i++){
-                for (var j = 0; j < bus_list[i].announcements.length; j++) {
-                    this.state.posts.push({name: bus_list[i].name, content: bus_list[i].announcements[j], date: "19"})
-                }
-            }
-            this.setState({ businesses: bus_list})
+        // fetch('http://localhost:5000/business/all', {
+        //     method: 'GET',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     mode: 'cors',
+        //     cache: 'default',
+        //     body: JSON.stringify()
+        // }).then((response) => response.json()).then(bus_list => {
+        //     // Should work?
+        //     for (var i = 0; i < bus_list.length; i++){
+        //         for (var j = 0; j < bus_list[i].announcements.length; j++) {
+        //             this.state.posts.push({name: bus_list[i].name, content: bus_list[i].announcements[j], date: "19"})
+        //         }
+        //     }
+        //     this.setState({ businesses: bus_list})
+        // })
+        window.addEventListener('load', this.fetchResturants.bind(this))
+    }
+
+    async fetchResturants() {
+        let activeBusinesses = []
+        const businesses = await getBusinesses()
+        console.log(businesses)
+        businesses.forEach((business)=>{
+            activeBusinesses.push({name: business['name'], type: business['type'], content: business['description'], id: business['_id'], email: business['email'], date: business['dateCreated']})
         })
+        this.setState({businesses: activeBusinesses})
     }
 
     handleInputChange = (event) => {

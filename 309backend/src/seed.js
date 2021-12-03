@@ -23,7 +23,9 @@ const seedDatabase = async () =>{
             password: businessPassword,
             type: 'Resturant',
             description: `American pizza restaurant franchise. It is the fourth largest pizza delivery
-                restaurant chain in the United States, with headquarters in Atlanta, Georgia.`
+                restaurant chain in the United States, with headquarters in Atlanta, Georgia.`,
+            dateCreated: new Date().toLocaleString().split(',')[0]
+
         }).save()
 
         await new Announcement({
