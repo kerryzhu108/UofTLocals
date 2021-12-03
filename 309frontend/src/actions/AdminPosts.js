@@ -1,4 +1,4 @@
-import { deleteBusiness } from "../apis/business";
+import { deleteBusiness, deletePost } from "../apis/business";
 
 // Functionality for denying the application; simply remove it from the application list
 export const denyApp = (panel, business) => {
@@ -39,17 +39,25 @@ export const removeBusiness = (panel, business) => {
 
 // Functionality for removing a post; simply remove it from the post list
 export const removePost = (panel, post) => {
-    const filteredPost = panel.state.posts.filter(b => {
-        return b !== post
-    });
+    for (var i = 0; i < panel.state.businesses.length; i++) {
+        if (panel.state.businesses[i].announcements.includes(post.content)) {
+            const ind = panel.state.businesses[i].announcements.indexOf(post.content)
+            deletePost(panel.state.businesses[i]._id, ind)
+            const filteredPost = panel.state.posts.filter(b => {
+                return b !== post
+            });
 
-    panel.setState({
-        posts: filteredPost
-    })
+            panel.setState({
+                posts: filteredPost
+            })
+        }
+    }
+
 }
 
 // Functionality for sorting the entries based on certain inputs
 export function sortation(val, event, panel) {
+    console.log(panel.state.businesses[1].announcements)
     if (val === "(A-Z)") {
         if (event.target.id === "apps") {
             panel.state.business_applications.sort((a, b) => a.name.localeCompare(b.name))
