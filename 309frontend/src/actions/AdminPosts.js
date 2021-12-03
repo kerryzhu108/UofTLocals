@@ -1,3 +1,5 @@
+import { deleteBusiness } from "../apis/business";
+
 // Functionality for denying the application; simply remove it from the application list
 export const denyApp = (panel, business) => {
     const filteredApps = panel.state.business_applications.filter(b => {
@@ -25,9 +27,7 @@ export const acceptApp = (panel, business) => {
 
 // Functionality for removing a business; simply remove it from the business list
 export const removeBusiness = (panel, business) => {
-    fetch('http://localhost:5000/business/delete/' + business._id, {
-        method: 'DELETE'
-    }).then((response) => response.json())
+    deleteBusiness(business._id)
     const filteredBus = panel.state.businesses.filter(b => {
         return b !== business
     });

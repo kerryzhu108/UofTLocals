@@ -1,10 +1,10 @@
 'use strict'
 
-import {domain, headers} from 'headers.js'
+import { domain, headers } from '../apis/headers.js'
 
-// Gets all approved businesses
+//Gets all approved businesses
 export function getBusinesses(bid) {
-   return fetch(domain + 'signup', {
+  return fetch(domain + 'signup', {
     method: 'POST',
     headers: headers,
     mode: 'cors',
@@ -13,4 +13,12 @@ export function getBusinesses(bid) {
       "businessID": bid,
     })
   }).then((response) => { return response; })
+}
+
+export function deleteBusiness(bid) {
+  fetch('http://localhost:5000/business/delete/' + bid, {
+    method: 'DELETE'
+  }).then((response) => { 
+    return response;
+  })
 }
