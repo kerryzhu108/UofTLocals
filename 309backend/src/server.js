@@ -15,6 +15,9 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyparser.json());
 
+// Seed databse
+require("./seed")
+
 // Link routers
 const rootRouter = require("./routes/root");
 const businessRouter = require("./routes/business");

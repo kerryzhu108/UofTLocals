@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const businessSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String },
+    type: {type: String},
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     comments: { type: [mongoose.Types.ObjectId], ref: "Comment" }, // List of student comments on this business
