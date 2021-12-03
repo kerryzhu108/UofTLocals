@@ -1,21 +1,18 @@
 .infoLabel {
     color: grey;
-    font-weight: bold;
     margin: 20px;
 }
 
 .infoInput {
-    margin: 10px;
     height: 30px;
     border-radius: 5px;
-    width: 210px;
+    width: 200px;
 }
 
 .infoSelect {
-    margin: 10px;
     height: 30px;
     border-radius: 5px;
-    width: 220px;
+    width: 207px;
 }
 
 .loginElements {
@@ -32,8 +29,8 @@
 #loginButton {
     background-color: #002451;
     color: white;
-    height:40px;
-    width: 220px;
+    height: 30px;
+    width: 100%;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
@@ -46,8 +43,8 @@
 #confirmButtonBusiness {
     background-color: #f1592a;
     color: white;
-    height:40px;
-    width: 230px;
+    height: 30px;
+    width: 100%;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
@@ -56,8 +53,8 @@
 #confirmButtonStudent {
     background-color: #8cc63f;
     color: white;
-    height:40px;
-    width: 230px;
+    height: 30px;
+    width: 100%;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;

@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Link from "../components/Link";
 import InputInfoStudent from "../components/InputInfoStudent";
 
-import { registerStudent } from '../actions/login'
+import { updateLoginForm, registerStudent } from '../actions/login'
 
 class SignupStudent extends React.Component {
 
@@ -14,45 +14,6 @@ class SignupStudent extends React.Component {
         username: "",
         password: "",
         confirmation: "",
-        message: "",
-        current_usernames: []
-    }
-
-    /* Update the state when user types in information. */
-    handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        this.setState({
-            [name]: value
-        })
-    }
-
-    /* This function will contain code to add a student to the system, sending data to the server. Uses the data
-    * currently in the state variable. */
-    addStudent = (event) => {
-        event.preventDefault()
-        if (this.state.password !== this.state.confirmation) {
-            this.setState({message: "Passwords do not match."})
-        } else if (this.state.current_usernames.includes(this.state.username)) {
-            this.setState({message: "Username already taken."})
-        } else {
-            console.log(registerStudent(this.state.username, this.state.password, this.state.firstname, this.state.lastname))
-            //window.location.href = "/login"     // just redirect to the login page for now
-        }
-    }
-
-    /* Set the state variables upon loading. */
-    componentDidMount() {
-        window.addEventListener('load', this.getAllUsers.bind(this));
-    }
-
-    /* Get all usernames currently in the system. */
-    getAllUsers() {
-        // for phase 2 this information will come from a server
-        this.setState({
-            current_usernames: ["user", "user2", "admin"]
-        })
     }
 
     render() {
@@ -63,18 +24,24 @@ class SignupStudent extends React.Component {
                 </Header>
                 <div className="loginElements">
                     <p>Please provide the following information to create a student account.</p>
-                    <InputInfoStudent firstname={this.state.firstname}
-                                      lastname={this.state.lastname}
-                                      username={this.state.username}
-                                      password={this.state.password}
-                                      confirmation={this.state.confirmation}
-                                      onChange={this.handleInputChange}
-                                      onClick={this.addStudent}/>
-                    <span className="red small"> {this.state.message}</span>
+                    <InputInfoStudent 
+                        firstname={ this.state.firstname }
+                        lastname={ this.state.lastname }
+                        username={ this.state.username }
+                        password={ this.state.password }
+                        confirmation={ this.state.confirmation }
+                        onChange={ e => updateLoginForm(this, e.target) }
+                        onClick={ e => registerStudent(this, e) }/>
                     <br/>
-                    <span className="small">Already a member?<Link href="/login" name="Login"/></span>
-                    <span className="small">Not a student?<Link href="/business-signup"
-                                                                name="Sign up as a business"/></span>
+                    <span>
+                        Already a member?
+                        <Link href="/login" name="Login"/>
+                    </span>
+                    <br/>
+                    <span>
+                        Not a student?
+                        <Link href="/business-signup" name="Sign up as a business"/>
+                    </span>
                 </div>
             </div>
         )
