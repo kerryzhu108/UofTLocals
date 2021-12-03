@@ -25,6 +25,9 @@ router.post(
                 name: req.body.name,
                 email: req.body.email,
                 password: password,
+                description: "",
+                comments: [],
+                announcements: []
             });
 
             await business.save();

@@ -28,29 +28,7 @@ class AdminPanel extends React.Component {
                 link: "/business-profile-user"
             }
         ],
-        businesses: [
-            {
-                name: "U of T Bookstore",
-                email: "bookstore@utoronto.ca",
-                date: "Oct 12 2021",
-                content: "The number one shopping spot for UofT students looking for all their textbooks! Founded as a sublet of the University of Toronto Press in 1934, the shop has since been the one stop location for all books, supplies, and school merchandise that any student would require. Located at 214 College Street, Toronto, Ontario, Postal Code M5T 3A1.",
-                link: "/business-profile-user"
-            },
-            {
-                name: "Medical Science Cafeteria",
-                email: "medsci@utoronto.ca",
-                date: "Oct 10 2021",
-                content: "Located on the Southeast side of campus, the Medical Science Cafeteria is one of the highest volume catering locations at UofT. Here, students can enjoy a wide selection of foods freshly served from our local providers. Located at 1 King's College Circle, Toronto, Ontario, Postal Code M5S 1A8.",
-                link: "/business-profile-user"
-            },
-            {
-                name: "Chatime College Street",
-                email: "chatime@customer_service.com",
-                date: "Nov 1 2021",
-                content: "Introducing our newest location: Chatime at College Street! Chatime is renouned globally for being one of the most successful bubble tea providers out there. Our newest location intends to provide students on campus with easily accessible bubble tea whenever they are craving it! Located at 199 College Street, Toronto, Ontario.",
-                link: "/business-profile-user"
-            }
-        ],
+        businesses: [],
         posts: [
             {
                 name: "U of T Bookstore",
@@ -71,6 +49,21 @@ class AdminPanel extends React.Component {
         businesses_search: '',
         posts_search: '',
         type: ''
+    }
+
+    componentDidMount() {
+        fetch('http://localhost:5000/business/all', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            cache: 'default',
+            body: JSON.stringify()
+        }).then((response) => response.json()).then(bus_list => {
+            this.setState({ businesses: bus_list})
+        })
     }
 
     handleInputChange = (event) => {
