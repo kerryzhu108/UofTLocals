@@ -19,7 +19,17 @@ router.get("/all", utils.checkDbConnection, async function (req, res) {
     }
 });
 
-router.delete("/delete/:id", utils.checkDbConnection, async function (req, res) {
+router.get("/allannouncements", utils.checkDbConnection, async function (req, res) {
+	try {
+        const announcements = await Announcement.find({});
+        return res.send(announcements);
+    } catch (error) {
+        return res.status(500).send("Internal server error");
+    }
+})
+
+// delete a business
+router.delete("/deletebusiness/:id", utils.checkDbConnection, async function (req, res) {
     const id = req.params.id
 	// Validate id
     try {
@@ -30,35 +40,39 @@ router.delete("/delete/:id", utils.checkDbConnection, async function (req, res) 
 			return res.send(business)
 		}
 	} catch(error) {
-		log(error)
+		console.log(error)
 		res.status(500).send() // server error, could not delete.
 	}
 })
 
-router.get("/allannouncements", utils.checkDbConnection, async function (req, res) {
+// delete postings from announcements folder
+router.delete("/delete/:pid", utils.checkDbConnection, async function (req, res) {
+	const pid = req.params.pid
 	try {
-        const announcements = await Announcement.find({});
-        return res.send(announcements);
-    } catch (error) {
-        return res.status(500).send("Internal server error");
-    }
+		const post = await Announcement.findByIdAndRemove(pid)
+		if (!post) {
+			res.status(404).send('resource not found')
+		} 
+        return res.send(post)
+	} catch(error) {
+		console.log(error)
+		res.status(500).send() // server error, could not delete.
+	}
 })
 
-
-// remove a posting WORKS
+// remove a posting from a business and the announcement folder
 router.delete("/delete/:bid/:pid", utils.checkDbConnection, async function (req, res) {
     const pid = req.params.pid
     const bid = req.params.bid
     try {
 		const post = await Announcement.findByIdAndRemove(pid)
 		const business = await Business.findById(bid)
-		if (!post) {
+		if (!post || !business) {
 			res.status(404).send('resource not found')
 		} 
-		const ind = business.announcements.indexOf(pid)
-		await business.announcements.splice(ind, 1)
-		await business.updateOne()
-        res.send(business)
+		await business.announcements.pull(pid)
+		await business.save()
+        return res.send(business)
 	} catch(error) {
 		console.log(error)
 		res.status(500).send() // server error, could not delete.

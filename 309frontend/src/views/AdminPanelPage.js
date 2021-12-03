@@ -62,14 +62,12 @@ class AdminPanel extends React.Component {
     async fetchResturants() {
         let activeBusinesses = []
         const businesses = await getBusinesses()
-        console.log(businesses)
         businesses.forEach((business)=>{
             activeBusinesses.push({name: business['name'], type: business['type'], content: business['description'], id: business['_id'], email: business['email'], date: business['dateCreated']})
         })
         this.setState({businesses: activeBusinesses})
         let activePosts = []
         const posts = await getAnnouncements()
-        console.log(posts)
         posts.forEach((post) => {            
             activePosts.push({name: post['poster_name'], content: post['content'], id: post['_id'], parent_id: post['poster'], date: post['date']})
         })
