@@ -15,11 +15,13 @@ async function checkPassword(password, hashed_password) {
     return await bcrypt.compare(password, hashed_password);
 }
 
-// Generate an access token containing the user id and email
-function generateAccessToken(id, email) {
+// Generate an access token containing the user's id, email, and type of user
+// which is either a business, student, or admin.
+function generateAccessToken(id, email, type) {
     const user = {
         id: id,
         email: email,
+        type: type,
     };
 
     const token = jwt.sign(user, process.env.SECRET_KEY, {
