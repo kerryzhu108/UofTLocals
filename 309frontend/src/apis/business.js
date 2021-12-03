@@ -1,7 +1,7 @@
 import { domain, headers } from '../apis/headers.js'
 
 //Gets all approved businesses
-export async function getBusinesses(bid) {
+export async function getBusinesses() {
   try {
     let response = await fetch(domain + 'business/all', {
       method: 'GET',

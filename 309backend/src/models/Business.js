@@ -12,6 +12,7 @@ const businessSchema = new mongoose.Schema({
     password: { type: String, required: true },
     comments: { type: [mongoose.Types.ObjectId], ref: "Comment" }, // List of student comments on this business
     announcements: { type: [mongoose.Types.ObjectId], ref: "Announcement" }, // List of announcements by this business
+    dateCreated: {type: String, required: true} // Format "Month Day Year"
 });
 
 const Business = mongoose.model("Business", businessSchema);

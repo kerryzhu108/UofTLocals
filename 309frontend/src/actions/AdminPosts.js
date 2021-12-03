@@ -27,7 +27,8 @@ export const acceptApp = (panel, business) => {
 
 // Functionality for removing a business; simply remove it from the business list
 export const removeBusiness = (panel, business) => {
-    deleteBusiness(business._id)
+    console.log(business.id)
+    deleteBusiness(business.id)
     const filteredBus = panel.state.businesses.filter(b => {
         return b !== business
     });
