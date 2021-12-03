@@ -1,6 +1,5 @@
 import LandingPage from './views/LandingPage.js';
 import BusinessProfilePage from './views/BusinessProfilePage';
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginPage from './views/LoginPage.js';
 import SignupStudent from './views/SignupStudent.js';

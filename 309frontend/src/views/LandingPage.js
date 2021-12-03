@@ -5,30 +5,32 @@ import filter from '../images/filter.png'
 import ResturantCover from '../components/ResturantCover.js';
 import Link from '../components/Link.js';
 import sampleStoreImg from '../images/sampleStoreImg.jpeg';
+import { getBusinesses } from '../apis/business.js'
 
 class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            resturants: [],
+            businesses: [],
             search: '',
             type: '',
         };
     }
 
     componentDidMount() {
-        window.addEventListener('load', this.fetchResturants.bind(this));
+        window.addEventListener('load', this.fetchResturants.bind(this))
     }
 
-    fetchResturants() {
+    async fetchResturants() {
         // fetch all active resturants and their descriptions from server
+        let activeBusinesses = []
+        const businesses = await getBusinesses()
+        console.log(businesses)
+        businesses.forEach((business)=>{
+            activeBusinesses.push({name: business['name'], type: business['type'], desc: business['description'], id: business['_id']})
+        })
         this.setState({
-            resturants: [
-                { name: "John's", type: "Resturant/Bar", desc: 'Some desc1', route: '/business-profile' },
-                { name: "Dan's", type: "Grocery", desc: 'Some desc2', route: '/business-profile' },
-                { name: "Lee's", type: "Activity", desc: 'Some desc3', route: '/business-profile' },
-                { name: "Jack's", type: "Resturant/Bar", desc: 'Some desc4', route: '/business-profile' },
-            ]
+            businesses: activeBusinesses
         })
     }
 
@@ -45,7 +47,7 @@ class LandingPage extends React.Component {
             <div className="App">
                 <div id='nav'>
                     <h3>UofT locals</h3>
-                    <div class='textRight'>
+                    <div className='textRight'>
                         <Link href="/login" name='Login' />
                         <Link href="/signup" name='SignUp' />
                         <Link href="/" name='Browse' />
@@ -62,7 +64,7 @@ class LandingPage extends React.Component {
                 <div id='browseContainer'>
                     <div id='filterBar'>
                         <img id='filter' src={filter} alt=''></img>
-                        <select name="catagories" class='catagories' onChange={this.filterType.bind(this)}>
+                        <select name="catagories" className='catagories' onChange={this.filterType.bind(this)}>
                             <option value="Any">Any</option>
                             <option value="Resturant/bar">Resturant/Bars</option>
                             <option value="Grocery">Grocery Stores</option>
@@ -70,16 +72,16 @@ class LandingPage extends React.Component {
                         </select>
                         <input placeholder='Search Names' id='filterSearch' onChange={this.filterEvents.bind(this)}></input>
                     </div>
-                    {this.state.resturants.map((resturant, id) => {
-                        const searchFilterCheck = resturant['name'].toLowerCase().includes(this.state.search.toLowerCase());
-                        const typeFilterCheck = resturant['type'].toLowerCase().includes(this.state.type.toLowerCase()) || this.state.type === 'Any';
+                    {this.state.businesses.map((business, id) => {
+                        const searchFilterCheck = business['name'].toLowerCase().includes(this.state.search.toLowerCase());
+                        const typeFilterCheck = business['type'].toLowerCase().includes(this.state.type.toLowerCase()) || this.state.type === 'Any';
                         if (searchFilterCheck && typeFilterCheck) {
                             return <ResturantCover key={id}
                                 img={sampleStoreImg}
-                                name={resturant['name']}
-                                businessType={resturant['type']}
-                                desc={resturant['desc']}
-                                route={resturant['route']}
+                                name={business['name']}
+                                businessType={business['type']}
+                                desc={business['desc']}
+                                dbId={business['id']}
                             />
                         }
                         return null

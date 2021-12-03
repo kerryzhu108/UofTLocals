@@ -1,18 +1,19 @@
-'use strict'
-
 import { domain, headers } from '../apis/headers.js'
 
 //Gets all approved businesses
-export function getBusinesses(bid) {
-  return fetch(domain + 'signup', {
-    method: 'POST',
-    headers: headers,
-    mode: 'cors',
-    cache: 'default',
-    body: JSON.stringify({
-      "businessID": bid,
+export async function getBusinesses(bid) {
+  try {
+    let response = await fetch(domain + 'business/all', {
+      method: 'GET',
+      headers: headers,
+      mode: 'cors',
+      cache: 'default',
     })
-  }).then((response) => { return response; })
+    response = await response.json()
+    return response
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export function deleteBusiness(bid) {

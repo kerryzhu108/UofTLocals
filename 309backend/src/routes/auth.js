@@ -14,6 +14,7 @@ router.post(
     body("email").isEmail(),
     body("password").isString(),
     body("name").isString(),
+    body("type").isString(),
     utils.validationHandler,
     async function (req, res) {
         // Create encrypted password
@@ -25,6 +26,7 @@ router.post(
                 name: req.body.name,
                 email: req.body.email,
                 password: password,
+                type: "",
                 description: "",
                 comments: [],
                 announcements: []

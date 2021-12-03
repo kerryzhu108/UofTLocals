@@ -17,10 +17,13 @@ const seedDatabase = async () =>{
 
 
         const businessPassword = await utils.hashPassword('abcd')
-        const business = await Business({
+        const business = await new Business({
             name: "Papa John's",
             email: "papa.john@gmail.com",
             password: businessPassword,
+            type: 'Resturant',
+            description: `American pizza restaurant franchise. It is the fourth largest pizza delivery
+                restaurant chain in the United States, with headquarters in Atlanta, Georgia.`
         }).save()
 
         await new Announcement({
