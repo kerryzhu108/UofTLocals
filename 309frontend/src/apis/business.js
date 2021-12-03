@@ -18,7 +18,15 @@ export function getBusinesses(bid) {
 export function deleteBusiness(bid) {
   fetch('http://localhost:5000/business/delete/' + bid, {
     method: 'DELETE'
-  }).then((response) => { 
+  }).then((response) => {
+    return response;
+  })
+}
+
+export function deletePost(bid, pid) {
+  fetch('http://localhost:5000/business/delete/' + bid + '/' + pid, {
+    method: 'DELETE'
+  }).then((response) => {
     return response;
   })
 }

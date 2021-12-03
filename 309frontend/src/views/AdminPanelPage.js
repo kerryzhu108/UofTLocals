@@ -29,22 +29,7 @@ class AdminPanel extends React.Component {
             }
         ],
         businesses: [],
-        posts: [
-            {
-                name: "U of T Bookstore",
-                content: "Year opening sale! Students can get 25% off of all varisty mechandising! Furthermore, textbooks are promoted at buy one get one 10% off! Valid while supplies last and for the first 2 weeks of class.",
-                date: "Oct 15 2021"
-            },
-            {
-                name: "Medical Science Cafeteria",
-                content: "Eat healthy! Students can enjoy a buy one get one 50% off discount on selected products marked \"Healthy\". Promotion valid once per purchase per student.",
-                date: "Oct 20 2021"
-            }, {
-                name: "Chatime College Street",
-                content: "Our 'Grand Opening 2.0' deal! Now that we are back from COVID, buy one large tea and get a voucher for a free medium tea upon future visit. Limit one per customer.",
-                date: "Nov 1 2021"
-            }
-        ],
+        posts: [],
         apps_search: '',
         businesses_search: '',
         posts_search: '',
@@ -62,6 +47,12 @@ class AdminPanel extends React.Component {
             cache: 'default',
             body: JSON.stringify()
         }).then((response) => response.json()).then(bus_list => {
+            // Should work?
+            for (var i = 0; i < bus_list.length; i++){
+                for (var j = 0; j < bus_list[i].announcements.length; j++) {
+                    this.state.posts.push({name: bus_list[i].name, content: bus_list[i].announcements[j], date: "19"})
+                }
+            }
             this.setState({ businesses: bus_list})
         })
     }
@@ -156,6 +147,7 @@ class AdminPanel extends React.Component {
                             </select>
                             <SearchForm name="Businesses-Search" value={this.state.posts_search} onChange={this.filterPosts.bind(this)} classType="search_form2"></SearchForm>
                             {this.state.posts.map((post) => {
+                                // Posts don't have these fields anymore, need to fix
                                 if (post.name.toLocaleLowerCase().includes(this.state.posts_search.toLowerCase())) {
                                     return <Post name={post.name} message={post.content} removePost={() => removePost(this, post)} date={post.date} />
                                 }
