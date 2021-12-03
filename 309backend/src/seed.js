@@ -28,8 +28,13 @@ const seedDatabase = async () =>{
 
         }).save()
 
-        await new Announcement({
+        const announcement1 = await new Announcement({
             content: "Buy one get one free pizza for students",
+            poster: business,
+        }).save()
+
+        const announcement2 = await new Announcement({
+            content: "Buy one medium pizza and get 2 free toppings",
             poster: business,
         }).save()
 
@@ -40,10 +45,15 @@ const seedDatabase = async () =>{
             password: "1234"
         }).save()
 
-        await new Comment({
+        const comment = await new Comment({
             content: "The pizza here is good, would like more sauce.",
             poster: student,
         }).save()
+
+        business.announcements.push(announcement1)
+        business.announcements.push(announcement2)
+        business.comments.push(comment)
+        await business.save()
 
     } catch (error) {
         console.log(error)
