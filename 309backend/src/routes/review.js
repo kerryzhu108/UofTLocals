@@ -1,0 +1,52 @@
+const express = require("express");
+const utils = require("./../utils/utils");
+const { body } = require("express-validator");
+
+const { Review } = require("./../models/Review");
+const { Business } = require("./../models/Business");
+const { Student } = require("./../models/Student");
+
+const router = express.Router();
+
+router.post(
+    "/:id",
+    utils.checkDbConnection,
+    utils.authenticateToken,
+    body("content").isString(),
+    body("rating").isInt({ min: 0, max: 5 }),
+    utils.validationHandler,
+    async function (req, res) {
+        try {
+            // Create a new announcement
+            const review = new Review({
+                content: req.body.content,
+                created: Date(),
+                rating: req.body.rating,
+                business: req.params.id,
+                poster: req.user.id,
+            });
+
+            // Add this announcement to the logged in business'
+            // announcement array
+            const business = await Business.findById(req.params.id);
+            if (!business) return res.status(404).send("Business not found");
+            business.reviews.push(review.id);
+
+            const student = await Student.findById(req.user.id);
+            if (!student) return res.status(404).send("Student not found");
+            student.reviews.push(review.id);
+
+            // Save the changes
+            await business.save();
+            await student.save();
+            await review.save();
+
+            return res.send(review);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal server error");
+        }
+    }
+);
+
+module.exports = router;

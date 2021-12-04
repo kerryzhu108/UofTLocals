@@ -61,7 +61,7 @@ function checkDbConnection(req, res, next) {
 function validationHandler(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.json(errors.array());
+        return res.status(400).json(errors.array());
     }
 
     next();
