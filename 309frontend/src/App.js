@@ -1,11 +1,11 @@
-import LandingPage from './views/LandingPage.js';
-import BusinessProfilePage from './views/BusinessProfilePage';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import LoginPage from './views/LoginPage.js';
-import SignupStudent from './views/SignupStudent.js';
+import LandingPage from "./views/LandingPage.js";
+import BusinessProfilePage from "./views/BusinessProfilePage";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LoginPage from "./views/LoginPage.js";
+import SignupStudent from "./views/SignupStudent.js";
 import SignupBusiness from "./views/SignupBusiness";
-import StudentProfile from './views/StudentProfilePage.js';
-import AdminPanel from './views/AdminPanelPage.js';
+import StudentProfile from "./views/StudentProfilePage.js";
+import AdminPanel from "./views/AdminPanelPage.js";
 
 function App() {
     return (
@@ -14,7 +14,7 @@ function App() {
                 <Route exact path="/">
                     <LandingPage />
                 </Route>
-                <Route path="/business-profile">
+                <Route path="/business/:id">
                     <BusinessProfilePage name="Caffeine Corner" />
                 </Route>
                 <Route path="/login">
@@ -36,6 +36,5 @@ function App() {
         </Router>
     );
 }
-
 
 export default App;

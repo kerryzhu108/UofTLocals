@@ -18,6 +18,7 @@ router.post(
             // Create a new announcement
             const announcement = new Announcement({
                 content: req.body.content,
+                poster: req.user.id,
                 date: Date(),
             });
 
@@ -29,11 +30,32 @@ router.post(
             // Save the changes
             await business.save();
             await announcement.save();
+
+            return res.send(announcement);
         } catch (error) {
             console.log(error);
             return res.status(500).send("Internal server error");
         }
     }
 );
+
+router.get("/:id", utils.checkDbConnection, async function (req, res) {
+    try {
+        const business = await Business.findById(req.params.id).populate({
+            path: "announcements",
+            populate: {
+                path: "poster",
+                model: "Business",
+                select: { name: 1, _id: 0 },
+            },
+        });
+
+        if (!business) return res.status(404).send("Unable to find business");
+        return res.send(business.announcements);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Internal server error");
+    }
+});
 
 module.exports = router;

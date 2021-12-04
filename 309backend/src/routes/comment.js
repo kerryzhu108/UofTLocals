@@ -64,9 +64,14 @@ router.get("/student/:id", utils.checkDbConnection, async function (req, res) {
 // Get all comments that a business has
 router.get("/business/:id", utils.checkDbConnection, async function (req, res) {
     try {
-        const business = await Business.findById(req.params.id).populate(
-            "comments"
-        );
+        const business = await Business.findById(req.params.id).populate({
+            path: "comments",
+            populate: {
+                path: "poster",
+                model: "Student",
+                select: { email: 1, _id: 0 },
+            },
+        });
         if (!business) return res.status(404).send("Business not found");
         return res.send(business.comments);
     } catch (error) {
