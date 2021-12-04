@@ -1,6 +1,7 @@
 const express = require("express");
 const { Business } = require("./../models/Business");
 const { Student } = require("./../models/Student");
+const { Announcement } = require("./../models/Announcement");
 const { mongoose } = require("./../db/mongoose");
 
 const { body, validationResult } = require("express-validator");
@@ -8,16 +9,27 @@ const utils = require(".././utils/utils");
 
 const router = express.Router();
 
+// get all businesses
 router.get("/all", utils.checkDbConnection, async function (req, res) {
     try {
-        const businesses = await Business.find({});
+        const businesses = await Business.find({}).populate("announcements");
         return res.send(businesses);
     } catch (error) {
         return res.status(500).send("Internal server error");
     }
 });
 
-router.delete("/delete/:id", utils.checkDbConnection, async function (req, res) {
+router.get("/allannouncements", utils.checkDbConnection, async function (req, res) {
+	try {
+        const announcements = await Announcement.find({});
+        return res.send(announcements);
+    } catch (error) {
+        return res.status(500).send("Internal server error");
+    }
+})
+
+// delete a business
+router.delete("/deletebusiness/:id", utils.checkDbConnection, async function (req, res) {
     const id = req.params.id
 	// Validate id
     try {
@@ -28,25 +40,41 @@ router.delete("/delete/:id", utils.checkDbConnection, async function (req, res) 
 			return res.send(business)
 		}
 	} catch(error) {
-		log(error)
+		console.log(error)
 		res.status(500).send() // server error, could not delete.
 	}
 })
 
-// remove a posting WORKS
+// delete postings from announcements folder
+router.delete("/delete/:pid", utils.checkDbConnection, async function (req, res) {
+	const pid = req.params.pid
+	try {
+		const post = await Announcement.findByIdAndRemove(pid)
+		if (!post) {
+			res.status(404).send('resource not found')
+		} 
+        return res.send(post)
+	} catch(error) {
+		console.log(error)
+		res.status(500).send() // server error, could not delete.
+	}
+})
+
+// remove a posting from a business and the announcement folder
 router.delete("/delete/:bid/:pid", utils.checkDbConnection, async function (req, res) {
     const pid = req.params.pid
     const bid = req.params.bid
     try {
+		const post = await Announcement.findByIdAndRemove(pid)
 		const business = await Business.findById(bid)
-		if (!business) {
+		if (!post || !business) {
 			res.status(404).send('resource not found')
 		} 
-        business.announcements.splice(pid, 1)
-        await business.save()
-        res.send({"business": business})
+		await business.announcements.pull(pid)
+		await business.save()
+        return res.send(business)
 	} catch(error) {
-		log(error)
+		console.log(error)
 		res.status(500).send() // server error, could not delete.
 	}
 })

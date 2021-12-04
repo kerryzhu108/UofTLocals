@@ -27,11 +27,11 @@ router.post(
                 name: req.body.name,
                 email: req.body.email,
                 password: password,
-                type: "Business", //placeholder, use req.body.type later 
+                type: "Business", //placeholder, use req.body.type later
                 description: req.body.desc,
                 comments: [],
                 announcements: [],
-                dateCreated: new Date().toLocaleString().split(',')[0]
+                dateCreated: new Date().toLocaleString().split(",")[0],
             });
 
             await business.save();
@@ -98,7 +98,8 @@ router.post(
             // This user is valid, generate an access token
             const access_token = utils.generateAccessToken(
                 business.id,
-                business.email
+                business.email,
+                "business"
             );
 
             // Set the session variable's user to access token
@@ -144,7 +145,8 @@ router.post(
             // This user is valid, generate an access token
             const access_token = utils.generateAccessToken(
                 student.id,
-                student.email
+                student.email,
+                "student"
             );
             
             // Set the session variable's user to access token
@@ -159,6 +161,40 @@ router.post(
             };
 
             return res.json(return_value);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal server error");
+        }
+    }
+);
+
+// Get student profile or business profile information
+router.get(
+    "/profile",
+    utils.checkDbConnection,
+    utils.authenticateToken,
+    async function (req, res) {
+        try {
+            // Determine this user's type
+            if (req.user.type == "business") {
+                const business = await Business.findById(req.user.id);
+                return res.json({
+                    id: req.user.id,
+                    type: req.user.type,
+                    name: business.name,
+                    email: business.email,
+                });
+            } else if (req.user.type == "student") {
+                const student = await Student.findById(req.user.id);
+                return res.json({
+                    id: req.user.id,
+                    type: req.user.type,
+                    name: `${student.first_name} ${student.last_name}`,
+                    email: student.email,
+                });
+            } else {
+                return res.status(400).send("Unknown user type");
+            }
         } catch (error) {
             console.log(error);
             return res.status(500).send("Internal server error");

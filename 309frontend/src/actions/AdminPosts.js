@@ -1,4 +1,4 @@
-import { deleteBusiness, deletePost } from "../apis/business";
+import { deleteBusiness, deletePost, deleteIndPost } from "../apis/business";
 
 // Functionality for denying the application; simply remove it from the application list
 export const denyApp = (panel, business) => {
@@ -26,9 +26,10 @@ export const acceptApp = (panel, business) => {
 }
 
 // Functionality for removing a business; simply remove it from the business list
-export const removeBusiness = (panel, business) => {
-    console.log(business.id)
-    deleteBusiness(business.id)
+export function removeBusiness(panel, business) {
+    // kill business first, then using business.id, kill posts
+    const bus_id = business.id
+    deleteBusiness(bus_id)
     const filteredBus = panel.state.businesses.filter(b => {
         return b !== business
     });
@@ -36,24 +37,56 @@ export const removeBusiness = (panel, business) => {
     panel.setState({
         businesses: filteredBus
     })
+    var postToRemove = []
+    panel.state.posts.forEach((post) => {
+        if (post.parent_id === bus_id) {
+            deleteIndPost(post.id)
+            postToRemove.push(post)
+        }
+    })
+    const filteredPost = panel.state.posts.filter(x=> !postToRemove.includes(x))
+
+    panel.setState({
+        posts: filteredPost
+    })
+
+    // console.log(business.id)
+    // panel.state.posts.forEach((post) => {
+    //     if (post.parent_id === business.id) {
+    //         console.log("Call for: " + post.id)
+    //         // call delete post directly from here?
+    //         deletePost(post.parent_id, post.id)
+    //         var filteredPost = panel.state.posts.filter(b => {
+    //             return b !== post
+    //         });
+
+    //         panel.setState({
+    //             posts: filteredPost
+    //         })
+    //         console.log("Removed!")
+    //     }
+    // })
+    // console.log("Call for remove business")
+    // deleteBusiness(business.id)
+    // const filteredBus = panel.state.businesses.filter(b => {
+    //     return b !== business
+    // });
+
+    // panel.setState({
+    //     businesses: filteredBus
+    // })
 }
 
 // Functionality for removing a post; simply remove it from the post list
-export const removePost = (panel, post) => {
-    for (var i = 0; i < panel.state.businesses.length; i++) {
-        if (panel.state.businesses[i].announcements.includes(post.content)) {
-            const ind = panel.state.businesses[i].announcements.indexOf(post.content)
-            deletePost(panel.state.businesses[i]._id, ind)
-            const filteredPost = panel.state.posts.filter(b => {
-                return b !== post
-            });
+export function removePost(panel, post) {
+    deletePost(post.parent_id, post.id)
+    const filteredPost = panel.state.posts.filter(b => {
+        return b !== post
+    });
 
-            panel.setState({
-                posts: filteredPost
-            })
-        }
-    }
-
+    panel.setState({
+        posts: filteredPost
+    })
 }
 
 // Functionality for sorting the entries based on certain inputs

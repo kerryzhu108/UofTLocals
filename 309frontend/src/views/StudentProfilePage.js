@@ -59,6 +59,7 @@ class StudentProfile extends React.Component {
 
     /* Set the state variables upon loading. */
     componentDidMount() {
+        
         window.addEventListener('load', this.getCurrentUser.bind(this));
         window.addEventListener('load', this.getPosts.bind(this));
         window.addEventListener('load', this.getAllUsers.bind(this));
