@@ -61,6 +61,7 @@ router.post(
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 password: password,
+                created: Date(),
             });
             await student.save();
 
@@ -103,7 +104,7 @@ router.post(
             );
 
             // Set the session variable's user to access token
-            req.session.user = access_token
+            req.session.user = access_token;
 
             const return_value = {
                 id: business.id,
@@ -148,9 +149,9 @@ router.post(
                 student.email,
                 "student"
             );
-            
+
             // Set the session variable's user to access token
-            req.session.user = access_token
+            req.session.user = access_token;
 
             const return_value = {
                 id: student.id,
@@ -205,13 +206,13 @@ router.get(
 // Logout the current user
 router.get("/logout", (req, res) => {
     // Remove the session
-    req.session.destroy(error => {
+    req.session.destroy((error) => {
         if (error) {
             res.status(500).send(error);
         } else {
-            res.send()
+            res.send();
         }
-    })
+    });
 });
 
 // Check if user is logged in

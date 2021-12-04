@@ -10,6 +10,7 @@ const studentSchema = new mongoose.Schema({
     last_name: { type: String, required: true },
     password: { type: String, required: true },
     comments: { type: [mongoose.Types.ObjectId], ref: "Comment" }, // References of comments this student has made
+    created: { type: Date },
 });
 
 const Student = mongoose.model("Student", studentSchema);
