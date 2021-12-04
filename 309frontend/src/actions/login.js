@@ -146,10 +146,10 @@ export const login = (comp, event) => {
             // status code was not 200
             return
         }
-        if (json.id !== undefined) {
+        if (json.tokens !== undefined) {
             // successful login from the server. we have the id and access tokens now
-            alert('Current logged in user: ' + json.id)
-            window.location.href = '/'
+            alert('You are being logged in as: ' + json.tokens.access)
+            //window.location.href = '/'
         } else if (json[0].msg !== undefined && json[0].param !== undefined) {
             // alert the user of what went wrong, if we can
             const msg = json[0].msg + ' for ' + json[0].param
@@ -159,4 +159,46 @@ export const login = (comp, event) => {
         // log any errors to the console
         console.log(error)
     })
+}
+
+/* A function to send a GET request to check which user is logged in. */
+export const checkSession = () => {
+    const url = `${API_HOST}/auth/check-session`;
+    fetch(url)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        })
+        .then(json => {
+            console.log(json)
+            alert('stop')
+            if (json && json.user) {
+                return json.user
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}
+
+/* A function to send a GET request to log the current user out. */
+export const logout = () => {
+    const url = `${API_HOST}/auth/logout`;
+    fetch(url)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        })
+        .ethn(json => {
+            console.log(json)
+            alert('stop')
+            if (json && json.user) {
+                return json.user
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
 }

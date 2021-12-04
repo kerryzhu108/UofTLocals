@@ -18,12 +18,30 @@ app.use(bodyparser.json());
 // Seed databse
 require("./seed")
 
+// express-session for managing user sessions
+const session = require("express-session")
+const MongoStore = require('connect-mongo')
+
 // Link routers
 const rootRouter = require("./routes/root");
 const businessRouter = require("./routes/business");
 const authRouter = require("./routes/auth");
 const commentRouter = require("./routes/comment");
 const studentRouter = require("./routes/student");
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET || "somesessionsecret", 
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+            expires: 600000,
+            httpOnly: true
+        },
+        // store the sessions on the database in production
+        store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/uoftlocals' })
+    })
+)
 
 app.use("/", rootRouter);
 app.use("/business", businessRouter);
