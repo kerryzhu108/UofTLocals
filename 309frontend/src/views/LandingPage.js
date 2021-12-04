@@ -6,6 +6,8 @@ import ResturantCover from '../components/ResturantCover.js';
 import Link from '../components/Link.js';
 import sampleStoreImg from '../images/sampleStoreImg.jpeg';
 import { getBusinesses } from '../apis/business.js'
+import {getProfile} from "../apis/profile";
+import Cookies from 'universal-cookie';
 
 class LandingPage extends React.Component {
     constructor(props) {
@@ -14,10 +16,19 @@ class LandingPage extends React.Component {
             businesses: [],
             search: '',
             type: '',
+            username: 'Login'
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        // Determine if the user is signed in or not
+        const cookies = new Cookies();
+        const access = cookies.get("access_token");
+        if (access) {
+            // This user is logged in, get the appropriate information
+            const profile = await getProfile();
+        }
+
         window.addEventListener('load', this.fetchResturants.bind(this))
     }
 
@@ -48,7 +59,7 @@ class LandingPage extends React.Component {
                 <div id='nav'>
                     <h3>UofT locals</h3>
                     <div className='textRight'>
-                        <Link href="/login" name='Login' />
+                        <Link href="/login" name={this.state.username} />
                         <Link href="/signup" name='SignUp' />
                         <Link href="/" name='Browse' />
                     </div>

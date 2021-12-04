@@ -1,3 +1,4 @@
+import Cookies from 'universal-cookie';
 
 const API_HOST = 'http://localhost:5000'
 
@@ -148,6 +149,10 @@ export const login = (comp, event) => {
         }
         if (json.tokens !== undefined) {
             // successful login from the server. we have the id and access tokens now
+            // Store received access token in cookie
+            const cookies = new Cookies();
+            cookies.set("access_token", json.tokens.access, {path: "/"});
+
             alert('You are being logged in as: ' + json.tokens.access)
             //window.location.href = '/'
         } else if (json[0].msg !== undefined && json[0].param !== undefined) {
