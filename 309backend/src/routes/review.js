@@ -49,4 +49,42 @@ router.post(
     }
 );
 
+// Get all reviews posted by a student
+router.get("/student/:id", utils.checkDbConnection, async function (req, res) {
+    try {
+        const student = await Student.findById(req.params.id).populate({
+            path: "reviews",
+            populate: {
+                path: "business",
+                model: "Business",
+                select: { name: 1 },
+            },
+        });
+        if (!student) return res.status(404).send("Student not found");
+        return res.send(student.reviews);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Internal server error");
+    }
+});
+
+// Get all reviews belonging to a business
+router.get("/business/:id", utils.checkDbConnection, async function (req, res) {
+    try {
+        const business = await Business.findById(req.params.id).populate({
+            path: "reviews",
+            populate: {
+                path: "poster",
+                model: "Student",
+                select: { email: 1 },
+            },
+        });
+        if (!business) return res.status(404).send("Business not found");
+        return res.send(business.reviews);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Internal server error");
+    }
+});
+
 module.exports = router;
