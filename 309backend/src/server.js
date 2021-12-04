@@ -32,13 +32,13 @@ const studentRouter = require("./routes/student");
 app.use(
     session({
         secret: process.env.SESSION_SECRET || "somesessionsecret", 
-        resave: true,
-        saveUninitialized: true,
+        resave: false,
+        saveUninitialized: false,
         cookie: {
             expires: 600000,
             httpOnly: true
         },
-        // store the sessions on the database in production
+        // store the sessions on local database for now
         store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/uoftlocals' })
     })
 )
