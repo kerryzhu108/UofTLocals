@@ -22,6 +22,7 @@ router.post(
             const comment = new Comment({
                 content: req.body.content,
                 poster: req.user.id,
+                created: Date(),
             });
 
             // Push this comment to the student's local array
