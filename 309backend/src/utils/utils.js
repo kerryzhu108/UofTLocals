@@ -25,7 +25,7 @@ function generateAccessToken(id, email, type) {
     };
 
     const token = jwt.sign(user, process.env.SECRET_KEY, {
-        expiresIn: 1800,
+        expiresIn: "2d",
     });
 
     return token;
