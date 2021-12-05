@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
 import Container from "../components/Container";
-import Link from "../components/Link";
 import BusinessProfile from "../components/BusinessProfile";
 import Comment from "../components/Comment";
 import AnnouncementBox from "../components/AnnouncementBox";
@@ -106,10 +105,7 @@ class BusinessProfilePage extends React.Component {
     render() {
         return (
             <div>
-                <Header>
-                    <Link href="/" active="true" name="Browse" />
-                    <Link href="/login" name="Login/Signup" />
-                </Header>
+                <Header />
                 <Container>
                     <BusinessProfile
                         name={this.state.businessName}

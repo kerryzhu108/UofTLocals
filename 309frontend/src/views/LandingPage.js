@@ -3,7 +3,7 @@ import "../css/LandingPage.css";
 import bannerImg from "../images/banner.jpeg";
 import filter from "../images/filter.png";
 import ResturantCover from "../components/ResturantCover.js";
-import Link from "../components/Link.js";
+import Header from "../components/Header";
 import sampleStoreImg from "../images/sampleStoreImg.jpeg";
 import { getBusinesses } from "../apis/business.js";
 import { getProfile } from "../apis/profile";
@@ -21,14 +21,6 @@ class LandingPage extends React.Component {
     }
 
     async componentDidMount() {
-        // Determine if the user is signed in or not
-        const cookies = new Cookies();
-        const access_token = cookies.get("access_token");
-        if (access_token) {
-            // This user is logged in, get the appropriate information
-            const profile = await getProfile(access_token);
-        }
-
         window.addEventListener("load", this.fetchResturants.bind(this));
     }
 
@@ -62,12 +54,7 @@ class LandingPage extends React.Component {
         return (
             <div className="App">
                 <div id="nav">
-                    <h3>UofT locals</h3>
-                    <div className="textRight">
-                        <Link href="/login" name={this.state.username} />
-                        <Link href="/signup" name="SignUp" />
-                        <Link href="/" name="Browse" />
-                    </div>
+                    <Header />
                 </div>
                 <div id="bannerWrapper">
                     <img id="banner" src={bannerImg} alt="resturant" />
