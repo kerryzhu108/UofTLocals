@@ -31,7 +31,13 @@ router.post(
             await business.save();
             await announcement.save();
 
-            return res.send(announcement);
+            return res.send(
+                await announcement.populate({
+                    path: "poster",
+                    model: "Business",
+                    select: { _id: 0, name: 1 },
+                })
+            );
         } catch (error) {
             console.log(error);
             return res.status(500).send("Internal server error");

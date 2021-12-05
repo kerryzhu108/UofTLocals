@@ -99,6 +99,32 @@ export async function commentOnBusiness(id, content, access_token) {
     }
 }
 
+// Add announcement to business profile (requires a business access token)
+export async function addBusinessAnnouncement(content, access_token) {
+    try {
+        let response = await fetch(domain + "announcement", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+            },
+            mode: "cors",
+            cache: "default",
+            body: JSON.stringify({
+                content: content,
+            }),
+        });
+
+        if (response.status !== 200) return null;
+
+        response = await response.json();
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 //Gets all approved announcements
 export async function getAnnouncements() {
     try {

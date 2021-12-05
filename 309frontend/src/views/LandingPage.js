@@ -6,8 +6,6 @@ import ResturantCover from "../components/ResturantCover.js";
 import Header from "../components/Header";
 import sampleStoreImg from "../images/sampleStoreImg.jpeg";
 import { getBusinesses } from "../apis/business.js";
-import { getProfile } from "../apis/profile";
-import Cookies from "universal-cookie";
 
 class LandingPage extends React.Component {
     constructor(props) {

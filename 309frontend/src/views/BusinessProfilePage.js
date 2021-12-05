@@ -16,6 +16,7 @@ import {
     getBusinessComments,
     getBusinessAnnouncements,
     commentOnBusiness,
+    addBusinessAnnouncement,
 } from "../apis/business";
 import { getProfile } from "../apis/profile";
 
@@ -67,7 +68,20 @@ class BusinessProfilePage extends React.Component {
         event.preventDefault();
     }
 
-    async handleBusinessSubmit(event) {}
+    async handleBusinessSubmit(event) {
+        var currentAnnouncements = this.state.announcements;
+
+        const cookies = new Cookies();
+        const announcement = await addBusinessAnnouncement(
+            this.state.boxText,
+            cookies.get("access_token")
+        );
+
+        if (announcement) {
+            currentAnnouncements.push(announcement);
+            this.setState({ announcements: currentAnnouncements });
+        }
+    }
 
     async componentDidMount() {
         let id = this.props.match.params.id;
@@ -116,10 +130,14 @@ class BusinessProfilePage extends React.Component {
                     <div className="info-section">
                         <AnnouncementBox name="Announcements">
                             {this.state.user &&
-                                this.state.user.type === "business" && (
+                                this.state.user.type === "business" &&
+                                this.props.match.params.id ===
+                                    this.state.user.id && (
                                     <InputButtonCombo
                                         buttonName="Post Announcement"
-                                        color="green"
+                                        color="orange"
+                                        onChange={this.handleChange}
+                                        onClick={this.handleBusinessSubmit}
                                     />
                                 )}
                             {this.state.announcements.map((announcement) => (

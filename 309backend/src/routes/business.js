@@ -62,7 +62,7 @@ router.delete(
         try {
             const post = await Announcement.findByIdAndRemove(pid);
             if (!post) {
-                res.status(404).send("resource not found");
+                res.status(404).send("Resource not found");
             }
             return res.send(post);
         } catch (error) {

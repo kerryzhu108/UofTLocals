@@ -11,7 +11,7 @@ const router = express.Router();
 router.post(
     "/register/business",
     utils.checkDbConnection,
-    body("email").isEmail(),
+    body("username").isString(),
     body("password").isString(),
     body("name").isString(),
     // body("type").isString(),
@@ -25,7 +25,7 @@ router.post(
             // Create business using provided parameters
             const business = new Business({
                 name: req.body.name,
-                email: req.body.email,
+                username: req.body.username,
                 password: password,
                 type: "Business", //placeholder, use req.body.type later
                 description: req.body.desc,
@@ -79,12 +79,14 @@ router.post(
 router.post(
     "/login/business",
     utils.checkDbConnection,
-    body("email").isEmail(),
+    body("username").isString(),
     body("password").isString(),
     utils.validationHandler,
     async function (req, res) {
         try {
-            const business = await Business.findOne({ email: req.body.email });
+            const business = await Business.findOne({
+                username: req.body.username,
+            });
             if (!business) return res.status(404).send("Business not found");
 
             // Compare send password with hashed password
@@ -99,7 +101,7 @@ router.post(
             // This user is valid, generate an access token
             const access_token = utils.generateAccessToken(
                 business.id,
-                business.email,
+                business.username,
                 "business"
             );
 
@@ -108,7 +110,7 @@ router.post(
 
             const return_value = {
                 id: business.id,
-                email: business.email,
+                username: business.username,
                 tokens: {
                     access: access_token,
                 },
@@ -157,7 +159,6 @@ router.post(
 
             const return_value = {
                 id: student.id,
-                email: student.email,
                 username: student.username,
                 tokens: {
                     access: access_token,
