@@ -62,7 +62,7 @@ class StudentProfile extends React.Component {
                         password={ this.state.password }
                         confirmation={ this.state.confirmation }
                         onChange={ e => updateLoginForm(this, e.target) }
-                        onClick={ () => console.log('helloo') }/>
+                        onClick={ () => console.log('patch route here') }/>
                 </div>
                 <div>
                     <div className='postsContainer'>

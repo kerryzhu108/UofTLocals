@@ -204,25 +204,4 @@ router.get(
     }
 );
 
-// Logout the current user
-router.get("/logout", (req, res) => {
-    // Remove the session
-    req.session.destroy((error) => {
-        if (error) {
-            res.status(500).send(error);
-        } else {
-            res.send();
-        }
-    });
-});
-
-// Check if user is logged in
-router.get("/check-session", (req, res) => {
-    if (req.session.user) {
-        res.send(req.session.user);
-    } else {
-        res.status(401).send();
-    }
-});
-
 module.exports = router;
