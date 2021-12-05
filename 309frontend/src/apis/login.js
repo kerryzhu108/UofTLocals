@@ -71,9 +71,10 @@ export const registerBusiness = async (comp, event) => {
             cache: 'default',
             body: JSON.stringify({
                 "name": comp.state.name,
-                "email": comp.state.username,
+                "username": comp.state.username,
                 "password": comp.state.password,
-                "desc": comp.state.description, 
+                "desc": comp.state.description,
+                "email": comp.state.email
             })
         })
         if (response.status !== 200) {
@@ -82,9 +83,9 @@ export const registerBusiness = async (comp, event) => {
             return
         }
         response = await response.json()
-        if (response.email !== undefined) {
+        if (response.username !== undefined) {
             // successful login from the server. we have the id and access tokens now
-            alert('Signed up as: ' + response.email)
+            alert('Signed up as: ' + response.username)
             window.location.href = '/login'
         } else if (response[0].msg !== undefined && response[0].param !== undefined) {
             // alert the user of what went wrong, if we can
@@ -126,7 +127,7 @@ export const login = async (comp, event) => {
             // Store received access token in cookie
             const cookies = new Cookies();
             cookies.set("access_token", response.tokens.access, {path: "/"});
-            alert('Success! You are being logged in as: ' + response.email)
+            alert('Success! You are being logged in as: ' + response.username)
             window.location.href = '/'
         } else if (response[0].msg !== undefined && response[0].param !== undefined) {
             // alert the user of what went wrong, if we can

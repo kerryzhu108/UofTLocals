@@ -9,6 +9,7 @@ import { updateLoginForm, registerBusiness } from '../apis/login'
 class SignupBusiness extends React.Component {
     state = {
         name: "",
+        email: "",
         username: "",
         password: "",
         confirmation: "",
@@ -26,14 +27,15 @@ class SignupBusiness extends React.Component {
                         business account.
                     </p>
                     <InputInfoBusiness
-                        name={this.state.name}
-                        username={this.state.username}
-                        password={this.state.password}
-                        confirmation={this.state.confirmation}
-                        description={this.state.description}
-                        type={this.state.type}
-                        onChange={(e) => updateLoginForm(this, e.target)}
-                        onClick={(e) => registerBusiness(this, e)}
+                        name={ this.state.name }
+                        email={ this.state.email }
+                        username={ this.state.username }
+                        password={ this.state.password }
+                        confirmation={ this.state.confirmation }
+                        description={ this.state.description }
+                        type={ this.state.type }
+                        onChange={ (e) => updateLoginForm(this, e.target) }
+                        onClick={ (e) => registerBusiness(this, e) }
                     />
                     <br />
                     <span>

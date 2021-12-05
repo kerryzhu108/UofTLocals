@@ -40,8 +40,8 @@ class StudentProfile extends React.Component {
         this.setState({
             firstname: user_information.firstname,
             lastname: user_information.lastname,
-            // email: user_information.email,
-            username: user_information.username,
+            email: user_information.email,
+            username: user_information.name,
             comments: comments
         })
     }
