@@ -18,6 +18,7 @@ class StudentProfile extends React.Component {
         this.state = {
             firstname: "Unknown",
             lastname: "Unknown",
+            email: "Unknown",
             username: "Unknown",
             password: "",
             confirmation: "",
@@ -39,7 +40,8 @@ class StudentProfile extends React.Component {
         this.setState({
             firstname: user_information.firstname,
             lastname: user_information.lastname,
-            username: user_information.email,
+            email: user_information.email,
+            username: user_information.username,
             comments: comments
         })
     }
@@ -54,11 +56,12 @@ class StudentProfile extends React.Component {
                 </Header>
 
                 <div className='postsContainer'>
+                    <h1>Welcome, { this.state.username }</h1>
                     <h3>Edit My Profile</h3>
                     <InputInfoStudent 
                         firstname={ this.state.firstname }
                         lastname={ this.state.lastname }
-                        username={ this.state.username }
+                        email={ this.state.email }
                         password={ this.state.password }
                         confirmation={ this.state.confirmation }
                         onChange={ e => updateLoginForm(this, e.target) }

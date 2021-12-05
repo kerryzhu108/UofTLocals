@@ -11,6 +11,7 @@ class SignupStudent extends React.Component {
     state = {
         firstname: "",
         lastname: "",
+        email: "",
         username: "",
         password: "",
         confirmation: "",
@@ -27,6 +28,7 @@ class SignupStudent extends React.Component {
                     <InputInfoStudent 
                         firstname={ this.state.firstname }
                         lastname={ this.state.lastname }
+                        email={ this.state.email }
                         username={ this.state.username }
                         password={ this.state.password }
                         confirmation={ this.state.confirmation }

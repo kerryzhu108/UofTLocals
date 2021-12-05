@@ -17,10 +17,10 @@ async function checkPassword(password, hashed_password) {
 
 // Generate an access token containing the user's id, email, and type of user
 // which is either a business, student, or admin.
-function generateAccessToken(id, email, type) {
+function generateAccessToken(id, username, type) {
     const user = {
         id: id,
-        email: email,
+        username: username,
         type: type,
     };
 

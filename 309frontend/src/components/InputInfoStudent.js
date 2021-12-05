@@ -3,7 +3,7 @@ import React from "react";
 class InputInfoStudent extends React.Component {
 
     render() {
-        const {firstname, lastname, username, password, confirmation, onChange, onClick} = this.props
+        const {firstname, lastname, email, password, confirmation, onChange, onClick} = this.props
         return (
             <form>
                 <table>
@@ -17,8 +17,8 @@ class InputInfoStudent extends React.Component {
                         <td><input className="infoInput" name="lastname" value={lastname} onChange={onChange}/></td>
                     </tr>
                     <tr>
-                        <td><label className="infoLabel">Username: <span className="red">*</span></label></td>
-                        <td><input className="infoInput" name="username" value={username} onChange={onChange}/></td>
+                        <td><label className="infoLabel">Email: <span className="red">*</span></label></td>
+                        <td><input className="infoInput" name="email" value={email} onChange={onChange}/></td>
                     </tr>
                     <tr>
                         <td><label className="infoLabel">Password: <span className="red">*</span></label></td>

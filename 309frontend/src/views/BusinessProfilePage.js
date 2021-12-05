@@ -16,6 +16,7 @@ import {
     getBusiness,
     getBusinessComments,
     getBusinessAnnouncements,
+    commentOnBusiness,
 } from "../apis/business";
 import { getProfile } from "../apis/profile";
 
@@ -34,8 +35,40 @@ class BusinessProfilePage extends React.Component {
             announcements: [],
             comments: [],
             user: null,
+            boxText: "",
         };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleStudentSubmit = this.handleStudentSubmit.bind(this);
+        this.handleBusinessSubmit = this.handleBusinessSubmit.bind(this);
     }
+
+    // Handle text box changes, store them in the state
+    handleChange(event) {
+        this.setState({ boxText: event.target.value });
+    }
+
+    async handleStudentSubmit(event) {
+        var currentComments = this.state.comments;
+
+        const cookies = new Cookies();
+        const comment = await commentOnBusiness(
+            this.props.match.params.id,
+            this.state.boxText,
+            cookies.get("access_token")
+        );
+
+        if (comment) {
+            // Received a response, update the frontend
+            // with the new information.
+            currentComments.push(comment);
+            this.setState({ comments: currentComments });
+        }
+
+        event.preventDefault();
+    }
+
+    async handleBusinessSubmit(event) {}
 
     async componentDidMount() {
         let id = this.props.match.params.id;
@@ -106,6 +139,8 @@ class BusinessProfilePage extends React.Component {
                             {this.state.user &&
                                 this.state.user.type === "student" && (
                                     <InputButtonCombo
+                                        onChange={this.handleChange}
+                                        onClick={this.handleStudentSubmit}
                                         buttonName="Post comment"
                                         color="green"
                                     />
@@ -113,7 +148,7 @@ class BusinessProfilePage extends React.Component {
                             {this.state.comments.map((comment) => (
                                 <Comment
                                     key={comment._id}
-                                    username={comment.poster.email}
+                                    username={comment.poster.username}
                                     profile={defaultProfile}
                                     content={comment.content}
                                 />

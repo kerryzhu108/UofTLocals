@@ -25,10 +25,11 @@ export const registerStudent = async (comp, event) => {
             mode: 'cors',
             cache: 'default',
             body: JSON.stringify({
-                "email": comp.state.username,
+                "username": comp.state.username,
                 "password": comp.state.password,
                 "first_name": comp.state.firstname,
-                "last_name": comp.state.lastname
+                "last_name": comp.state.lastname,
+                "email": comp.state.email
             })
         })
         if (response.status !== 200) {
@@ -37,9 +38,9 @@ export const registerStudent = async (comp, event) => {
             return
         }
         response = await response.json()
-        if (response.email !== undefined) {
+        if (response.username !== undefined) {
             // successful login from the server. we have the id and access tokens now
-            alert('Signed up as: ' + response.email)
+            alert('Signed up as: ' + response.username)
             window.location.href = '/login'
         } else if (response[0].msg !== undefined && response[0].param !== undefined) {
             // alert the user of what went wrong, if we can
@@ -109,7 +110,7 @@ export const login = async (comp, event) => {
             mode: 'cors',
             cache: 'default',
             body: JSON.stringify({
-                "email": comp.state.username,
+                "username": comp.state.username,
                 "password": comp.state.password,
             })
         })
