@@ -2,6 +2,7 @@ import React from "react";
 import "../css/Header.css";
 import Link from "../components/Link";
 import Cookies from "universal-cookie";
+import Logout from "../components/Logout";
 
 import { getProfile } from "../apis/profile";
 
@@ -39,9 +40,7 @@ class Header extends React.Component {
                     ) : (
                         <Link href="/login" name="Login/Signup" />
                     )}
-                    {this.state.loggedIn && (
-                        <Link name="Logout" href="/logout" />
-                    )}
+                    {this.state.loggedIn && <Logout />}
                 </div>
             </div>
         );

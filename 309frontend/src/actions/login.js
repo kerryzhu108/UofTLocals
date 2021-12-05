@@ -167,7 +167,7 @@ export const login = (comp, event) => {
                 const cookies = new Cookies();
                 cookies.set("access_token", json.tokens.access, { path: "/" });
 
-                alert("You are being logged in as: " + json.tokens.access);
+                // alert("You are being logged in as: " + json.tokens.access);
                 window.location.href = "/";
             } else if (
                 json[0].msg !== undefined &&
