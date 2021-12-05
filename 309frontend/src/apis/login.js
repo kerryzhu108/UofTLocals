@@ -124,7 +124,7 @@ export const login = async (comp, event) => {
             // Store received access token in cookie
             const cookies = new Cookies();
             cookies.set("access_token", response.tokens.access, {path: "/"});
-            alert('You are being logged in as: ' + response.tokens.access)
+            alert('Success! You are being logged in as: ' + response.email)
             window.location.href = '/'
         } else if (response[0].msg !== undefined && response[0].param !== undefined) {
             // alert the user of what went wrong, if we can

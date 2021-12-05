@@ -16,20 +16,3 @@ export const getComments = async (id) => {
         console.log(error)
     } 
 }
-
-/* A function to send a GET request to get info about the current (student) user. */
-export const getStudent = async (id) => {
-    try {
-        // make a call to the server API to get personal info of the current user
-        let response = await fetch(`${domain}student/${id}`, {
-            method: "GET",
-            headers: headers,
-            mode: "cors",
-            cache: "default"
-        })
-        response = await response.json()
-        return response
-    } catch (error) {
-        console.log(error)
-    }
-}

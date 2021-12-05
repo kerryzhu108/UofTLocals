@@ -1,15 +1,15 @@
 import React from "react"
+import Cookies from "universal-cookie";
 
 import Link from "../components/Link";
 import Header from "../components/Header";
-import ProfileInformation from "../components/ProfileInformation";
 import Comment from '../components/Comment';
 import defaultProfile from "../images/default-profile.png";
 import InputInfoStudent from "../components/InputInfoStudent";
-import { withRouter } from "react-router";
 
-import { getComments, getStudent } from "../apis/student";
+import { getComments } from "../apis/student";
 import { updateLoginForm } from "../apis/login";
+import { getProfile } from "../apis/profile";
 
 class StudentProfile extends React.Component {
 
@@ -26,22 +26,20 @@ class StudentProfile extends React.Component {
     }
 
     async componentDidMount() {
-        let id = this.props.match.params.id
-        // get the current student's data and set the state
-        const student = await getStudent(id)
-        if (!student) {
-            console.log("This student cannot be found.")
-            return
-        }
-        const comments = await getComments(id)
+        // get the current (student) user's data
+        const cookies = new Cookies()
+        const access_token = cookies.get("access_token")
+        const user_information = await getProfile(access_token)
+        const comments = await getComments(user_information.id)
         if (!comments) {
             console.log("This student's comments cannot be found.")
             return
         }
+        // set the state with the retrieved information
         this.setState({
-            firstname: student.first_name,
-            lastname: student.last_name,
-            username: student.email,
+            firstname: user_information.firstname,
+            lastname: user_information.lastname,
+            username: user_information.email,
             comments: comments
         })
     }
@@ -82,4 +80,4 @@ class StudentProfile extends React.Component {
     }
 }
 
-export default withRouter(StudentProfile);
+export default StudentProfile;

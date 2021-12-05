@@ -190,7 +190,8 @@ router.get(
                 return res.json({
                     id: req.user.id,
                     type: req.user.type,
-                    name: `${student.first_name} ${student.last_name}`,
+                    firstname: `${student.first_name}`,
+                    lastname: `${student.last_name}`,
                     email: student.email,
                 });
             } else {
