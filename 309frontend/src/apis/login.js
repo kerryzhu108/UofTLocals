@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 
-const API_HOST = 'http://localhost:5000'
+import { domain, headers } from "./headers.js";
 
 /* A function to update the login form. */
 export const updateLoginForm = (comp, field) => {
@@ -18,12 +18,9 @@ export const registerStudent = (comp, event) => {
         return
     }
     // make a call to the server API to register a student
-    fetch(`${API_HOST}/auth/register/student`, {
+    fetch(`${domain}auth/register/student`, {
         method: 'POST',
-        headers: { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+        headers: headers,
         mode: 'cors',
         cache: 'default',
         body: JSON.stringify({
@@ -69,7 +66,7 @@ export const registerBusiness = (comp, event) => {
         return
     }
     // make a call to the server API to register a business account
-    fetch(`${API_HOST}/auth/register/business`, {
+    fetch(`${domain}auth/register/business`, {
         method: 'POST',
         headers: { 
             'Accept': 'application/json',
@@ -117,10 +114,11 @@ export const login = (comp, event) => {
     // figure out whether we are to log in as a student or business
     let url
     if (comp.state.type === 'student') {
-        url = `${API_HOST}/auth/login/student`
+        url = `${domain}auth/login/student`
     } else {
-        url = `${API_HOST}/auth/login/business`
+        url = `${domain}auth/login/business`
     }
+    console.log(url)
     // make a call to the server API to login
     fetch(url, {
         method: 'POST',
@@ -154,7 +152,7 @@ export const login = (comp, event) => {
             cookies.set("access_token", json.tokens.access, {path: "/"});
 
             alert('You are being logged in as: ' + json.tokens.access)
-            //window.location.href = '/'
+            window.location.href = '/'
         } else if (json[0].msg !== undefined && json[0].param !== undefined) {
             // alert the user of what went wrong, if we can
             const msg = json[0].msg + ' for ' + json[0].param
@@ -168,7 +166,7 @@ export const login = (comp, event) => {
 
 /* A function to send a GET request to check which user is logged in. */
 export const checkSession = () => {
-    const url = `${API_HOST}/auth/check-session`;
+    const url = `${domain}auth/check-session`;
     fetch(url)
         .then(res => {
             if (res.status === 200) {
@@ -189,7 +187,7 @@ export const checkSession = () => {
 
 /* A function to send a GET request to log the current user out. */
 export const logout = () => {
-    const url = `${API_HOST}/auth/logout`;
+    const url = `${domain}auth/logout`;
     fetch(url)
         .then(res => {
             if (res.status === 200) {

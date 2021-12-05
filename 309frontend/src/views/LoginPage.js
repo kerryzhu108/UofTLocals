@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import LoginInput from "../components/LoginInput";
 import Link from "../components/Link";
 
-import { updateLoginForm, login } from '../actions/login'
+import { updateLoginForm, login } from '../apis/login'
 
 class LoginPage extends React.Component {
 

@@ -26,7 +26,7 @@ function App() {
                 <Route path="/business-signup">
                     <SignupBusiness />
                 </Route>
-                <Route path="/student-profile">
+                <Route path="/student/:id">
                     <StudentProfile />
                 </Route>
                 <Route path="/admin-panel">
