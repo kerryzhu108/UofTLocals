@@ -3,7 +3,7 @@ import React from "react";
 class InputInfoBusiness extends React.Component {
 
     render() {
-        const {name, username, password, confirmation, description, onChange, onClick} = this.props
+        const { name, email, username, password, confirmation, description, onChange, onClick } = this.props
         return (
             <form>
                 <table>
@@ -11,6 +11,10 @@ class InputInfoBusiness extends React.Component {
                     <tr>
                         <td><label className="infoLabel">Name: <span className="red">*</span></label></td>
                         <td><input className="infoInput" name="name" value={name} onChange={onChange}/></td>
+                    </tr>
+                    <tr>
+                        <td><label className="infoLabel">Email: <span className="red">*</span></label></td>
+                        <td><input className="infoInput" name="email" value={email} onChange={onChange}/></td>
                     </tr>
                     <tr>
                         <td><label className="infoLabel">Username: <span className="red">*</span></label></td>

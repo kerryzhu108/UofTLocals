@@ -25,6 +25,7 @@ router.post(
             // Create business using provided parameters
             const business = new Business({
                 name: req.body.name,
+                email: req.body.email,
                 username: req.body.username,
                 password: password,
                 type: "Business", //placeholder, use req.body.type later
@@ -58,6 +59,7 @@ router.post(
         try {
             const student = new Student({
                 username: req.body.username,
+                email: req.body.email,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 password: password,
@@ -194,7 +196,7 @@ router.get(
                 return res.json({
                     id: req.user.id,
                     type: req.user.type,
-                    username: student.username,
+                    name: student.username,
                     email: student.email,
                     firstname: student.first_name,
                     lastname: student.last_name
