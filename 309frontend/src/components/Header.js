@@ -36,7 +36,21 @@ class Header extends React.Component {
                 <div className="links">
                     <Link href="/" name="Browse" />
                     {this.state.loggedIn ? (
-                        <Link href="/student-profile" name={this.state.user.name} />
+                        <Link
+                            href={(() => {
+                                switch (this.state.user.type) {
+                                    case "student":
+                                        return "/student-profile";
+                                    case "business":
+                                        return (
+                                            "/business/" + this.state.user.id
+                                        );
+                                    default:
+                                        return "/";
+                                }
+                            })()}
+                            name={this.state.user.name}
+                        />
                     ) : (
                         <Link href="/login" name="Login/Signup" />
                     )}

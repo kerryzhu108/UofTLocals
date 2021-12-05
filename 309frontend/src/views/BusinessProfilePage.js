@@ -116,6 +116,11 @@ class BusinessProfilePage extends React.Component {
         console.log(this.state.user);
     }
 
+    // TODO:
+    // A few things that need to be done with this page:
+    // Pagenate comments and announcements
+    // Allow businesses to edit their pages
+    // Allow students to remove their posts(?)
     render() {
         return (
             <div>
