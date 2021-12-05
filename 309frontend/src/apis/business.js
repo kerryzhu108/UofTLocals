@@ -73,6 +73,32 @@ export async function getBusinessAnnouncements(id) {
     }
 }
 
+// Add comment to business profile (requires a student access token)
+export async function commentOnBusiness(id, content, access_token) {
+    try {
+        var response = await fetch(domain + `comment/${id}`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+            },
+            mode: "cors",
+            cache: "default",
+            body: JSON.stringify({
+                content: content,
+            }),
+        });
+
+        if (response.status !== 200) return null;
+
+        response = await response.json();
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 //Gets all approved announcements
 export async function getAnnouncements() {
     try {

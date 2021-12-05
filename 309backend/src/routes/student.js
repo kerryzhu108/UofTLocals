@@ -11,6 +11,7 @@ router.get("/:id", utils.checkDbConnection, async function (req, res) {
     try {
         const student = await Student.findById(req.params.id, {
             email: 1,
+            username: 1,
             first_name: 1,
             last_name: 1,
             comments: 1,

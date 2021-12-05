@@ -19,7 +19,7 @@ router.post(
     utils.validationHandler,
     async function (req, res) {
         try {
-            const comment = new Comment({
+            let comment = new Comment({
                 content: req.body.content,
                 poster: req.user.id,
                 created: Date(),
@@ -39,7 +39,13 @@ router.post(
             await student.save();
             await business.save();
 
-            return res.send(comment);
+            return res.send(
+                await comment.populate({
+                    path: "poster",
+                    model: "Student",
+                    select: { username: 1, _id: 0 },
+                })
+            );
         } catch (error) {
             console.log(error);
             return res.status(500).send("Internal server error");
@@ -69,7 +75,7 @@ router.get("/business/:id", utils.checkDbConnection, async function (req, res) {
             populate: {
                 path: "poster",
                 model: "Student",
-                select: { email: 1, _id: 0 },
+                select: { username: 1, _id: 0 },
             },
         });
         if (!business) return res.status(404).send("Business not found");

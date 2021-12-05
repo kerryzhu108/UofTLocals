@@ -47,7 +47,7 @@ router.post(
 router.post(
     "/register/student",
     utils.checkDbConnection,
-    body("email").isEmail(),
+    body("username").isString(),
     body("password").isString(),
     body("first_name").isString(),
     body("last_name").isString(),
@@ -57,7 +57,7 @@ router.post(
 
         try {
             const student = new Student({
-                email: req.body.email,
+                username: req.body.username,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 password: password,
@@ -126,13 +126,15 @@ router.post(
 router.post(
     "/login/student",
     utils.checkDbConnection,
-    body("email").isEmail(),
+    body("username").isString(),
     body("password").isString(),
     utils.validationHandler,
     async function (req, res) {
         try {
-            const student = await Student.findOne({ email: req.body.email });
-            if (!student) return res.status(404).send("Business not found");
+            const student = await Student.findOne({
+                username: req.body.username,
+            });
+            if (!student) return res.status(404).send("Student not found");
 
             // Compare send password with hashed password
             const password_result = await utils.checkPassword(
@@ -146,7 +148,7 @@ router.post(
             // This user is valid, generate an access token
             const access_token = utils.generateAccessToken(
                 student.id,
-                student.email,
+                student.username,
                 "student"
             );
 
@@ -156,6 +158,7 @@ router.post(
             const return_value = {
                 id: student.id,
                 email: student.email,
+                username: student.username,
                 tokens: {
                     access: access_token,
                 },
@@ -190,7 +193,7 @@ router.get(
                 return res.json({
                     id: req.user.id,
                     type: req.user.type,
-                    name: `${student.first_name} ${student.last_name}`,
+                    name: student.username,
                     email: student.email,
                 });
             } else {
