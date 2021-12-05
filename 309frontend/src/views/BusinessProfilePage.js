@@ -62,7 +62,7 @@ class BusinessProfilePage extends React.Component {
             // Received a response, update the frontend
             // with the new information.
             currentComments.push(comment);
-            this.setState({ comments: currentComments });
+            this.setState({ comments: currentComments, boxText: "" });
         }
 
         event.preventDefault();
@@ -79,7 +79,7 @@ class BusinessProfilePage extends React.Component {
 
         if (announcement) {
             currentAnnouncements.push(announcement);
-            this.setState({ announcements: currentAnnouncements });
+            this.setState({ announcements: currentAnnouncements, boxText: "" });
         }
     }
 
@@ -134,6 +134,7 @@ class BusinessProfilePage extends React.Component {
                                 this.props.match.params.id ===
                                     this.state.user.id && (
                                     <InputButtonCombo
+                                        value={this.state.boxText}
                                         buttonName="Post Announcement"
                                         color="orange"
                                         onChange={this.handleChange}
@@ -153,6 +154,7 @@ class BusinessProfilePage extends React.Component {
                             {this.state.user &&
                                 this.state.user.type === "student" && (
                                     <InputButtonCombo
+                                        value={this.state.boxText}
                                         onChange={this.handleChange}
                                         onClick={this.handleStudentSubmit}
                                         buttonName="Post comment"
