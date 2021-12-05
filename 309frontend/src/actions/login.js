@@ -47,9 +47,9 @@ export const registerStudent = (comp, event) => {
                 // status code was not 200
                 return;
             }
-            if (json.email !== undefined) {
+            if (json.username !== undefined) {
                 // successful login from the server. we have the id and access tokens now
-                alert("Signed up as: " + json.email);
+                alert("Signed up as: " + json.username);
                 window.location.href = "/login";
             } else if (
                 json[0].msg !== undefined &&
@@ -85,7 +85,7 @@ export const registerBusiness = (comp, event) => {
         cache: "default",
         body: JSON.stringify({
             name: comp.state.name,
-            email: comp.state.username,
+            username: comp.state.username,
             password: comp.state.password,
             desc: comp.state.description,
         }),
@@ -104,9 +104,9 @@ export const registerBusiness = (comp, event) => {
                 // status code was not 200
                 return;
             }
-            if (json.email !== undefined) {
+            if (json.username !== undefined) {
                 // successful login from the server. we have the id and access tokens now
-                alert("Signed up as: " + json.email);
+                alert("Signed up as: " + json.username);
                 window.location.href = "/login";
             } else if (
                 json[0].msg !== undefined &&
@@ -168,7 +168,7 @@ export const login = (comp, event) => {
                 cookies.set("access_token", json.tokens.access, { path: "/" });
 
                 alert("You are being logged in as: " + json.tokens.access);
-                //window.location.href = '/'
+                window.location.href = "/";
             } else if (
                 json[0].msg !== undefined &&
                 json[0].param !== undefined
@@ -214,7 +214,7 @@ export const logout = () => {
                 return res.json();
             }
         })
-        .ethn((json) => {
+        .then((json) => {
             console.log(json);
             alert("stop");
             if (json && json.user) {
