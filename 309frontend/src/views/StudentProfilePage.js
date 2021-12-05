@@ -24,7 +24,7 @@ class StudentProfile extends React.Component {
             confirmation: "",
             comments: [],
         }
-    }
+    };
 
     async componentDidMount() {
         // get the current (student) user's data
@@ -50,9 +50,9 @@ class StudentProfile extends React.Component {
         return (
             <div>
                 <Header>
-                    <Link href="/landing-user" name="Browse"/>
-                    <Link name="user"/>
-                    <Link href="/" name="logout"/>
+                    <Link href="/landing-user" name="Browse" />
+                    <Link name="user" />
+                    <Link href="/" name="logout" />
                 </Header>
 
                 <div className='postsContainer'>
@@ -79,7 +79,7 @@ class StudentProfile extends React.Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 

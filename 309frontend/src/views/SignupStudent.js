@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import Header from "../components/Header";
 import Link from "../components/Link";
@@ -7,7 +7,6 @@ import InputInfoStudent from "../components/InputInfoStudent";
 import { updateLoginForm, registerStudent } from '../apis/login'
 
 class SignupStudent extends React.Component {
-
     state = {
         firstname: "",
         lastname: "",
@@ -15,14 +14,12 @@ class SignupStudent extends React.Component {
         username: "",
         password: "",
         confirmation: "",
-    }
+    };
 
     render() {
         return (
             <div>
-                <Header>
-                    <Link href="/" name="Browse"/>
-                </Header>
+                <Header />
                 <div className="loginElements">
                     <p>Please provide the following information to create a student account.</p>
                     <InputInfoStudent 
@@ -37,16 +34,19 @@ class SignupStudent extends React.Component {
                     <br/>
                     <span>
                         Already a member?
-                        <Link href="/login" name="Login"/>
+                        <Link href="/login" name="Login" />
                     </span>
-                    <br/>
+                    <br />
                     <span>
                         Not a student?
-                        <Link href="/business-signup" name="Sign up as a business"/>
+                        <Link
+                            href="/business-signup"
+                            name="Sign up as a business"
+                        />
                     </span>
                 </div>
             </div>
-        )
+        );
     }
 }
 
