@@ -19,6 +19,7 @@ export const registerStudent = async (comp, event) => {
     }
     try {
         // make a call to the server API to register a student
+        console.log(comp.state )
         let response = await fetch(`${domain}auth/register/student`, {
             method: 'POST',
             headers: headers,

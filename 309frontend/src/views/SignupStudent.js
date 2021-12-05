@@ -23,6 +23,7 @@ class SignupStudent extends React.Component {
                 <div className="loginElements">
                     <p>Please provide the following information to create a student account.</p>
                     <InputInfoStudent 
+                        update={ false }
                         firstname={ this.state.firstname }
                         lastname={ this.state.lastname }
                         email={ this.state.email }

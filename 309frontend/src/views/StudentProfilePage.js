@@ -40,7 +40,7 @@ class StudentProfile extends React.Component {
         this.setState({
             firstname: user_information.firstname,
             lastname: user_information.lastname,
-            email: user_information.email,
+            // email: user_information.email,
             username: user_information.username,
             comments: comments
         })
@@ -56,12 +56,18 @@ class StudentProfile extends React.Component {
                 </Header>
 
                 <div className='postsContainer'>
-                    <h1>Welcome, { this.state.username }</h1>
+                    <h1>Welcome, @{ this.state.username }.</h1>
                     <h3>Edit My Profile</h3>
-                    <InputInfoStudent 
+                    <p>
+                        Please provide the following information to edit your profile.
+                        Note that you may not modify your username.
+                    </p>
+                    <InputInfoStudent
+                        update={ true }
                         firstname={ this.state.firstname }
                         lastname={ this.state.lastname }
                         email={ this.state.email }
+                        username={ this.state.username }
                         password={ this.state.password }
                         confirmation={ this.state.confirmation }
                         onChange={ e => updateLoginForm(this, e.target) }
@@ -70,6 +76,9 @@ class StudentProfile extends React.Component {
                 <div>
                     <div className='postsContainer'>
                         <h3>My Comments and Reviews</h3>
+                        <p>
+                            Below is a list of all comments you have made on this site.
+                        </p>    
                         { this.state.comments.map((comment) => {
                             return <Comment 
                                         username={ comment.user }
