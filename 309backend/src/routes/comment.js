@@ -23,6 +23,7 @@ router.post(
                 content: req.body.content,
                 poster: req.user.id,
                 created: Date(),
+                business: req.params.id,
             });
 
             // Push this comment to the student's local array
@@ -56,9 +57,14 @@ router.post(
 // Get all comments belonging to a certain user
 router.get("/student/:id", utils.checkDbConnection, async function (req, res) {
     try {
-        const student = await Student.findById(req.params.id).populate(
-            "comments"
-        );
+        const student = await Student.findById(req.params.id).populate({
+            path: "comments",
+            populate: {
+                path: "business",
+                model: "Business",
+                select: { name: 1 },
+            },
+        });
         if (!student) return res.status(404).send("User not found");
         return res.send(student.comments);
     } catch (error) {
