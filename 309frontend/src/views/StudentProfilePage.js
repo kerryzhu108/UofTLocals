@@ -1,114 +1,49 @@
-import React from "react";
+import React from "react"
+import Cookies from "universal-cookie";
 
 import Link from "../components/Link";
 import Header from "../components/Header";
-import ProfileInformation from "../components/ProfileInformation";
-import Comment from "../components/Comment";
+import Comment from '../components/Comment';
 import defaultProfile from "../images/default-profile.png";
 import InputInfoStudent from "../components/InputInfoStudent";
 
+import { getComments } from "../apis/student";
+import { updateLoginForm } from "../apis/login";
+import { getProfile } from "../apis/profile";
+
 class StudentProfile extends React.Component {
-    state = {
-        user: {},
-        firstname: "",
-        lastname: "",
-        username: "",
-        password: "",
-        confirmation: "",
-        posts: [],
-        message: "",
-        current_usernames: [],
-    };
 
-    /* Update the state when user types in information. */
-    handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        this.setState({
-            [name]: value,
-        });
-    };
-
-    /* Updates the information of the current user. */
-    updateInfo = (event) => {
-        event.preventDefault();
-        if (
-            this.state.password !== this.state.user.password ||
-            this.state.confirmation !== this.state.password
-        ) {
-            this.setState({ message: "Invalid password." });
-        } else if (
-            this.state.username !== this.state.user.username &&
-            this.state.current_usernames.includes(this.state.username)
-        ) {
-            this.setState({ message: "Username already taken." });
-        } else {
-            this.setState({
-                user: {
-                    firstname: this.state.firstname,
-                    lastname: this.state.lastname,
-                    username: this.state.username,
-                    password: this.state.password,
-                },
-                firstname: "",
-                lastname: "",
-                username: "",
-                password: "",
-                confirmation: "",
-                message: "",
-            });
+    constructor(props) {
+        super(props)
+        this.state = {
+            firstname: "Unknown",
+            lastname: "Unknown",
+            email: "Unknown",
+            username: "Unknown",
+            password: "",
+            confirmation: "",
+            comments: [],
         }
     };
 
-    /* Set the state variables upon loading. */
-    componentDidMount() {
-        window.addEventListener("load", this.getCurrentUser.bind(this));
-        window.addEventListener("load", this.getPosts.bind(this));
-        window.addEventListener("load", this.getAllUsers.bind(this));
-    }
-
-    /* Get the current user's data. */
-    getCurrentUser() {
+    async componentDidMount() {
+        // get the current (student) user's data
+        const cookies = new Cookies()
+        const access_token = cookies.get("access_token")
+        const user_information = await getProfile(access_token)
+        const comments = await getComments(user_information.id)
+        if (!comments) {
+            console.log("This student's comments cannot be found.")
+            return
+        }
+        // set the state with the retrieved information
         this.setState({
-            // for phase 2 this information will come from a server.
-            user: {
-                firstname: "John",
-                lastname: "Smith",
-                username: "user",
-                password: "user",
-            },
-        });
-    }
-
-    /* Get a list of all the current user's posts. */
-    getPosts() {
-        this.setState({
-            posts: [
-                {
-                    title: "Review 1",
-                    business: "Business 1",
-                    user: "user",
-                    date: "October 26, 2021",
-                    content: "*placeholder -- review #1*",
-                },
-                {
-                    title: "Review 2",
-                    business: "Business 2",
-                    user: "user",
-                    date: "November 7, 2021",
-                    content: "*placeholder -- review #2*",
-                },
-            ],
-        });
-    }
-
-    /* Get all usernames currently in the system. */
-    getAllUsers() {
-        // for phase 2 this information will come from a server
-        this.setState({
-            current_usernames: ["user", "user2", "admin"],
-        });
+            firstname: user_information.firstname,
+            lastname: user_information.lastname,
+            // email: user_information.email,
+            username: user_information.username,
+            comments: comments
+        })
     }
 
     render() {
@@ -120,37 +55,36 @@ class StudentProfile extends React.Component {
                     <Link href="/" name="logout" />
                 </Header>
 
-                <div className="postsContainer">
-                    <h3>CURRENT PROFILE INFORMATION</h3>
-                    <ProfileInformation
-                        firstname={this.state.user.firstname}
-                        lastname={this.state.user.lastname}
-                        username={this.state.user.username}
-                    />
-                    <h3>EDIT PROFILE</h3>
+                <div className='postsContainer'>
+                    <h1>Welcome, @{ this.state.username }.</h1>
+                    <h3>Edit My Profile</h3>
+                    <p>
+                        Please provide the following information to edit your profile.
+                        Note that you may not modify your username.
+                    </p>
                     <InputInfoStudent
-                        firstname={this.state.firstname}
-                        lastname={this.state.lastname}
-                        username={this.state.username}
-                        password={this.state.password}
-                        confirmation={this.state.confirmation}
-                        onChange={this.handleInputChange}
-                        onClick={this.updateInfo}
-                    />
-                    <span className="red small"> {this.state.message}</span>
+                        update={ true }
+                        firstname={ this.state.firstname }
+                        lastname={ this.state.lastname }
+                        email={ this.state.email }
+                        username={ this.state.username }
+                        password={ this.state.password }
+                        confirmation={ this.state.confirmation }
+                        onChange={ e => updateLoginForm(this, e.target) }
+                        onClick={ () => console.log('patch route here') }/>
                 </div>
                 <div>
-                    <div className="postsContainer">
-                        <h3>MY COMMENTS / REVIEWS</h3>
-                        {this.state.posts.map((post) => {
-                            return (
-                                <Comment
-                                    username={post.user}
-                                    profile={defaultProfile}
-                                    content={post.content}
-                                />
-                            );
-                        })}
+                    <div className='postsContainer'>
+                        <h3>My Comments and Reviews</h3>
+                        <p>
+                            Below is a list of all comments you have made on this site.
+                        </p>    
+                        { this.state.comments.map((comment) => {
+                            return <Comment 
+                                        username={ comment.user }
+                                        profile={ defaultProfile }
+                                        content={ comment.content }/>
+                        }) }
                     </div>
                 </div>
             </div>

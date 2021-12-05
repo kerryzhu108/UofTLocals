@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Link from "../components/Link";
 import InputInfoBusiness from "../components/InputInfoBusiness";
 
-import { updateLoginForm, registerBusiness } from "../actions/login";
+import { updateLoginForm, registerBusiness } from '../apis/login'
 
 class SignupBusiness extends React.Component {
     state = {
