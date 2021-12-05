@@ -76,15 +76,17 @@ class StudentProfile extends React.Component {
                 <div>
                     <div className='postsContainer'>
                         <h3>My Comments and Reviews</h3>
-                        <p>
-                            Below is a list of all comments you have made on this site.
-                        </p>    
-                        { this.state.comments.map((comment) => {
-                            return <Comment 
-                                        username={ comment.user }
-                                        profile={ defaultProfile }
-                                        content={ comment.content }/>
-                        }) }
+                        { this.state.comments.length === 0 ? 
+                            <p>You have not posted any comments yet.</p> : 
+                            <p>Below is a list of all comments you have made on this site.</p>
+                        }    
+                        { this.state.comments.map((comment) => (
+                            <Comment 
+                                key={ comment._id }
+                                username={ this.state.username }
+                                profile={ defaultProfile }
+                                content={ comment.content }/>
+                        )) }
                     </div>
                 </div>
             </div>

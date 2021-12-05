@@ -19,7 +19,6 @@ export const registerStudent = async (comp, event) => {
     }
     try {
         // make a call to the server API to register a student
-        console.log(comp.state )
         let response = await fetch(`${domain}auth/register/student`, {
             method: 'POST',
             headers: headers,
@@ -35,7 +34,7 @@ export const registerStudent = async (comp, event) => {
         })
         if (response.status !== 200) {
             // received a code other than 200
-            alert(response.status + ' ' + response.statusText)
+            response.text().then(text => { alert(text) })
             return
         }
         response = await response.json()
@@ -79,7 +78,7 @@ export const registerBusiness = async (comp, event) => {
         })
         if (response.status !== 200) {
             // received a code other than 200
-            alert(response.status + ' ' + response.statusText)
+            response.text().then(text => { alert(text) })
             return
         }
         response = await response.json()
@@ -118,7 +117,7 @@ export const login = async (comp, event) => {
         })
         if (response.status !== 200) {
             // received a code other than 200
-            alert(response.status + ' ' + response.statusText)
+            response.text().then(text => { alert(text) })
             return
         }
         response = await response.json()
