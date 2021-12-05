@@ -1,24 +1,20 @@
-import {domain} from "./headers";
-import Cookies from 'universal-cookie';
+import { domain } from "./headers";
 
 // Fetch user profile information using stored access token
-export async function getProfile() {
+export async function getProfile(access_token) {
     try {
-        const cookies = new Cookies();
         const response = await fetch(domain + "auth/profile", {
             method: "GET",
             mode: "cors",
             headers: {
-                "Accept": "application/json",
+                Accept: "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${cookies.get("access_token")}`
-            }
+                Authorization: `Bearer ${access_token}`,
+            },
         });
-        
-        // TODO: Handle these statuses a little better
+
         if (response.status !== 200) {
-            console.log("Invalid access token provided to server.");
-            return;
+            return null;
         }
 
         const response_json = await response.json();

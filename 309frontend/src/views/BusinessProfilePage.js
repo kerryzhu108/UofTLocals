@@ -6,8 +6,10 @@ import BusinessProfile from "../components/BusinessProfile";
 import Comment from "../components/Comment";
 import AnnouncementBox from "../components/AnnouncementBox";
 import { withRouter } from "react-router";
+import InputButtonCombo from "../components/InputButtonCombo";
 
 import defaultProfile from "../images/default-profile.png";
+import Cookies from "universal-cookie";
 
 // API related imports
 import {
@@ -15,6 +17,7 @@ import {
     getBusinessComments,
     getBusinessAnnouncements,
 } from "../apis/business";
+import { getProfile } from "../apis/profile";
 
 import "../css/RoundedBox.css";
 import "../css/BusinessProfilePage.css";
@@ -30,6 +33,7 @@ class BusinessProfilePage extends React.Component {
                 "https://images.unsplash.com/photo-1525193612562-0ec53b0e5d7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
             announcements: [],
             comments: [],
+            user: null,
         };
     }
 
@@ -49,13 +53,21 @@ class BusinessProfilePage extends React.Component {
         const comments = await getBusinessComments(id);
         const announcements = await getBusinessAnnouncements(id);
 
+        // Check user type
+        const cookies = new Cookies();
+        const access_token = cookies.get("access_token");
+        const user_information = await getProfile(access_token);
+
         // Set the state accordingly
         this.setState({
             businessName: business.name,
             businessDescription: business.description,
             comments: comments,
             announcements: announcements,
+            user: user_information,
         });
+
+        console.log(this.state.user);
     }
 
     render() {
@@ -74,6 +86,13 @@ class BusinessProfilePage extends React.Component {
                     </BusinessProfile>
                     <div className="info-section">
                         <AnnouncementBox name="Announcements">
+                            {this.state.user &&
+                                this.state.user.type === "business" && (
+                                    <InputButtonCombo
+                                        buttonName="Post Announcement"
+                                        color="green"
+                                    />
+                                )}
                             {this.state.announcements.map((announcement) => (
                                 <Comment
                                     key={announcement._id}
@@ -84,6 +103,13 @@ class BusinessProfilePage extends React.Component {
                             ))}
                         </AnnouncementBox>
                         <AnnouncementBox name="Comments">
+                            {this.state.user &&
+                                this.state.user.type === "student" && (
+                                    <InputButtonCombo
+                                        buttonName="Post comment"
+                                        color="green"
+                                    />
+                                )}
                             {this.state.comments.map((comment) => (
                                 <Comment
                                     key={comment._id}
