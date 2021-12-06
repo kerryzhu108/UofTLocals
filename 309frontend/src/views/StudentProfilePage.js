@@ -36,7 +36,6 @@ class StudentProfile extends React.Component {
             console.log("This student's comments cannot be found.")
             return
         }
-        console.log(comments[0].business.name)
         // set the state with the retrieved information
         this.setState({
             firstname: user_information.firstname,
