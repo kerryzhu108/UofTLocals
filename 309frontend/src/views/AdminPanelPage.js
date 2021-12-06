@@ -13,27 +13,28 @@ import {
     sortation,
 } from "../actions/AdminPosts";
 import { getAnnouncements, getBusinesses } from "../apis/business.js";
+import help from "../images/help.png";
 
 class AdminPanel extends React.Component {
     state = {
-        business_applications: [
-            {
-                name: "Tom's Turntable",
-                email: "turntable@gmail.com",
-                date: "Oct 28 2021",
-                content:
-                    "Studies have shown that majority of students rely on music in order to help them through the day, and Tom's Turntable has you covered! We offer a handy selection of various genres and music devices, from vinyls to CDs. Music is just one of the many ways people can express themselves, and we aim to bring out the true colours in all students!",
-                link: "/business-profile-user",
-            },
-            {
-                name: "Slurpy Slushies",
-                email: "slushies@yahoo.ca",
-                date: "Oct 26 2021",
-                content:
-                    "Slurpy Slushies are your local cold drink experts! From slushies to smoothies, we cover all the bases, offering clients a wide selection of flavours and combinations. As an up and coming business, we aim to provide students with door dropping discounts when they advertise their experience at our location on social media!",
-                link: "/business-profile-user",
-            },
-        ],
+        // business_applications: [
+        //     {
+        //         name: "Tom's Turntable",
+        //         email: "turntable@gmail.com",
+        //         date: "Oct 28 2021",
+        //         content:
+        //             "Studies have shown that majority of students rely on music in order to help them through the day, and Tom's Turntable has you covered! We offer a handy selection of various genres and music devices, from vinyls to CDs. Music is just one of the many ways people can express themselves, and we aim to bring out the true colours in all students!",
+        //         link: "/business-profile-user",
+        //     },
+        //     {
+        //         name: "Slurpy Slushies",
+        //         email: "slushies@yahoo.ca",
+        //         date: "Oct 26 2021",
+        //         content:
+        //             "Slurpy Slushies are your local cold drink experts! From slushies to smoothies, we cover all the bases, offering clients a wide selection of flavours and combinations. As an up and coming business, we aim to provide students with door dropping discounts when they advertise their experience at our location on social media!",
+        //         link: "/business-profile-user",
+        //     },
+        // ],
         businesses: [],
         posts: [],
         apps_search: "",
@@ -75,6 +76,7 @@ class AdminPanel extends React.Component {
                 id: business["_id"],
                 email: business["email"],
                 date: business["dateCreated"],
+                link: "/business/" + business["_id"]
             });
         });
         this.setState({ businesses: activeBusinesses });
@@ -101,9 +103,9 @@ class AdminPanel extends React.Component {
         });
     };
 
-    filterApps(event) {
-        this.setState({ apps_search: event.target.value });
-    }
+    // filterApps(event) {
+    //     this.setState({ apps_search: event.target.value });
+    // }
 
     filterBus(event) {
         this.setState({ businesses_search: event.target.value });
@@ -127,7 +129,10 @@ class AdminPanel extends React.Component {
                     <strong className="panel_title_text">ADMIN PANEL</strong>
                 </div>
                 <div className="panel_container">
-                    <div className="panel_subcontainer_left">
+                    <button type="button" className="help_button">
+                        <img className='images2' src={help} alt="" />
+                    </button>
+                    {/* <div className="panel_subcontainer_left">
                         <div>
                             <strong className="subcontainer_title">
                                 BUSINESS APPLICATIONS
@@ -180,8 +185,8 @@ class AdminPanel extends React.Component {
                             }
                             return null;
                         })}
-                    </div>
-                    <div className="panel_subcontainer_right">
+                    </div> */}
+                    <div className="posts_div">
                         <div>
                             <strong className="subcontainer_title">
                                 BUSINESSES

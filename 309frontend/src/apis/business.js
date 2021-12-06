@@ -143,7 +143,7 @@ export async function getAnnouncements() {
 
 export async function deleteBusiness(bid) {
     try {
-        fetch("http://localhost:5000/business/deletebusiness/" + bid, {
+        fetch(domain + "business/deletebusiness/" + bid, {
             method: "DELETE",
             headers: headers,
             mode: "cors",
@@ -158,7 +158,7 @@ export async function deleteBusiness(bid) {
 
 export async function deletePost(bid, pid) {
     try {
-        fetch("http://localhost:5000/business/delete/" + bid + "/" + pid, {
+        fetch(domain + "business/delete/" + bid + "/" + pid, {
             method: "DELETE",
             headers: headers,
             mode: "cors",
@@ -173,7 +173,7 @@ export async function deletePost(bid, pid) {
 
 export async function deleteIndPost(pid) {
     try {
-        fetch("http://localhost:5000/business/delete/" + pid, {
+        fetch(domain + "business/delete/" + pid, {
             method: "DELETE",
             headers: headers,
             mode: "cors",
