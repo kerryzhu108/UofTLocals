@@ -21,6 +21,7 @@ class SignupStudent extends React.Component {
             <div>
                 <Header />
                 <div className="loginElements">
+                    <h1>Sign up for a student account.</h1>
                     <p>Please provide the following information to create a student account.</p>
                     <InputInfoStudent 
                         update={ false }

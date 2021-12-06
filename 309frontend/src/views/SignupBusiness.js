@@ -22,6 +22,7 @@ class SignupBusiness extends React.Component {
             <div>
                 <Header />
                 <div className="loginElements">
+                    <h1>Sign up for a business account.</h1>
                     <p>
                         Please provide the following information to create a
                         business account.

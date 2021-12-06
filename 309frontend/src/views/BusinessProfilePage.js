@@ -8,6 +8,7 @@ import { withRouter } from "react-router";
 import InputButtonCombo from "../components/InputButtonCombo";
 
 import defaultProfile from "../images/default-profile.png";
+import replyBtn from "../images/replyButton.png";
 import Cookies from "universal-cookie";
 
 // API related imports
@@ -17,6 +18,7 @@ import {
     getBusinessAnnouncements,
     commentOnBusiness,
     addBusinessAnnouncement,
+    changeBusinessDescription,
 } from "../apis/business";
 import { getProfile } from "../apis/profile";
 
@@ -29,18 +31,21 @@ class BusinessProfilePage extends React.Component {
 
         this.state = {
             businessName: "Unknown",
-            businessDescription: "No description",
             businessImage:
                 "https://images.unsplash.com/photo-1525193612562-0ec53b0e5d7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
             announcements: [],
             comments: [],
             user: null,
             boxText: "",
+            businessTextBox: "No description",
+            isOwner: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleStudentSubmit = this.handleStudentSubmit.bind(this);
         this.handleBusinessSubmit = this.handleBusinessSubmit.bind(this);
+        this.handleBusinessDescChange = this.handleBusinessDescChange.bind(this);
+        this.handleBusinessDescSubmit = this.handleBusinessDescSubmit.bind(this);
     }
 
     // Handle text box changes, store them in the state
@@ -69,7 +74,7 @@ class BusinessProfilePage extends React.Component {
     }
 
     async handleBusinessSubmit(event) {
-        var currentAnnouncements = this.state.announcements;
+        let currentAnnouncements = this.state.announcements;
 
         const cookies = new Cookies();
         const announcement = await addBusinessAnnouncement(
@@ -81,6 +86,26 @@ class BusinessProfilePage extends React.Component {
             currentAnnouncements.push(announcement);
             this.setState({ announcements: currentAnnouncements, boxText: "" });
         }
+    }
+
+    handleBusinessDescChange(event) {
+        this.setState({ businessTextBox: event.target.value });
+    }
+
+    async handleBusinessDescSubmit(event) {
+        const cookies = new Cookies();
+        const res = await changeBusinessDescription(
+            this.state.businessTextBox,
+            cookies.get("access_token")
+        );
+        if (res.businessUpdated) {alert('Your business description has been updated')}
+    }
+
+    async submitReply(content) {
+        const cookies = new Cookies();
+        // TODO: make frontend and backend endpoint for replying to comments
+        // use $position and $indexOfArray to insert comment right after the current comment
+
     }
 
     async componentDidMount() {
@@ -107,20 +132,17 @@ class BusinessProfilePage extends React.Component {
         // Set the state accordingly
         this.setState({
             businessName: business.name,
-            businessDescription: business.description,
+            businessTextBox: business.description,
             comments: comments,
             announcements: announcements,
             user: user_information,
+            isOwner: user_information.id === this.props.match.params.id
         });
-
-        console.log(this.state.user);
     }
-
     // TODO:
     // A few things that need to be done with this page:
     // Pagenate comments and announcements
     // Allow businesses to edit their pages
-    // Allow students to remove their posts(?)
     render() {
         return (
             <div>
@@ -130,7 +152,16 @@ class BusinessProfilePage extends React.Component {
                         name={this.state.businessName}
                         image={this.state.businessImage}
                     >
-                        <p>{this.state.businessDescription}</p>
+                        {(!this.state.user || !this.state.isOwner) && <p>{this.state.businessTextBox}</p>}
+                        { this.state.user && this.state.user.type === "business" && this.state.isOwner &&
+                                    <InputButtonCombo
+                                        value={this.state.businessTextBox}
+                                        buttonName="Edit Business"
+                                        color="orange"
+                                        onChange={this.handleBusinessDescChange}
+                                        onClick={this.handleBusinessDescSubmit}
+                                    />
+                        }
                     </BusinessProfile>
                     <div className="info-section">
                         <AnnouncementBox name="Announcements">
@@ -172,6 +203,9 @@ class BusinessProfilePage extends React.Component {
                                     username={comment.poster.username}
                                     profile={defaultProfile}
                                     content={comment.content}
+                                    replyBtn={replyBtn}
+                                    isOwner={this.state.isOwner}
+                                    submitReply={this.submitReply}
                                 />
                             ))}
                         </AnnouncementBox>

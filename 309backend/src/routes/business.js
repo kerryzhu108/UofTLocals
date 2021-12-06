@@ -110,6 +110,26 @@ router.get("/:id", utils.checkDbConnection, async function (req, res) {
     }
 });
 
+router.patch(
+    "/",
+    utils.checkDbConnection,
+    utils.authenticateToken,
+    body("content").isString(),
+    utils.validationHandler,
+    async function (req, res) {
+        try {
+            // Change the description of the business
+            const business = await Business.findOneAndUpdate({_id: req.user.id}, {description: req.body.content} )
+            await business.save();
+
+            return res.json({businessUpdated: true});
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal server error");
+        }
+    }
+);
+
 // router.post("/addpost/:bid", async function (req, res) {
 //     const bid = req.params.bid
 //     try {

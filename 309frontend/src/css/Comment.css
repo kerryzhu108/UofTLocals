@@ -24,6 +24,16 @@
     border-radius: 50px;
 }
 
+.comment-box .reply {
+    height: 30px;
+    width: 30px;
+    float: right;
+}
+
+.comment-box .reply-box {
+    background-color: grey;
+}
+
 .comment-box .comment-header h1 {
     font-size: 12pt;
     color: #141414;

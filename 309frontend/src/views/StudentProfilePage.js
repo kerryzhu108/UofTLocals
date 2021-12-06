@@ -83,10 +83,10 @@ class StudentProfile extends React.Component {
                         { this.state.comments.map((comment) => (
                             <Comment 
                                 key={ comment._id }
-                                username={ this.state.username }
+                                username={ this.state.username + " for " + comment.business.name }
                                 profile={ defaultProfile }
                                 content={ comment.content }/>
-                        )) }
+                        ))}
                     </div>
                 </div>
             </div>

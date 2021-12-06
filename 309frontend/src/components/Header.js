@@ -12,7 +12,6 @@ import { getProfile } from "../apis/profile";
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        console.log("This is a constructor");
 
         // Attempt to get user information
         this.state = {
