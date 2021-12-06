@@ -185,3 +185,30 @@ export async function deleteIndPost(pid) {
         console.log(error);
     }
 }
+
+// Change business description (requires a business access token)
+// Business profile need to only show when business is owner of that profile
+export async function changeBusinessDescription(content, access_token) {
+    try {
+        let response = await fetch(domain + "business", {
+            method: "PATCH",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+            },
+            mode: "cors",
+            cache: "default",
+            body: JSON.stringify({
+                content: content,
+            }),
+        });
+
+        if (response.status !== 200) return null;
+
+        response = await response.json();
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}

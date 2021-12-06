@@ -36,6 +36,11 @@
     background-color: #f1592a;
 }
 
+.input-button-combo button.straight{
+    background-color: #f1592a;
+    border-radius: 0px;
+}
+
 .input-button-combo button.green {
     background-color: #8cc63f;
 }
