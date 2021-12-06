@@ -16,11 +16,13 @@ const seedDatabase = async () =>{
         await Comment.deleteMany({})
 
 
-        const businessPassword = await utils.hashPassword('abcd')
+        const businessPassword = await utils.hashPassword('user2')
         const business = await new Business({
             name: "Papa John's",
+            username: 'bossbusiness',
             email: "papa.john@gmail.com",
             password: businessPassword,
+            dateCreated: new Date().toLocaleString().split(",")[0],
             type: 'Resturant',
             description: `American pizza restaurant franchise. It is the fourth largest pizza delivery
                 restaurant chain in the United States, with headquarters in Atlanta, Georgia.`,
@@ -49,16 +51,20 @@ const seedDatabase = async () =>{
             date: new Date().toLocaleString().split(',')[0]
         }).save()
 
+        const studentPassword = await utils.hashPassword('user')
         const student = await new Student({
             email: "example.mail@gmail.com",
+            username: 'user',
             first_name: "Shin",
             last_name: "Chan",
-            password: "1234"
+            password: studentPassword
         }).save()
 
         const comment = await new Comment({
             content: "The pizza here is good, would like more sauce.",
             poster: student,
+            created: Date(),
+            business: business.id
         }).save()
 
         business.announcements.push(announcement1)

@@ -1,4 +1,6 @@
 import "../css/ResturantCover.css";
+import "../css/RoundedBox.css";
+import "../css/AnnouncementBox.css";
 
 function ResturantCover(props) {
     return (

@@ -50,69 +50,71 @@ class LandingPage extends React.Component {
 
     render() {
         return (
-            <div className="App">
+            <div>
                 <div id="nav">
                     <Header />
                 </div>
-                <div id="bannerWrapper">
-                    <img id="banner" src={bannerImg} alt="resturant" />
-                    <div id="bannerDesc">
-                        <h3>
-                            {" "}
-                            UOFT <br /> LOCALS
-                        </h3>
-                        <p>
-                            Discover local businesses in the <br /> Toronto
-                            area.
-                        </p>
+                <div className='center'>
+                    <div id="bannerWrapper">
+                        <img id="banner" src={bannerImg} alt="resturant" />
+                        <div id="bannerDesc">
+                            <h3>
+                                {" "}
+                                UOFT <br /> LOCALS
+                            </h3>
+                            <p>
+                                Discover local businesses in the <br /> Toronto
+                                area.
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <p id="browseLabel">BROWSE LOCAL BUSINESSES</p>
-                <div id="browseContainer">
-                    <div id="filterBar">
-                        <img id="filter" src={filter} alt=""></img>
-                        <select
-                            name="catagories"
-                            className="catagories"
-                            onChange={this.filterType.bind(this)}
-                        >
-                            <option value="Any">Any</option>
-                            <option value="Resturant/bar">
-                                Resturant/Bars
-                            </option>
-                            <option value="Grocery">Grocery Stores</option>
-                            <option value="Activity">Activities</option>
-                        </select>
-                        <input
-                            placeholder="Search Names"
-                            id="filterSearch"
-                            onChange={this.filterEvents.bind(this)}
-                        ></input>
-                    </div>
-                    {this.state.businesses.map((business, id) => {
-                        const searchFilterCheck = business["name"]
-                            .toLowerCase()
-                            .includes(this.state.search.toLowerCase());
-                        const typeFilterCheck =
-                            business["type"]
+                    <p id="browseLabel">BROWSE LOCAL BUSINESSES</p>
+                    <div id="browseContainer">
+                        <div id="filterBar">
+                            <img id="filter" src={filter} alt=""></img>
+                            <select
+                                name="catagories"
+                                className="catagories"
+                                onChange={this.filterType.bind(this)}
+                            >
+                                <option value="Any">Any</option>
+                                <option value="Resturant/bar">
+                                    Resturant/Bars
+                                </option>
+                                <option value="Grocery">Grocery Stores</option>
+                                <option value="Activity">Activities</option>
+                            </select>
+                            <input
+                                placeholder="Search Names"
+                                id="filterSearch"
+                                onChange={this.filterEvents.bind(this)}
+                            ></input>
+                        </div>
+                        {this.state.businesses.map((business, id) => {
+                            const searchFilterCheck = business["name"]
                                 .toLowerCase()
-                                .includes(this.state.type.toLowerCase()) ||
-                            this.state.type === "Any";
-                        if (searchFilterCheck && typeFilterCheck) {
-                            return (
-                                <ResturantCover
-                                    key={id}
-                                    img={sampleStoreImg}
-                                    name={business["name"]}
-                                    businessType={business["type"]}
-                                    desc={business["desc"]}
-                                    dbId={business["id"]}
-                                />
-                            );
-                        }
-                        return null;
-                    })}
-                </div>
+                                .includes(this.state.search.toLowerCase());
+                            const typeFilterCheck =
+                                business["type"]
+                                    .toLowerCase()
+                                    .includes(this.state.type.toLowerCase()) ||
+                                this.state.type === "Any";
+                            if (searchFilterCheck && typeFilterCheck) {
+                                return (
+                                    <ResturantCover
+                                        key={id}
+                                        img={sampleStoreImg}
+                                        name={business["name"]}
+                                        businessType={business["type"]}
+                                        desc={business["desc"]}
+                                        dbId={business["id"]}
+                                    />
+                                );
+                            }
+                            return null;
+                        })}
+                    </div>
+                </div>    
             </div>
         );
     }
