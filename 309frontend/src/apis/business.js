@@ -203,13 +203,40 @@ export async function changeBusinessDescription(content, access_token) {
             mode: "cors",
             cache: "default",
             body: JSON.stringify({
-                content: content,
+                content: content
             }),
         });
 
         if (response.status !== 200) return null;
 
         response = await response.json();
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Reply to comment as business owner
+export async function replyToComment(content, commentid, access_token) {
+    try {
+        let response = await fetch(domain + "business/reply", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+            },
+            mode: "cors",
+            cache: "default",
+            body: JSON.stringify({
+                content: content,
+                commentid: commentid
+            }),
+        });
+        if (response.status !== 200) return null;
+
+        response = await response.json();
+        console.log(response)
         return response;
     } catch (error) {
         console.log(error);

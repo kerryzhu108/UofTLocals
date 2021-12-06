@@ -30,7 +30,7 @@ class Comment extends React.Component {
                     type="text"
                     onChange={this.changeReplyText.bind(this)}
                     />
-                    <button className="orange straight" onClick={()=>{this.props.submitReply(this.state.replyText)}}>Submit</button>
+                    <button className="orange straight" onClick={()=>{this.props.submitReply(this.state.replyText, this.props.commentid)}}>Submit</button>
                     <button className="orange" onClick={()=>{this.setState({showReply: !this.state.showReply})}}>Cancel</button>
                 </div>}
                 <div className="content">

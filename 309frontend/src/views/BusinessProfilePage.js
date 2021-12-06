@@ -19,6 +19,7 @@ import {
     commentOnBusiness,
     addBusinessAnnouncement,
     changeBusinessDescription,
+    replyToComment,
 } from "../apis/business";
 import { getProfile } from "../apis/profile";
 
@@ -101,11 +102,10 @@ class BusinessProfilePage extends React.Component {
         if (res.businessUpdated) {alert('Your business description has been updated')}
     }
 
-    async submitReply(content) {
+    async submitReply(content, commentid) {
         const cookies = new Cookies();
-        // TODO: make frontend and backend endpoint for replying to comments
-        // use $position and $indexOfArray to insert comment right after the current comment
-
+        const res = await replyToComment(content, commentid, cookies.get("access_token"))
+        console.log(res)
     }
 
     async componentDidMount() {
@@ -136,7 +136,7 @@ class BusinessProfilePage extends React.Component {
             comments: comments,
             announcements: announcements,
             user: user_information,
-            isOwner: user_information.id === this.props.match.params.id
+            isOwner: user_information?.id === this.props.match.params.id
         });
     }
     // TODO:
@@ -205,6 +205,7 @@ class BusinessProfilePage extends React.Component {
                                     content={comment.content}
                                     replyBtn={replyBtn}
                                     isOwner={this.state.isOwner}
+                                    commentid={comment.id}
                                     submitReply={this.submitReply}
                                 />
                             ))}
