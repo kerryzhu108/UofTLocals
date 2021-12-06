@@ -130,6 +130,30 @@ router.patch(
     }
 );
 
+router.post(
+    "/reply/:id",
+    utils.checkDbConnection,
+    utils.authenticateToken,
+    body("content").isString(),
+    utils.validationHandler,
+    async function (req, res) {
+        try {
+            console.log('in server')
+            // Reply to the user's comment, inserts response right after comment
+            // use $position and $indexOfArray to insert comment right after the current comment>
+            console.log(req.user.id)
+            const business = await Business.findById(req.params.id)
+            console.log(business)
+            const commentIndex = await business.comments.find({"$indexOfArray": ["$_id", req.body.commentid]})
+
+            return res.json({index: commentIndex});
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal server error");
+        }
+    }
+);
+
 // router.post("/addpost/:bid", async function (req, res) {
 //     const bid = req.params.bid
 //     try {

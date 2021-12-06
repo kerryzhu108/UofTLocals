@@ -59,10 +59,29 @@ const seedDatabase = async () =>{
             password: studentPassword
         }).save()
 
+        const adminPassword = await utils.hashPassword('admin')
+        await new Student({
+            email: "admin.mail@gmail.com",
+            username: 'admin',
+            first_name: "Admin",
+            last_name: "San",
+            password: adminPassword,
+            type: 'admin'
+        }).save()
+
+        const date = new Date()
         const comment = await new Comment({
             content: "The pizza here is good, would like more sauce.",
             poster: student,
-            created: Date(),
+            created: date,
+            business: business.id
+        }).save()
+
+        const laterDate = new Date()
+        const laterComment = await new Comment({
+            content: "Yeah the pizza needs more sauces.",
+            poster: student,
+            created: laterDate,
             business: business.id
         }).save()
 
@@ -70,6 +89,7 @@ const seedDatabase = async () =>{
         business.announcements.push(announcement2)
         business.announcements.push(announcement3)
         business.comments.push(comment)
+        business.comments.push(laterComment)
         await business.save()
 
     } catch (error) {

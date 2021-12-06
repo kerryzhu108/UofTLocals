@@ -81,9 +81,9 @@ router.get("/business/:id", utils.checkDbConnection, async function (req, res) {
             populate: {
                 path: "poster",
                 model: "Student",
-                select: { username: 1, _id: 0 },
+                select: { username: 1, _id: 0, created: 1},
             },
-        });
+        })
         if (!business) return res.status(404).send("Business not found");
         return res.send(business.comments);
     } catch (error) {
