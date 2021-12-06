@@ -141,6 +141,7 @@ export async function getAnnouncements() {
     }
 }
 
+// Deletes a singular business
 export async function deleteBusiness(bid) {
     try {
         fetch(domain + "business/deletebusiness/" + bid, {
@@ -156,6 +157,7 @@ export async function deleteBusiness(bid) {
     }
 }
 
+// Deletes a singular post from the business and announcements folder
 export async function deletePost(bid, pid) {
     try {
         fetch(domain + "business/delete/" + bid + "/" + pid, {
@@ -171,6 +173,7 @@ export async function deletePost(bid, pid) {
     }
 }
 
+// Deletes a posting from the announcement folder only (used when the corresponding business is already deleted)
 export async function deleteIndPost(pid) {
     try {
         fetch(domain + "business/delete/" + pid, {
