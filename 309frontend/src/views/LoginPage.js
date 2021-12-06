@@ -18,7 +18,10 @@ class LoginPage extends React.Component {
             <div>
                 <Header />
                 <div className="loginElements">
-                    <p>Please login to continue.</p>
+                    <h1> Welcome! </h1>
+                    <p>
+                        Please login to continue. Remember to select the correct type in the dropdown below according to your account type.
+                    </p>
                     <LoginInput
                         username={this.state.username}
                         password={this.state.password}
