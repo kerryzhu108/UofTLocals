@@ -153,7 +153,7 @@ router.post(
             const access_token = utils.generateAccessToken(
                 student.id,
                 student.username,
-                "student"
+                student.type
             );
 
             // Set the session variable's user to access token
@@ -191,11 +191,11 @@ router.get(
                     name: business.name,
                     email: business.email,
                 });
-            } else if (req.user.type == "student") {
+            } else if (req.user.type == "student" || req.user.type == "admin") {
                 const student = await Student.findById(req.user.id);
                 return res.json({
                     id: req.user.id,
-                    type: student.type,
+                    type: req.user.type,
                     name: student.username,
                     email: student.email,
                     firstname: student.first_name,
