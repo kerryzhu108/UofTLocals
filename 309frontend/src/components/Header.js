@@ -44,6 +44,8 @@ class Header extends React.Component {
                                         return (
                                             "/business/" + this.state.user.id
                                         );
+                                    case "admin":
+                                        return "/admin-panel";
                                     default:
                                         return "/";
                                 }

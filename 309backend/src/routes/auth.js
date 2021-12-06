@@ -153,7 +153,7 @@ router.post(
             const access_token = utils.generateAccessToken(
                 student.id,
                 student.username,
-                "student"
+                student.type
             );
 
             // Set the session variable's user to access token
@@ -191,7 +191,7 @@ router.get(
                     name: business.name,
                     email: business.email,
                 });
-            } else if (req.user.type == "student") {
+            } else if (req.user.type == "student" || req.user.type == "admin") {
                 const student = await Student.findById(req.user.id);
                 return res.json({
                     id: req.user.id,
@@ -199,7 +199,7 @@ router.get(
                     name: student.username,
                     email: student.email,
                     firstname: student.first_name,
-                    lastname: student.last_name
+                    lastname: student.last_name,
                 });
             } else {
                 return res.status(400).send("Unknown user type");
