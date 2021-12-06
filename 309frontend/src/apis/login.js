@@ -40,7 +40,6 @@ export const registerStudent = async (comp, event) => {
         response = await response.json()
         if (response.username !== undefined) {
             // successful login from the server. we have the id and access tokens now
-            alert('Signed up as: ' + response.username)
             window.location.href = '/login'
         } else if (response[0].msg !== undefined && response[0].param !== undefined) {
             // alert the user of what went wrong, if we can
@@ -84,7 +83,6 @@ export const registerBusiness = async (comp, event) => {
         response = await response.json()
         if (response.username !== undefined) {
             // successful login from the server. we have the id and access tokens now
-            alert('Signed up as: ' + response.username)
             window.location.href = '/login'
         } else if (response[0].msg !== undefined && response[0].param !== undefined) {
             // alert the user of what went wrong, if we can
@@ -126,7 +124,6 @@ export const login = async (comp, event) => {
             // Store received access token in cookie
             const cookies = new Cookies();
             cookies.set("access_token", response.tokens.access, {path: "/"});
-            alert('Success! You are being logged in as: ' + response.username)
             window.location.href = '/'
         } else if (response[0].msg !== undefined && response[0].param !== undefined) {
             // alert the user of what went wrong, if we can
