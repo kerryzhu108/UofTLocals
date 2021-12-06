@@ -195,11 +195,11 @@ router.get(
                 const student = await Student.findById(req.user.id);
                 return res.json({
                     id: req.user.id,
-                    type: req.user.type,
+                    type: student.type,
                     name: student.username,
                     email: student.email,
                     firstname: student.first_name,
-                    lastname: student.last_name
+                    lastname: student.last_name,
                 });
             } else {
                 return res.status(400).send("Unknown user type");

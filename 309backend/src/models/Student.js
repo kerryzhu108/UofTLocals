@@ -13,6 +13,7 @@ const studentSchema = new mongoose.Schema({
     comments: { type: [mongoose.Types.ObjectId], ref: "Comment" }, // References of comments this student has made
     reviews: { type: [mongoose.Types.ObjectId], ref: "Review" },
     created: { type: Date },
+    type: { type: String, default: "student" },
 });
 
 const Student = mongoose.model("Student", studentSchema);
