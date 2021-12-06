@@ -44,37 +44,11 @@ export function removeBusiness(panel, business) {
             postToRemove.push(post)
         }
     })
-    const filteredPost = panel.state.posts.filter(x=> !postToRemove.includes(x))
+    const filteredPost = panel.state.posts.filter(x => !postToRemove.includes(x))
 
     panel.setState({
         posts: filteredPost
     })
-
-    // console.log(business.id)
-    // panel.state.posts.forEach((post) => {
-    //     if (post.parent_id === business.id) {
-    //         console.log("Call for: " + post.id)
-    //         // call delete post directly from here?
-    //         deletePost(post.parent_id, post.id)
-    //         var filteredPost = panel.state.posts.filter(b => {
-    //             return b !== post
-    //         });
-
-    //         panel.setState({
-    //             posts: filteredPost
-    //         })
-    //         console.log("Removed!")
-    //     }
-    // })
-    // console.log("Call for remove business")
-    // deleteBusiness(business.id)
-    // const filteredBus = panel.state.businesses.filter(b => {
-    //     return b !== business
-    // });
-
-    // panel.setState({
-    //     businesses: filteredBus
-    // })
 }
 
 // Functionality for removing a post; simply remove it from the post list
@@ -89,22 +63,21 @@ export function removePost(panel, post) {
     })
 }
 
+export function myFunc() {
+    alert("This is the Admin Panel. Here, you can sort through businesses and their announcements, search by name, and remove posts and businesses! You can also link to the business' website by clicking the orange button titled 'Profile Link'! If you wish to return to the landing (browse) page, click browse in the top right!")
+}
+
 // Functionality for sorting the entries based on certain inputs
 export function sortation(val, event, panel) {
     console.log(panel.state.businesses[1].announcements)
     if (val === "(A-Z)") {
-        if (event.target.id === "apps") {
-            panel.state.business_applications.sort((a, b) => a.name.localeCompare(b.name))
-        } else if (event.target.id === "bus") {
+        if (event.target.id === "bus") {
             panel.state.businesses.sort((a, b) => a.name.localeCompare(b.name))
         } else if (event.target.id === "posts") {
             panel.state.posts.sort((a, b) => a.name.localeCompare(b.name))
         }
     } else if (val === "(Z-A)") {
-        if (event.target.id === "apps") {
-            panel.state.business_applications.sort((a, b) => a.name.localeCompare(b.name))
-            panel.state.business_applications.reverse()
-        } else if (event.target.id === "bus") {
+        if (event.target.id === "bus") {
             panel.state.businesses.sort((a, b) => a.name.localeCompare(b.name))
             panel.state.businesses.reverse()
         } else if (event.target.id === "posts") {
@@ -112,17 +85,13 @@ export function sortation(val, event, panel) {
             panel.state.posts.reverse()
         }
     } else if (val === "DateNew") {
-        if (event.target.id === "apps") {
-            panel.state.business_applications.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
-        } else if (event.target.id === "bus") {
+        if (event.target.id === "bus") {
             panel.state.businesses.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
         } else if (event.target.id === "posts") {
             panel.state.posts.sort((a, b) => { return new Date(b.date) - new Date(a.date) })
         }
     } else if (val === "DateOld") {
-        if (event.target.id === "apps") {
-            panel.state.business_applications.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
-        } else if (event.target.id === "bus") {
+        if (event.target.id === "bus") {
             panel.state.businesses.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
         } else if (event.target.id === "posts") {
             panel.state.posts.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
