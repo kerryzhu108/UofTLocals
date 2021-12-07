@@ -1,5 +1,62 @@
 # team36
 
+# Phase 2
+
+URL of website:
+
+## No Account
+Browse landing page
+Filter businesess by name and catagory
+Get details of any busienss by clicking on its image (View only)
+Sign up or login through the top right button
+## Student User
+Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Student"
+Leave reviews by clicking on the image of any business
+View profile and upload profile image by clicking on their username
+
+## Business User
+Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Business"
+Can edit their business information by clicking on their username
+Can post new annoucements, respond to comments, and change their description
+Can upload business image by going inside their business profile
+
+## Admin User
+
+
+
+## Routes
+
+### Announcements
+Folder for managing business announcements
+
+post /announcements
+Creates a new announcement for a business, returns {success: true} if created successfully
+Body:
+{
+    announcement: content (stirng)
+}
+
+### Auth
+Folder for managing registeration and sessions
+
+
+### Business
+
+
+### Comment
+
+
+### Review
+
+
+### Root
+
+### Student
+
+
+
+
+# Phase 1
 ## High level summary:
 * cd into 309frontend, then npm install && npm start will open up our application.
 * The entry point is the landing page all visitors see, from there we can browse and filter avaliable bussinesses
