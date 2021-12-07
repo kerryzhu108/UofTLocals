@@ -135,6 +135,8 @@ const seedDatabase = async () =>{
         await business2.save()
         await student.save();
 
+        console.log("Database seeded")
+
     } catch (error) {
         console.log(error)
     }
