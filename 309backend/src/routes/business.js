@@ -1,8 +1,7 @@
 const express = require("express");
 const { Business } = require("./../models/Business");
-const { Student } = require("./../models/Student");
+const { Comment } = require("./../models/Comment");
 const { Announcement } = require("./../models/Announcement");
-const { mongoose } = require("./../db/mongoose");
 
 const { body, validationResult } = require("express-validator");
 const utils = require(".././utils/utils");
@@ -131,22 +130,19 @@ router.patch(
 );
 
 router.post(
-    "/reply/:id",
+    "/reply",
     utils.checkDbConnection,
-    utils.authenticateToken,
     body("content").isString(),
     utils.validationHandler,
     async function (req, res) {
         try {
-            console.log('in server')
-            // Reply to the user's comment, inserts response right after comment
-            // use $position and $indexOfArray to insert comment right after the current comment>
-            console.log(req.user.id)
-            const business = await Business.findById(req.params.id)
-            console.log(business)
-            const commentIndex = await business.comments.find({"$indexOfArray": ["$_id", req.body.commentid]})
+            // Reply to the user's comment
+            const comment = await Comment.findById(req.body.commentid)
+            if (!comment) {return res.status(404).send("Comment not found")}
 
-            return res.json({index: commentIndex});
+            comment.replies.push(req.body.content)
+            comment.save()
+            return res.json({replied: true});
         } catch (error) {
             console.log(error);
             return res.status(500).send("Internal server error");

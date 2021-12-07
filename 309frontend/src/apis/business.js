@@ -217,15 +217,11 @@ export async function changeBusinessDescription(content, access_token) {
 }
 
 // Reply to comment as business owner
-export async function replyToComment(content, commentid, access_token) {
+export async function replyToComment(content, commentid) {
     try {
         let response = await fetch(domain + "business/reply", {
             method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${access_token}`,
-            },
+            headers: headers,
             mode: "cors",
             cache: "default",
             body: JSON.stringify({

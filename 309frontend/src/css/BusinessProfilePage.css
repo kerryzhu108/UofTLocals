@@ -6,3 +6,7 @@
     display: flex;
     justify-content: center;
 }
+
+.business-description {
+    margin-top: 55px;
+}

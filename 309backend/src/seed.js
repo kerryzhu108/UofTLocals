@@ -29,6 +29,18 @@ const seedDatabase = async () =>{
 
         }).save()
 
+        const businessPassword2 = await utils.hashPassword('user3')
+        const business2 = await new Business({
+            name: "Domino's",
+            username: 'user3',
+            email: "domino.john@gmail.com",
+            password: businessPassword,
+            dateCreated: new Date().toLocaleString().split(",")[0],
+            type: 'Resturant',
+            description: `Domino's Pizza, Inc. is an American multinational pizza restaurant chain founded in 1960 and led by CEO Richard Allison. The corporation is Delaware domiciled and headquartered at the Domino's Farms Office Park in Ann Arbor, Michigan.`,
+            dateCreated: new Date().toLocaleString().split(',')[0]
+        }).save()
+
         const announcement1 = await new Announcement({
             content: "Buy one get one free pizza for students",
             poster: business,
@@ -47,6 +59,13 @@ const seedDatabase = async () =>{
             content: "Buy one large pizza and get 3 free toppings",
             poster: business,
             poster_name: business.name,
+            date: new Date().toLocaleString().split(',')[0]
+        }).save()
+
+        const announcement4 = await new Announcement({
+            content: "Buy two medium cheese pizzas and get a complimentary drink",
+            poster: business2,
+            poster_name: business2.name,
             date: new Date().toLocaleString().split(',')[0]
         }).save()
 
@@ -69,27 +88,35 @@ const seedDatabase = async () =>{
             type: 'admin'
         }).save()
 
-        const date = new Date()
-        const comment = await new Comment({
+        const comment1 = await new Comment({
             content: "The pizza here is good, would like more sauce.",
             poster: student,
-            created: date,
+            created: Date(),
             business: business.id
         }).save()
 
-        const laterDate = new Date()
-        const laterComment = await new Comment({
+        const comment2 = await new Comment({
             content: "Yeah the pizza needs more sauces.",
             poster: student,
-            created: laterDate,
+            created: Date(),
+            business: business.id
+        }).save()
+
+        const comment3 = await new Comment({
+            content: "Can't go wrong with Domino's, food tastes as expected.",
+            poster: student,
+            created: Date(),
             business: business.id
         }).save()
 
         business.announcements.push(announcement1)
         business.announcements.push(announcement2)
         business.announcements.push(announcement3)
-        business.comments.push(comment)
-        business.comments.push(laterComment)
+        business.comments.push(comment1)
+        business.comments.push(comment2)
+        
+        business2.announcements.push(announcement4)
+        business2.comments.push(comment3)
         await business.save()
 
     } catch (error) {

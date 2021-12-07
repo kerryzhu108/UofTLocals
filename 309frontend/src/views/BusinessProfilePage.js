@@ -47,6 +47,7 @@ class BusinessProfilePage extends React.Component {
         this.handleBusinessSubmit = this.handleBusinessSubmit.bind(this);
         this.handleBusinessDescChange = this.handleBusinessDescChange.bind(this);
         this.handleBusinessDescSubmit = this.handleBusinessDescSubmit.bind(this);
+        this.submitReply = this.submitReply.bind(this);
     }
 
     // Handle text box changes, store them in the state
@@ -103,9 +104,10 @@ class BusinessProfilePage extends React.Component {
     }
 
     async submitReply(content, commentid) {
-        const cookies = new Cookies();
-        const res = await replyToComment(content, commentid, cookies.get("access_token"))
-        console.log(res)
+        await replyToComment(content, commentid)
+        const id = this.props.match.params.id;
+        const comments = await getBusinessComments(id);
+        this.setState({comments: comments})
     }
 
     async componentDidMount() {
@@ -152,6 +154,7 @@ class BusinessProfilePage extends React.Component {
                         name={this.state.businessName}
                         image={this.state.businessImage}
                     >
+                    <div className="business-description">
                         {(!this.state.user || !this.state.isOwner) && <p>{this.state.businessTextBox}</p>}
                         { this.state.user && this.state.user.type === "business" && this.state.isOwner &&
                                     <InputButtonCombo
@@ -162,6 +165,7 @@ class BusinessProfilePage extends React.Component {
                                         onClick={this.handleBusinessDescSubmit}
                                     />
                         }
+                    </div>
                     </BusinessProfile>
                     <div className="info-section">
                         <AnnouncementBox name="Announcements">
@@ -197,7 +201,7 @@ class BusinessProfilePage extends React.Component {
                                         color="green"
                                     />
                                 )}
-                            {this.state.comments.map((comment) => (
+                            {this.state.comments.map(comment => (
                                 <Comment
                                     key={comment._id}
                                     username={comment.poster.username}
@@ -205,10 +209,12 @@ class BusinessProfilePage extends React.Component {
                                     content={comment.content}
                                     replyBtn={replyBtn}
                                     isOwner={this.state.isOwner}
-                                    commentid={comment.id}
+                                    commentId={comment._id}
                                     submitReply={this.submitReply}
-                                />
-                            ))}
+                                    replies={comment.replies}
+                                    businessName={comment.business.name}
+                                />)
+                            )}
                         </AnnouncementBox>
                     </div>
                 </Container>

@@ -13,6 +13,7 @@ const commentSchema = new mongoose.Schema({
         required: true,
     },
     created: { type: Date, required: true },
+    replies: {type: [String]}
 });
 
 const Comment = mongoose.model("Comment", commentSchema);

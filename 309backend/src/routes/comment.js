@@ -81,7 +81,14 @@ router.get("/business/:id", utils.checkDbConnection, async function (req, res) {
             populate: {
                 path: "poster",
                 model: "Student",
-                select: { username: 1, _id: 0, created: 1},
+                select: { username: 1, _id: 0},
+            },
+        }).populate({
+            path: "comments",
+            populate: {
+                path: "business",
+                model: "Business",
+                select: { name: 1, _id: 0},
             },
         })
         if (!business) return res.status(404).send("Business not found");
