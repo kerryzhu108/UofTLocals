@@ -42,7 +42,11 @@ router.post(
             await student.save();
             await review.save();
 
-            return res.send(review);
+            return res.send(await review.populate({
+                path: "poster",
+                model: "Student",
+                select: {username: 1, profileImageURL: 1, _id: 0}
+            }));
         } catch (error) {
             console.log(error);
             return res.status(500).send("Internal server error");

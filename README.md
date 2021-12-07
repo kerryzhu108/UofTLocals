@@ -4,37 +4,80 @@
 
 URL of website:
 
+Users can browse the website using different accounts or no account.
 ## No Account
 Browse landing page
 Filter businesess by name and catagory
 Get details of any busienss by clicking on its image (View only)
 Sign up or login through the top right button
 ## Student User
+Login with username: user password: user
 Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Student"
-Leave reviews by clicking on the image of any business
-View profile and upload profile image by clicking on their username
+Leave reviews by clicking on the image of any business, reviews will have their name and profile image
+View profile, upload profile image, and see past comments by clicking on their username at the top right
+Inside their profile, students can also change their account information.
 
 ## Business User
+Login with username: user2 password: user2
 Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Business"
-Can edit their business information by clicking on their username
-Can post new annoucements, respond to comments, and change their description
-Can upload business image by going inside their business profile
+Can edit their business profile by clicking on their username
+Inside their own profile businesses can post new annoucements, respond to comments from students, and change their business description
+Can upload business cover image which will be reflected on the landing page with all the businesses
 Editing their business is only possible when they are looking at their own business
 
 ## Admin User
+Login with username: admin password: admin
 
+## Third party libraries
 
+universal-cookie: storing and retrieving a user's authentication token
+body-parser: to access req.files
+cloudinary: to turn images into urls for db storage (given by professor on piazza) 
 
 ## Routes
+
+ACCESS_TOKEN is retrieved from the login endpoint
+All body content is in json unless otherwise mentioned
 
 ### Announcements
 Folder for managing business announcements
 
-post /announcements
-Creates a new announcement for a business, returns {success: true} if created successfully
-Body:
-{
-    announcement: content (stirng)
+POST /announcement
+"Creates a new announcement for a business, returns the created announcement on success"
+"Access token retreived from login endpoint"
+headers: {
+    Authorization: Bearer ACCESS_TOKEN,
+},
+body: {
+  content: "Announcement details"
+}
+response: {
+    "content": "Announcement details",
+    "poster": {
+        "name": "Business Name"
+    },
+    "date": "Tue Dec 07 2021 15:52:38 GMT-0500 (Eastern Standard Time)",
+    "_id": "61afc996e48b56a8ceb8d03a",
+    "__v": 0
+}
+
+GRT /announcement/:id
+"Gets business announcement id"
+"Access token retreived from login endpoint"
+headers: {
+    Authorization: Bearer ACCESS_TOKEN,
+},
+body: {
+  content: "Announcement details"
+}
+response: {
+    "content": "Announcement details",
+    "poster": {
+        "name": "Business Name"
+    },
+    "date": "Tue Dec 07 2021 15:52:38 GMT-0500 (Eastern Standard Time)",
+    "_id": "61afc996e48b56a8ceb8d03a",
+    "__v": 0
 }
 
 ### Auth
@@ -42,6 +85,52 @@ Folder for managing registeration and sessions
 
 
 ### Business
+Folder for managing business interactions
+
+**GET** /business/all
+
+Gets all businesses in the database, returns list of all businesses if retrieved successfully. Empty body
+
+**GET** /business/allannouncements
+
+Gets all announcements in the database, returns a list of all announcements if retrieved successfully. Empty body
+
+**DELETE** /business/deletebusiness/:id
+
+Deletes a business from the database based on the id parameter provided, returns the business deleted if completed successfully. Empty body
+
+**DELETE** /business/delete/:pid
+
+Deletes an announcement from the announcements folder based on the pid parameter provided, returns the post deleted if completed successfully. Empty body
+
+**DELETE** /business/delete/:bid/:pid
+
+Removes a specific announcement from the business it belongs to and from the announcements folder, returns the updated business if completed successfully. Empty body
+
+**GET** /business/:id
+
+Gets information from a single business based on the id provided, returns the business if completed successfully. Empty body
+
+**PATCH** /business
+
+Changes the description of a business, returns {businessUpdated: true} if updated successfully. 
+Body:
+{
+    content: content (String)
+}
+
+**POST** /business/image/:userid
+
+Stores the image url to the cloudinary server, returns the URL of the image if successful. No body
+
+**POST** /business/reply
+
+Adds a reply to a user comment, returns {replied: true} if the comment was posted successfully. 
+Body:
+{
+    commentid: commentid (String)
+    content: content (String)
+}
 
 
 ### Comment
@@ -53,7 +142,6 @@ Folder for managing registeration and sessions
 ### Root
 
 ### Student
-
 
 
 
