@@ -118,6 +118,35 @@ export async function getBusinessReviews(id) {
     }
 }
 
+// Post review to business (Student must be logged in)
+export async function postBusinessReview(id, content, rating, access_token) {
+    try {
+        var response = await fetch(domain + `review/${id}`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+            },
+            mode: "cors",
+            cache: "default",
+            body: JSON.stringify({
+                content: content,
+                rating: rating
+            }),
+        });
+
+        console.log(response);
+
+        if (response.status !== 200) return null;
+        
+        response = await response.json();
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // Add announcement to business profile (requires a business access token)
 export async function addBusinessAnnouncement(content, access_token) {
     try {
