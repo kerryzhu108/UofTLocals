@@ -15,6 +15,7 @@ const businessSchema = new mongoose.Schema({
     announcements: { type: [mongoose.Types.ObjectId], ref: "Announcement" }, // List of announcements by this business
     reviews: { type: [mongoose.Types.ObjectId], ref: "Review" },
     dateCreated: { type: String, required: true }, // Format "Month Day Year"
+    publicImageURL: {type: String, default: ""},
 });
 
 const Business = mongoose.model("Business", businessSchema);

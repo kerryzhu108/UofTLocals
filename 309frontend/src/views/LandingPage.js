@@ -3,8 +3,8 @@ import "../css/LandingPage.css";
 import bannerImg from "../images/banner.jpeg";
 import filter from "../images/filter.png";
 import ResturantCover from "../components/ResturantCover.js";
-import Header from "../components/Header";
-import sampleStoreImg from "../images/sampleStoreImg.jpeg";
+import Header from "../components/Header.js";
+import defaultBusinessImg from "../images/defaultBusinessImage.png";
 import { getBusinesses } from "../apis/business.js";
 
 class LandingPage extends React.Component {
@@ -26,13 +26,13 @@ class LandingPage extends React.Component {
         // fetch all active resturants and their descriptions from server
         let activeBusinesses = [];
         const businesses = await getBusinesses();
-        console.log(businesses);
         businesses.forEach((business) => {
             activeBusinesses.push({
                 name: business["name"],
                 type: business["type"],
                 desc: business["description"],
                 id: business["_id"],
+                publicImageURL: business["publicImageURL"]
             });
         });
         this.setState({
@@ -55,6 +55,7 @@ class LandingPage extends React.Component {
                     <Header />
                 </div>
                 <div className='center'>
+
                     <div id="bannerWrapper">
                         <img id="banner" src={bannerImg} alt="resturant" />
                         <div id="bannerDesc">
@@ -103,7 +104,7 @@ class LandingPage extends React.Component {
                                 return (
                                     <ResturantCover
                                         key={id}
-                                        img={sampleStoreImg}
+                                        img={ business.publicImageURL || defaultBusinessImg}
                                         name={business["name"]}
                                         businessType={business["type"]}
                                         desc={business["desc"]}

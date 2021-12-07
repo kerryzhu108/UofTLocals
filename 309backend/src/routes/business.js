@@ -3,8 +3,11 @@ const { Business } = require("./../models/Business");
 const { Comment } = require("./../models/Comment");
 const { Announcement } = require("./../models/Announcement");
 
-const { body, validationResult } = require("express-validator");
+const { body } = require("express-validator");
 const utils = require(".././utils/utils");
+const cloudinary = require(".././utils/uploader");
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
 
 const router = express.Router();
 
@@ -100,6 +103,7 @@ router.get("/:id", utils.checkDbConnection, async function (req, res) {
         const business = await Business.findById(req.params.id).select({
             name: 1,
             description: 1,
+            publicImageURL: 1,
         });
         if (!business) return res.status(404).send("Business not found");
         return res.send(business);
@@ -129,6 +133,24 @@ router.patch(
     }
 );
 
+// stores image url to cloudinary server
+router.post("/image/:userid", multipartMiddleware, async function (req, res) {
+    try {
+        const business = await Business.findById(req.params.userid)
+        if (!business) return res.status(404).send("Unable to find business");
+        cloudinary.uploader.upload(
+            req.files.image.path,
+            async function (result) {
+                business.publicImageURL = result.url
+                await business.save()
+                return res.json({url: business.publicImageURL})
+            });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Internal server error");
+    }
+});
+
 router.post(
     "/reply",
     utils.checkDbConnection,
@@ -150,20 +172,4 @@ router.post(
     }
 );
 
-// router.post("/addpost/:bid", async function (req, res) {
-//     const bid = req.params.bid
-//     try {
-// 		const business = await Business.findById(bid)
-// 		if (!business) {
-// 			res.status(404).send('resource not found')
-// 		}
-//         const post = req.body.announcement
-//         business.announcements.push(post)
-//         await business.save()
-//         res.send({"business": business, "post": post})
-// 	} catch(error) {
-// 		log(error)
-// 		res.status(500).send() // server error, could not delete.
-// 	}
-// })
 module.exports = router;

@@ -1,9 +1,10 @@
 const express = require("express");
 const { Student } = require("./../models/Student");
-const { mongoose } = require("./../db/mongoose");
 
-const { body } = require("express-validator");
 const utils = require(".././utils/utils");
+const cloudinary = require(".././utils/uploader");
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
 
 const router = express.Router();
 
@@ -45,6 +46,22 @@ router.patch("/",
         }
     }
 )
+// stores image url to cloudinary server
+router.post("/image/:userid", multipartMiddleware, async function (req, res) {
+    try {
+        const student = await Student.findById(req.params.userid)
+        if (!student) return res.status(404).send("Unable to find student");
+        cloudinary.uploader.upload(
+            req.files.image.path,
+            async function (result) {
+                student.profileImageURL = result.url
+                await student.save()
+                return res.json({url: student.profileImageURL})
+            });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send("Internal server error");
+    }
+});
 
 module.exports = router;
-

@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Comment from '../components/Comment';
 import defaultProfile from "../images/default-profile.png";
 import InputInfoStudent from "../components/InputInfoStudent";
+import ImageUploader from "../components/ImageUploader";
 
 import { getComments, updateProfile } from "../apis/student";
 import { updateLoginForm } from "../apis/login";
@@ -20,9 +21,11 @@ class StudentProfile extends React.Component {
             lastname: "Unknown",
             email: "Unknown",
             username: "Unknown",
+            id: "",
             password: "",
             confirmation: "",
             comments: [],
+            imageURL: "",
         }
     };
 
@@ -33,7 +36,6 @@ class StudentProfile extends React.Component {
         const user_information = await getProfile(access_token)
         const comments = await getComments(user_information.id)
         if (!comments) {
-            console.log("This student's comments cannot be found.")
             return
         }
         // set the state with the retrieved information
@@ -42,7 +44,10 @@ class StudentProfile extends React.Component {
             lastname: user_information.lastname,
             email: user_information.email,
             username: user_information.name,
-            comments: comments
+            comments: comments,
+            imageURL: user_information.profileImageURL,
+            id: user_information.id,
+
         })
     }
 
@@ -61,6 +66,10 @@ class StudentProfile extends React.Component {
         })
     }
 
+    updateImage(url) {
+        this.setState({imageURL: url})
+    }
+
     render() {
         return (
             <div>
@@ -72,6 +81,7 @@ class StudentProfile extends React.Component {
 
                 <div className='postsContainer'>
                     <h1>Welcome, @{ this.state.username }.</h1>
+                    <img src={this.state.imageURL} alt="" id="profileImg"/>
                     <h3>Edit My Profile</h3>
                     <p>
                         Please provide the following information to edit your profile.
@@ -87,6 +97,8 @@ class StudentProfile extends React.Component {
                         confirmation={ this.state.confirmation }
                         onChange={ e => updateLoginForm(this, e.target) }
                         onClick={ e => this.updateStudentProfile(this, e) }/>
+                    
+                    <ImageUploader updateImage={this.updateImage.bind(this)} userid={this.state.id} type={"student"}/>
                 </div>
                 <div>
                     <div className='postsContainer'>

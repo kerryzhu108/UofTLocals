@@ -27,7 +27,7 @@ export const updateProfile = async (comp, event, access_token) => {
     }
     try {
         // make a call to the server API to edit the profile of this student
-        let response = await fetch(`${domain}student`, {
+        await fetch(`${domain}student`, {
             method: "PATCH",
             headers: {
                 accept: "application/json",

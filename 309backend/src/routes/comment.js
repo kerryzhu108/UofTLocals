@@ -81,7 +81,7 @@ router.get("/business/:id", utils.checkDbConnection, async function (req, res) {
             populate: {
                 path: "poster",
                 model: "Student",
-                select: { username: 1, _id: 0},
+                select: { username: 1, _id: 0, profileImageURL: 1},
             },
         }).populate({
             path: "comments",

@@ -47,6 +47,14 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
 }
 
+#profileImg {
+    height: 150px;
+    width: 150px;
+    float: right;
+    margin-top: -80px;
+    border-radius: 80px;
+}
+
 #loginButton {
     background-color: #002451;
     color: white;
@@ -87,6 +95,10 @@
 
 #confirmButtonBusiness:hover {
     box-shadow: 0 0 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.10);
+}
+
+#uploadInput {
+    margin-bottom: 20px;
 }
 
 .small {

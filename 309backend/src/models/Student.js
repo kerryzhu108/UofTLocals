@@ -14,6 +14,7 @@ const studentSchema = new mongoose.Schema({
     reviews: { type: [mongoose.Types.ObjectId], ref: "Review" },
     created: { type: Date },
     type: { type: String, default: "student" },
+    profileImageURL: { type: String, default: "" }
 });
 
 const Student = mongoose.model("Student", studentSchema);

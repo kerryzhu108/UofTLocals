@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Backend REST API for the uoft-locals website.",
   "main": "index.js",
+  "engines": {
+    "node": "14.16.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js"
@@ -12,7 +15,9 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "cloudinary": "^1.27.1",
     "connect-mongo": "^4.4.0",
+    "connect-multiparty": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

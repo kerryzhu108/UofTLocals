@@ -1,4 +1,5 @@
 import React from "react";
+import defaultProfile from "../images/default-profile.png";
 
 import "../css/Comment.css";
 import "../css/InputButtonCombo.css"
@@ -20,7 +21,7 @@ class Comment extends React.Component {
         return (
             <div className="comment-box">
                 <div className="comment-header">
-                    {this.props.profile && <img className="profile" src={this.props.profile} alt="" /> }
+                    {this.props.profile != null && <img className="profile" src={this.props.profile || defaultProfile} alt="" />}
                     <h1 className="username">{this.props.username}</h1>
                 </div>
                 { this.props.isOwner && <img className="reply" src={this.props.replyBtn} onClick={()=>{this.setState({showReply: !this.state.showReply})}} alt=""/> } 

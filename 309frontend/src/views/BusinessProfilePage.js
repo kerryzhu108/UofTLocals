@@ -6,9 +6,9 @@ import Comment from "../components/Comment";
 import AnnouncementBox from "../components/AnnouncementBox";
 import { withRouter } from "react-router";
 import InputButtonCombo from "../components/InputButtonCombo";
-
-import defaultProfile from "../images/default-profile.png";
+import ImageUploader from "../components/ImageUploader";
 import replyBtn from "../images/replyButton.png";
+import defaultBusinessImg from "../images/defaultBusinessImage.png";
 import Cookies from "universal-cookie";
 
 // API related imports
@@ -32,14 +32,14 @@ class BusinessProfilePage extends React.Component {
 
         this.state = {
             businessName: "Unknown",
-            businessImage:
-                "https://images.unsplash.com/photo-1525193612562-0ec53b0e5d7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            businessID: "",
             announcements: [],
             comments: [],
             user: null,
             boxText: "",
             businessTextBox: "No description",
             isOwner: false,
+            publicImageURL: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -48,6 +48,7 @@ class BusinessProfilePage extends React.Component {
         this.handleBusinessDescChange = this.handleBusinessDescChange.bind(this);
         this.handleBusinessDescSubmit = this.handleBusinessDescSubmit.bind(this);
         this.submitReply = this.submitReply.bind(this);
+        this.updateImage = this.updateImage.bind(this);
     }
 
     // Handle text box changes, store them in the state
@@ -110,6 +111,10 @@ class BusinessProfilePage extends React.Component {
         this.setState({comments: comments})
     }
 
+    updateImage(url) {
+        this.setState({publicImageURL: url})
+    }
+
     async componentDidMount() {
         let id = this.props.match.params.id;
 
@@ -134,17 +139,17 @@ class BusinessProfilePage extends React.Component {
         // Set the state accordingly
         this.setState({
             businessName: business.name,
+            businessID: business._id,
             businessTextBox: business.description,
             comments: comments,
             announcements: announcements,
             user: user_information,
-            isOwner: user_information?.id === this.props.match.params.id
+            isOwner: user_information?.id === this.props.match.params.id,
+            publicImageURL: business.publicImageURL,
         });
+        console.log(this.state.publicImageURL)
     }
-    // TODO:
-    // A few things that need to be done with this page:
-    // Pagenate comments and announcements
-    // Allow businesses to edit their pages
+
     render() {
         return (
             <div>
@@ -152,18 +157,25 @@ class BusinessProfilePage extends React.Component {
                 <Container>
                     <BusinessProfile
                         name={this.state.businessName}
-                        image={this.state.businessImage}
+                        image={this.state.publicImageURL || defaultBusinessImg}
                     >
                     <div className="business-description">
                         {(!this.state.user || !this.state.isOwner) && <p>{this.state.businessTextBox}</p>}
                         { this.state.user && this.state.user.type === "business" && this.state.isOwner &&
-                                    <InputButtonCombo
-                                        value={this.state.businessTextBox}
-                                        buttonName="Edit Business"
-                                        color="orange"
-                                        onChange={this.handleBusinessDescChange}
-                                        onClick={this.handleBusinessDescSubmit}
-                                    />
+                            <div>
+                                <InputButtonCombo
+                                    value={this.state.businessTextBox}
+                                    buttonName="Edit Business"
+                                    color="orange"
+                                    onChange={this.handleBusinessDescChange}
+                                    onClick={this.handleBusinessDescSubmit}
+                                />
+                                <ImageUploader
+                                    updateImage={this.updateImage}
+                                    userid={this.state.businessID}
+                                    type={"business"}
+                                    desc={"As the business owner, you can add or change your business picture."}/>
+                            </div>
                         }
                     </div>
                     </BusinessProfile>
@@ -185,7 +197,6 @@ class BusinessProfilePage extends React.Component {
                                 <Comment
                                     key={announcement._id}
                                     username={announcement.poster.name}
-                                    profile={defaultProfile}
                                     content={announcement.content}
                                 />
                             ))}
@@ -204,8 +215,8 @@ class BusinessProfilePage extends React.Component {
                             {this.state.comments.map(comment => (
                                 <Comment
                                     key={comment._id}
+                                    profile={comment.poster.profileImageURL}
                                     username={comment.poster.username}
-                                    profile={defaultProfile}
                                     content={comment.content}
                                     replyBtn={replyBtn}
                                     isOwner={this.state.isOwner}

@@ -19,26 +19,28 @@ class InputInfoStudent extends React.Component {
                     { update ? 
                         <tr>
                             <td><label className="infoLabel">Username: <span className="red">*</span></label></td>
-                            <td><input className="infoInput" name="username" disabled="disabled" value={username} onChange={onChange}/></td>
+                            <td><input className="infoInput" name="username" disabled="disabled" 
+                            value={username} onChange={onChange} autoComplete="username"/></td>
                         </tr> : 
                         <tr>
                             <td><label className="infoLabel">Username: <span className="red">*</span></label></td>
-                            <td><input className="infoInput" name="username" value={username} onChange={onChange}/></td>
+                            <td><input className="infoInput" name="username" 
+                            value={username} onChange={onChange} autoComplete="username"/></td>
                         </tr> 
                     }
                     <tr>
                         <td><label className="infoLabel">Email: <span className="red">*</span></label></td>
-                        <td><input className="infoInput" name="email" value={email} onChange={onChange}/></td>
+                        <td><input className="infoInput" name="email" value={email} onChange={onChange} autoComplete="email"/></td>
                     </tr>
                     <tr>
                         <td><label className="infoLabel">Password: <span className="red">*</span></label></td>
                         <td><input className="infoInput" type="password" name="password" value={password}
-                                   onChange={onChange}/></td>
+                                   onChange={onChange} autoComplete="current-password" /></td>
                     </tr>
                     <tr>
                         <td><label className="infoLabel">Confirm password: <span className="red">*</span></label></td>
                         <td><input className="infoInput" type="password" name="confirmation" value={confirmation}
-                                   onChange={onChange}/></td>
+                                   onChange={onChange} autoComplete="current-password" /></td>
                     </tr>
                     <tr>
                         <td><p className="grey small"><span className="red">*</span> required information</p></td>

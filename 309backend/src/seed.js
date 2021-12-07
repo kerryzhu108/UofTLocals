@@ -34,7 +34,7 @@ const seedDatabase = async () =>{
             name: "Domino's",
             username: 'user3',
             email: "domino.john@gmail.com",
-            password: businessPassword,
+            password: businessPassword2,
             dateCreated: new Date().toLocaleString().split(",")[0],
             type: 'Resturant',
             description: `Domino's Pizza, Inc. is an American multinational pizza restaurant chain founded in 1960 and led by CEO Richard Allison. The corporation is Delaware domiciled and headquartered at the Domino's Farms Office Park in Ann Arbor, Michigan.`,
@@ -114,10 +114,11 @@ const seedDatabase = async () =>{
         business.announcements.push(announcement3)
         business.comments.push(comment1)
         business.comments.push(comment2)
-        
+
         business2.announcements.push(announcement4)
         business2.comments.push(comment3)
         await business.save()
+        await business2.save()
 
     } catch (error) {
         console.log(error)

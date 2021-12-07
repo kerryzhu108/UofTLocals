@@ -185,6 +185,7 @@ router.get(
             // Determine this user's type
             if (req.user.type == "business") {
                 const business = await Business.findById(req.user.id);
+                if (!business) {return res.status(404).send("Business not found")}
                 return res.json({
                     id: req.user.id,
                     type: req.user.type,
@@ -193,6 +194,7 @@ router.get(
                 });
             } else if (req.user.type == "student" || req.user.type == "admin") {
                 const student = await Student.findById(req.user.id);
+                if (!student) {return res.status(404).send("Business not found")}
                 return res.json({
                     id: req.user.id,
                     type: req.user.type,
@@ -200,6 +202,7 @@ router.get(
                     email: student.email,
                     firstname: student.first_name,
                     lastname: student.last_name,
+                    profileImageURL: student.profileImageURL,
                 });
             } else {
                 return res.status(400).send("Unknown user type");

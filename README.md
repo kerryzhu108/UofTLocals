@@ -19,6 +19,7 @@ Created through the the "LOGIN/SIGNUP" button on the top right, then "New member
 Can edit their business information by clicking on their username
 Can post new annoucements, respond to comments, and change their description
 Can upload business image by going inside their business profile
+Editing their business is only possible when they are looking at their own business
 
 ## Admin User
 
