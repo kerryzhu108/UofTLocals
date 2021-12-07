@@ -18,7 +18,7 @@ export const getComments = async (id) => {
 }
 
 /* A function to send a PATCH request to update a student user's account. */
-export const updateProfile = async (id, comp, event) => {
+export const updateProfile = async (comp, event, access_token) => {
     event.preventDefault()
     // make sure the given password and confirmation match
     if (comp.state.password !== comp.state.confirmation) {
@@ -27,19 +27,23 @@ export const updateProfile = async (id, comp, event) => {
     }
     try {
         // make a call to the server API to edit the profile of this student
-        let response = await fetch(`${domain}comment/student/${id}`, {
+        let response = await fetch(`${domain}student`, {
             method: "PATCH",
-            headers: headers,
+            headers: {
+                accept: "application/json",
+                "Content-Type": "application/json",
+                authorization: `Bearer ${access_token}`,
+            },
             mode: "cors",
             cache: "default",
             body: JSON.stringify({
+                "username": comp.state.username,
                 "first_name": comp.state.firstname,
                 "last_name": comp.state.lastname,
                 "email": comp.state.email
             })
         })
     } catch (error) {
-
+        console.log(error)
     }
-
 }

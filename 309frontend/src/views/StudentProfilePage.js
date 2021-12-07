@@ -7,7 +7,7 @@ import Comment from '../components/Comment';
 import defaultProfile from "../images/default-profile.png";
 import InputInfoStudent from "../components/InputInfoStudent";
 
-import { getComments } from "../apis/student";
+import { getComments, updateProfile } from "../apis/student";
 import { updateLoginForm } from "../apis/login";
 import { getProfile } from "../apis/profile";
 
@@ -46,6 +46,21 @@ class StudentProfile extends React.Component {
         })
     }
 
+    async updateStudentProfile(app, event) {
+        const cookies = new Cookies()
+        const access_token = cookies.get("access_token")
+        console.log(access_token)
+        await updateProfile(app, event, access_token)
+
+        const user_information = await getProfile(access_token)
+        this.setState({
+            firstname: user_information.firstname,
+            lastname: user_information.lastname,
+            email: user_information.email,
+            username: user_information.name
+        })
+    }
+
     render() {
         return (
             <div>
@@ -71,7 +86,7 @@ class StudentProfile extends React.Component {
                         password={ this.state.password }
                         confirmation={ this.state.confirmation }
                         onChange={ e => updateLoginForm(this, e.target) }
-                        onClick={ () => console.log('patch route here') }/>
+                        onClick={ e => this.updateStudentProfile(this, e) }/>
                 </div>
                 <div>
                     <div className='postsContainer'>
