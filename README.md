@@ -64,7 +64,6 @@ response: {
 GET /announcement/:id
 "Gets all annoucements for a business, :id is the business id which can be obtained from GET /businesses/all"
 response: [AnnouncementObj, AnnouncementObj, ...]
-}
 
 ### Auth
 Folder for managing registeration and sessions
@@ -131,7 +130,7 @@ Body:
 
 GET /student/:id
 ":id is the student id, can be obtained from POST /auth/login/student"
-returns 
+returns the user object along with their comments
 
 
 # Phase 1
