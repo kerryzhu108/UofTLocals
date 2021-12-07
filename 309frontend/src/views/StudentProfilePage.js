@@ -90,7 +90,7 @@ class StudentProfile extends React.Component {
                 <div className='postsContainer'>
                     <h2>Welcome, { this.state.displayname }.</h2>
                     <p>(@{ this.state.username })</p>
-                    { this.state.imageURL && <img src={this.state.imageURL} alt="profile image" id="profileImg"/>}
+                    { this.state.imageURL && <img src={this.state.imageURL} alt="" id="profileImg"/>}
                     <h4>Edit My Profile</h4>
                     <p>
                         Please provide the following information to edit your profile.

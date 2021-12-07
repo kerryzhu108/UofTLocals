@@ -229,7 +229,7 @@ class BusinessProfilePage extends React.Component {
         } else {
             return (
                 <div>
-                    {this.state.user && this.state.user.type == "student" && (
+                    {this.state.user && this.state.user.type === "student" && (
                         <Dropdown
                             options={[1, 2, 3, 4, 5]}
                             value={"Set Rating"}
