@@ -1,6 +1,6 @@
 const express = require("express");
 const { Student } = require("./../models/Student");
-
+const { body, validationResult } = require("express-validator");
 const utils = require(".././utils/utils");
 const cloudinary = require(".././utils/uploader");
 const multipart = require('connect-multiparty');
@@ -28,6 +28,9 @@ router.get("/:id", utils.checkDbConnection, async function (req, res) {
 router.patch("/", 
     utils.checkDbConnection, 
     utils.authenticateToken,
+    body("email").isEmail(),
+    body("first_name").isString(),
+    body("last_name").isString(),
     utils.validationHandler,
     async function (req, res) {
         try {
@@ -39,7 +42,7 @@ router.patch("/",
                 last_name: req.body.last_name
             })
             await student.save();
-            return res.json();
+            return res.send(student);
         } catch (error) {
             console.log(error);
             return res.status(500).send("Internal server error");

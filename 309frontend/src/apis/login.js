@@ -34,18 +34,21 @@ export const registerStudent = async (comp, event) => {
         })
         if (response.status !== 200) {
             // received a code other than 200
-            response.text().then(text => { alert(text) })
+            try {
+                // alert the user of what went wrong, if we can
+                response = await response.json()
+                const msg = response[0].msg + ' for ' + response[0].param
+                alert(msg)
+            } catch(error) {
+                response.text().then(text => { alert(text) })
+            }
             return
         }
         response = await response.json()
         if (response.username !== undefined) {
             // successful login from the server. we have the id and access tokens now
             window.location.href = '/login'
-        } else if (response[0].msg !== undefined && response[0].param !== undefined) {
-            // alert the user of what went wrong, if we can
-            const msg = response[0].msg + ' for ' + response[0].param
-            alert(msg)
-        }
+        } 
     } catch (error) {
         // log any errors to the console
         console.log(error)

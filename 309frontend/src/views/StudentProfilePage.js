@@ -1,14 +1,14 @@
 import React from "react"
 import Cookies from "universal-cookie";
 
-import Link from "../components/Link";
 import Header from "../components/Header";
 import Comment from '../components/Comment';
+import Review from '../components/Review';
 import defaultProfile from "../images/default-profile.png";
 import InputInfoStudent from "../components/InputInfoStudent";
 import ImageUploader from "../components/ImageUploader";
 
-import { getComments, updateProfile } from "../apis/student";
+import { getComments, getReviews, updateProfile } from "../apis/student";
 import { updateLoginForm } from "../apis/login";
 import { getProfile } from "../apis/profile";
 
@@ -21,10 +21,11 @@ class StudentProfile extends React.Component {
             lastname: "Unknown",
             email: "Unknown",
             username: "Unknown",
-            id: "",
+            displayname: "Unknown",
             password: "",
             confirmation: "",
             comments: [],
+            reviews: [],
             imageURL: "",
         }
     };
@@ -40,10 +41,16 @@ class StudentProfile extends React.Component {
             window.location.href = '/'
         }
 
+        // get comments and reviews
         const comments = await getComments(user_information.id)
         if (!comments) {
             return
         }
+        const reviews = await getReviews(user_information.id)
+        if (!reviews) {
+            return
+        }
+
         // set the state with the retrieved information
         this.setState({
             firstname: user_information.firstname,
@@ -51,9 +58,9 @@ class StudentProfile extends React.Component {
             email: user_information.email,
             username: user_information.name,
             comments: comments,
+            reviews: reviews,
             imageURL: user_information.profileImageURL,
-            id: user_information.id,
-
+            displayname: user_information.firstname + " " + user_information.lastname
         })
     }
 
@@ -67,7 +74,8 @@ class StudentProfile extends React.Component {
             firstname: user_information.firstname,
             lastname: user_information.lastname,
             email: user_information.email,
-            username: user_information.name
+            username: user_information.name,
+            displayname: user_information.firstname + " " + user_information.lastname
         })
     }
 
@@ -80,9 +88,10 @@ class StudentProfile extends React.Component {
             <div>
                 <Header/>
                 <div className='postsContainer'>
-                    <h1>Welcome, @{ this.state.username }.</h1>
+                    <h2>Welcome, { this.state.displayname }.</h2>
+                    <p>(@{ this.state.username })</p>
                     { this.state.imageURL && <img src={this.state.imageURL} alt="profile image" id="profileImg"/>}
-                    <h3>Edit My Profile</h3>
+                    <h4>Edit My Profile</h4>
                     <p>
                         Please provide the following information to edit your profile.
                         Note that you may not modify your username.
@@ -105,14 +114,22 @@ class StudentProfile extends React.Component {
                         <h3>My Comments and Reviews</h3>
                         { this.state.comments.length === 0 ? 
                             <p>You have not posted any comments yet.</p> : 
-                            <p>Below is a list of all comments you have made on this site.</p>
+                            <p>Below is a list of all comments and reviews you have made on this site.</p>
                         }    
                         { this.state.comments.map((comment) => (
                             <Comment 
                                 key={ comment._id }
-                                username={ this.state.username + " for " + comment.business.name }
+                                username={ "@" + this.state.username + " commented on: " + comment.business.name }
                                 profile={ defaultProfile }
                                 content={ comment.content }/>
+                        ))}
+                        { this.state.reviews.map((review) => (
+                            <Review 
+                                key={ review._id }
+                                username={ "@" + this.state.username + " reviewed: " + review.business.name }
+                                profile={ defaultProfile }
+                                content={ review.content }
+                                rating={ review.rating }/>
                         ))}
                     </div>
                 </div>
