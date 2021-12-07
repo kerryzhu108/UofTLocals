@@ -4,5 +4,6 @@
     "description": "Backend REST API for the uoft-locals website.",
     "main": "index.js",
     "engines": {
-    "node": "14.16.1"
+        "node": "14.16.1"
+    }
 }
