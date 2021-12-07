@@ -11,10 +11,10 @@ const router = express.Router();
 router.post(
     "/register/business",
     utils.checkDbConnection,
+    body("email").isEmail(),
     body("username").isString(),
     body("password").isString(),
     body("name").isString(),
-    // body("type").isString(),
     body("desc").isString(),
     utils.validationHandler,
     async function (req, res) {
