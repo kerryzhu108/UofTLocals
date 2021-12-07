@@ -43,7 +43,7 @@ app.use(
         },
         // store the sessions on local database for now
         store: MongoStore.create({
-            mongoUrl: "mongodb://localhost:27017/uoftlocals",
+            mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/uoftlocals',
         }),
     })
 );

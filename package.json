@@ -1,0 +1,8 @@
+{
+    "name": "uoft-locals",
+    "version": "1.0.0",
+    "description": "Backend REST API for the uoft-locals website.",
+    "main": "index.js",
+    "engines": {
+    "node": "14.16.1"
+}
