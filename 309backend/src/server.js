@@ -58,5 +58,5 @@ app.use("/review", reviewRouter);
 
 // Begin application routing
 app.listen(port, () => {
-    console.log(`Server listening on ${ip}:${port}`);
+    console.log(`Server listening on ${port}`);
 });
