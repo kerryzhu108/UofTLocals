@@ -227,7 +227,7 @@ Note that the `type` field can be used to authenticate certain endpoints dependi
 ### Business
 Folder for managing business interactions
 
-**GET** /business/all
+**GET** `/business/all`
 
 Gets all businesses in the database, returns list of all businesses if retrieved successfully. Empty body
 
@@ -238,7 +238,7 @@ Response:
 }
 ```
 
-**GET** /business/allannouncements
+**GET** `/business/allannouncements`
 
 Gets all announcements in the database, returns a list of all announcements if retrieved successfully. Empty body
 
@@ -249,7 +249,7 @@ Response:
 }
 ```
 
-**DELETE** /business/deletebusiness/:id
+**DELETE** `/business/deletebusiness/:id`
 
 Deletes a business from the database based on the id parameter provided, returns the business deleted if completed successfully. Empty body
 
@@ -260,7 +260,7 @@ Response:
 }
 ```
 
-**DELETE** /business/delete/:pid
+**DELETE** `/business/delete/:pid`
 
 Deletes an announcement from the announcements folder based on the pid parameter provided, returns the post deleted if completed successfully. Empty body
 
@@ -271,7 +271,7 @@ Response:
 }
 ```
 
-**DELETE** /business/delete/:bid/:pid
+**DELETE** `/business/delete/:bid/:pid`
 
 Removes a specific announcement from the business it belongs to and from the announcements folder, returns the updated business if completed successfully. Empty body
 
@@ -283,7 +283,7 @@ Response:
 ```
 
 
-**GET** /business/:id
+**GET** `/business/:id`
 
 Gets information from a single business based on the id provided, returns the business if completed successfully. Empty body
 
@@ -294,7 +294,7 @@ Response:
 }
 ```
 
-**PATCH** /business
+**PATCH** `/business`
 
 Changes the description of a business, returns {businessUpdated: true} if updated successfully. 
 
@@ -319,7 +319,7 @@ Response:
 }
 ```
 
-**POST** /business/image/:userid
+**POST** `/business/image/:userid`
 
 Stores the image url to the cloudinary server, returns the URL of the image if successful. No body
 
@@ -331,7 +331,7 @@ Response:
 ```
 
 
-**POST** /business/reply
+**POST** `/business/reply`
 
 Adds a reply to a user comment, returns {replied: true} if the comment was posted successfully. 
 
