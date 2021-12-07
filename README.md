@@ -5,25 +5,24 @@
 URL of website:
 
 Users can browse the website using different accounts or no account.
+
 ## No Account
-Browse landing page
-Filter businesess by name and catagory
-Get details of any busienss by clicking on its image (View only)
-Sign up or login through the top right button
+Without an account, any user of the site can browse the landing page, filter businesess by name and catagory, and get details of any busienss by clicking on its image (view only). Furthermore, any user of the site may sign up or login through the "LOGIN/SIGNUP" button at the top right of the homepage.
+
 ## Student User
-Login with username: user password: user
-Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Student"
-Leave reviews by clicking on the image of any business, reviews will have their name and profile image
-View profile, upload profile image, and see past comments by clicking on their username at the top right
-Inside their profile, students can also change their account information.
+Provided account: login with `username: user, password: user`
+Accounts are created through the sign up page, accessible from the "LOGIN/SIGNUP" button on the top right of the homepage, then through the link: "New member? Sign up as a Student".
+Student users logged in as a student user can view and leave reviews by clicking on the image of any business, reviews will have their name and profile image.
+Student users can view their profile by clicking on their username at the top right. On the student profile page, they can upload a profile image, and see their past comments and reviews.
+Furthermore, inside their profile, students can change certain aspects of their account, such as their first name, last name, and email. Users cannot change their username once their account has been created.
 
 ## Business User
-Login with username: user2 password: user2
-Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Business"
-Can edit their business profile by clicking on their username
-Inside their own profile businesses can post new annoucements, respond to comments from students, and change their business description
-Can upload business cover image which will be reflected on the landing page with all the businesses
-Editing their business is only possible when they are looking at their own business
+Provided account: login with `username: user2 password: user2`
+Similar to student accounts, business accounts are created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Business".
+Business users can edit their business profile by clicking on their username in the top right of the screen.
+Inside their own profile businesses can post new annoucements, respond to comments from students, and change their business description.
+Business users can upload business cover image which will be reflected on the landing page with all the businesses.
+Editing their business is only possible when they are looking at their own business.
 
 ## Admin User
 Login with username: admin password: admin
