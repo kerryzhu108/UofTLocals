@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Container from "../components/Container";
 import BusinessProfile from "../components/BusinessProfile";
 import Comment from "../components/Comment";
+import Review from "../components/Review";
 import AnnouncementBox from "../components/AnnouncementBox";
 import { withRouter } from "react-router";
 import InputButtonCombo from "../components/InputButtonCombo";
@@ -10,6 +11,8 @@ import ImageUploader from "../components/ImageUploader";
 import replyBtn from "../images/replyButton.png";
 import defaultBusinessImg from "../images/defaultBusinessImage.png";
 import Cookies from "universal-cookie";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 // API related imports
 import {
@@ -20,6 +23,7 @@ import {
     addBusinessAnnouncement,
     changeBusinessDescription,
     replyToComment,
+    getBusinessReviews,
 } from "../apis/business";
 import { getProfile } from "../apis/profile";
 
@@ -35,11 +39,14 @@ class BusinessProfilePage extends React.Component {
             businessID: "",
             announcements: [],
             comments: [],
+            reviews: [],
             user: null,
             boxText: "",
             businessTextBox: "No description",
             isOwner: false,
-            publicImageURL: ""
+            publicImageURL: "",
+            isLoading: true,
+            displayType: "Comments",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -49,6 +56,8 @@ class BusinessProfilePage extends React.Component {
         this.handleBusinessDescSubmit = this.handleBusinessDescSubmit.bind(this);
         this.submitReply = this.submitReply.bind(this);
         this.updateImage = this.updateImage.bind(this);
+        this.handleDropdownChange = this.handleDropdownChange.bind(this);
+        this.getContentBox = this.getContentBox.bind(this);
     }
 
     // Handle text box changes, store them in the state
@@ -111,6 +120,10 @@ class BusinessProfilePage extends React.Component {
         this.setState({comments: comments})
     }
 
+    handleDropdownChange(option) {
+        this.setState({displayType: option.value});
+    }
+
     updateImage(url) {
         this.setState({publicImageURL: url})
     }
@@ -127,9 +140,10 @@ class BusinessProfilePage extends React.Component {
 
         // Fetch announcements made by this business
 
-        // Fetch comments from this business
+        // Fetch information from this business
         const comments = await getBusinessComments(id);
         const announcements = await getBusinessAnnouncements(id);
+        const reviews = await getBusinessReviews(id);
 
         // Check user type
         const cookies = new Cookies();
@@ -143,14 +157,55 @@ class BusinessProfilePage extends React.Component {
             businessTextBox: business.description,
             comments: comments,
             announcements: announcements,
+            reviews: reviews,
             user: user_information,
             isOwner: user_information?.id === this.props.match.params.id,
             publicImageURL: business.publicImageURL,
+            isLoading: false,
         });
         console.log(this.state.publicImageURL)
     }
 
+    getContentBox() {
+        if (this.state.displayType === "Comments") {
+            return (
+                <div>
+                {this.state.comments.map(comment => (
+                    <Comment
+                        key={comment._id}
+                        profile={comment.poster.profileImageURL}
+                        username={comment.poster.username}
+                        content={comment.content}
+                        replyBtn={replyBtn}
+                        isOwner={this.state.isOwner}
+                        commentId={comment._id}
+                        submitReply={this.submitReply}
+                        replies={comment.replies}
+                        businessName={comment.business.name}
+                    />)
+                )}
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                {this.state.reviews.map(review => (
+                    <Review
+                        key={review._id}
+                        profile={review.poster.profileImageURL}
+                        username={review.poster.username}
+                        content={review.content}
+                        rating={review.rating}
+                        isOwner={this.state.isOwner}
+                    />)
+                )}
+                </div>
+            )
+        }
+    }
+
     render() {
+        if (this.state.isLoading) return null;
         return (
             <div>
                 <Header />
@@ -198,10 +253,12 @@ class BusinessProfilePage extends React.Component {
                                     key={announcement._id}
                                     username={announcement.poster.name}
                                     content={announcement.content}
+                                    profile={announcement.poster.publicImageURL}
                                 />
                             ))}
                         </AnnouncementBox>
-                        <AnnouncementBox name="Comments">
+                        <AnnouncementBox name="Comments / Reviews">
+                            <Dropdown options={["Comments", "Reviews"]} value="Comments" onChange={this.handleDropdownChange}/>
                             {this.state.user &&
                                 this.state.user.type === "student" && (
                                     <InputButtonCombo
@@ -212,20 +269,7 @@ class BusinessProfilePage extends React.Component {
                                         color="green"
                                     />
                                 )}
-                            {this.state.comments.map(comment => (
-                                <Comment
-                                    key={comment._id}
-                                    profile={comment.poster.profileImageURL}
-                                    username={comment.poster.username}
-                                    content={comment.content}
-                                    replyBtn={replyBtn}
-                                    isOwner={this.state.isOwner}
-                                    commentId={comment._id}
-                                    submitReply={this.submitReply}
-                                    replies={comment.replies}
-                                    businessName={comment.business.name}
-                                />)
-                            )}
+                            {this.getContentBox()}
                         </AnnouncementBox>
                     </div>
                 </Container>
