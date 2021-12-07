@@ -42,6 +42,52 @@ Folder for managing registeration and sessions
 
 
 ### Business
+Folder for managing business interactions
+
+**GET** /business/all
+
+Gets all businesses in the database, returns list of all businesses if retrieved successfully. Empty body
+
+**GET** /business/allannouncements
+
+Gets all announcements in the database, returns a list of all announcements if retrieved successfully. Empty body
+
+**DELETE** /business/deletebusiness/:id
+
+Deletes a business from the database based on the id parameter provided, returns the business deleted if completed successfully. Empty body
+
+**DELETE** /business/delete/:pid
+
+Deletes an announcement from the announcements folder based on the pid parameter provided, returns the post deleted if completed successfully. Empty body
+
+**DELETE** /business/delete/:bid/:pid
+
+Removes a specific announcement from the business it belongs to and from the announcements folder, returns the updated business if completed successfully. Empty body
+
+**GET** /business/:id
+
+Gets information from a single business based on the id provided, returns the business if completed successfully. Empty body
+
+**PATCH** /business
+
+Changes the description of a business, returns {businessUpdated: true} if updated successfully. 
+Body:
+{
+    content: content (String)
+}
+
+**POST** /business/image/:userid
+
+Stores the image url to the cloudinary server, returns the URL of the image if successful. No body
+
+**POST** /business/reply
+
+Adds a reply to a user comment, returns {replied: true} if the comment was posted successfully. 
+Body:
+{
+    commentid: commentid (String)
+    content: content (String)
+}
 
 
 ### Comment
