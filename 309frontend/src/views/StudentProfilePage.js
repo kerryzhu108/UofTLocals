@@ -3,11 +3,12 @@ import Cookies from "universal-cookie";
 
 import Header from "../components/Header";
 import Comment from '../components/Comment';
+import Review from '../components/Review';
 import defaultProfile from "../images/default-profile.png";
 import InputInfoStudent from "../components/InputInfoStudent";
 import ImageUploader from "../components/ImageUploader";
 
-import { getComments, updateProfile } from "../apis/student";
+import { getComments, getReviews, updateProfile } from "../apis/student";
 import { updateLoginForm } from "../apis/login";
 import { getProfile } from "../apis/profile";
 
@@ -24,6 +25,7 @@ class StudentProfile extends React.Component {
             password: "",
             confirmation: "",
             comments: [],
+            reviews: [],
             imageURL: "",
         }
     };
@@ -39,10 +41,16 @@ class StudentProfile extends React.Component {
             window.location.href = '/'
         }
 
+        // get comments and reviews
         const comments = await getComments(user_information.id)
         if (!comments) {
             return
         }
+        const reviews = await getReviews(user_information.id)
+        if (!reviews) {
+            return
+        }
+
         // set the state with the retrieved information
         this.setState({
             firstname: user_information.firstname,
@@ -50,6 +58,7 @@ class StudentProfile extends React.Component {
             email: user_information.email,
             username: user_information.name,
             comments: comments,
+            reviews: reviews,
             imageURL: user_information.profileImageURL,
             displayname: user_information.firstname + " " + user_information.lastname
         })
@@ -105,14 +114,22 @@ class StudentProfile extends React.Component {
                         <h3>My Comments and Reviews</h3>
                         { this.state.comments.length === 0 ? 
                             <p>You have not posted any comments yet.</p> : 
-                            <p>Below is a list of all comments you have made on this site.</p>
+                            <p>Below is a list of all comments and reviews you have made on this site.</p>
                         }    
                         { this.state.comments.map((comment) => (
                             <Comment 
                                 key={ comment._id }
-                                username={ "@" + this.state.username + " reviewed: " + comment.business.name }
+                                username={ "@" + this.state.username + " commented on: " + comment.business.name }
                                 profile={ defaultProfile }
                                 content={ comment.content }/>
+                        ))}
+                        { this.state.reviews.map((review) => (
+                            <Review 
+                                key={ review._id }
+                                username={ "@" + this.state.username + " reviewed: " + review.business.name }
+                                profile={ defaultProfile }
+                                content={ review.content }
+                                rating={ review.rating }/>
                         ))}
                     </div>
                 </div>

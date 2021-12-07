@@ -17,6 +17,23 @@ export const getComments = async (id) => {
     } 
 }
 
+/* A function to send a GET request to get all reviews made by a user. */
+export const getReviews = async (id) => {
+    try {
+        // make a call to the server API to get all comments of the current user
+        let response = await fetch(`${domain}review/student/${id}`, {
+            method: "GET",
+            headers: headers,
+            mode: "cors",
+            cache: "default"
+        })
+        response = await response.json()
+        return response
+    } catch (error) {
+        console.log(error)
+    } 
+}
+
 /* A function to send a PATCH request to update a student user's account. */
 export const updateProfile = async (comp, event, access_token) => {
     event.preventDefault()
