@@ -352,9 +352,102 @@ Response:
 
 ### Comment
 
+**POST** `/comment/:id`
+
+Post a comment to business `:id`. Requires student access token.
+
+Header:
+```json
+{
+    "Authorization": "Bearer ACCESS_TOKEN"
+}
+```
+
+Body:
+```json
+{
+    "content" String
+}
+```
+
+Response:
+```json
+{
+    CommentModel
+}
+```
+
+**GET** `/comment/student/:id`
+
+Get all comments belonging to student `id`.
+
+Response:
+```json
+{
+    [CommentModel]
+}
+```
+
+**GET** `/comment/business/:id`
+
+Get all comments on business `id`.
+
+Response:
+```json
+{
+    [CommentModel]
+}
+```
 
 ### Review
 
+**POST** `review/:id`
+
+Post a review to business `id`. Requires a student access token.
+
+Header:
+```json
+{
+    "Authorization": "Bearer ACCESS_TOKEN"
+}
+```
+
+Body:
+```json
+{
+    "content" String,
+    "rating": Number (min: 1, max: 5)
+}
+```
+
+Response:
+```json
+{
+    ReviewModel
+}
+```
+
+**GET** `review/student/:id`
+
+Get all reviews belonging to student `id`.
+
+Response:
+```json
+{
+    [ReviewModel]
+}
+```
+
+**GET** `review/business/:id`
+
+Get all reviews belonging to a business `id`.
+
+Response:
+```json
+{
+    [ReviewModel]
+}
+```
 
 ### Root
 
