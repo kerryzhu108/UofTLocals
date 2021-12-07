@@ -4,37 +4,47 @@
 
 URL of website:
 
+Users can browse the website using different accounts or no account.
 ## No Account
 Browse landing page
 Filter businesess by name and catagory
 Get details of any busienss by clicking on its image (View only)
 Sign up or login through the top right button
 ## Student User
+Login with username: user password: user
 Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Student"
-Leave reviews by clicking on the image of any business
-View profile and upload profile image by clicking on their username
+Leave reviews by clicking on the image of any business, reviews will have their name and profile image
+View profile, upload profile image, and see past comments by clicking on their username at the top right
+Inside their profile, students can also change their account information.
 
 ## Business User
+Login with username: user2 password: user2
 Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Business"
-Can edit their business information by clicking on their username
-Can post new annoucements, respond to comments, and change their description
-Can upload business image by going inside their business profile
+Can edit their business profile by clicking on their username
+Inside their own profile businesses can post new annoucements, respond to comments from students, and change their business description
+Can upload business cover image which will be reflected on the landing page with all the businesses
 Editing their business is only possible when they are looking at their own business
 
 ## Admin User
-
+Login with username: admin password: admin
 
 
 ## Routes
 
+access_token is retrieved from the login endpoint
+All body content is in json unless otherwise mentioned
+
 ### Announcements
 Folder for managing business announcements
 
-post /announcements
-Creates a new announcement for a business, returns {success: true} if created successfully
-Body:
-{
-    announcement: content (stirng)
+POST /announcement
+"Creates a new announcement for a business, returns the announcement on success"
+"Access token retreived from login endpoint"
+headers: {
+    Authorization: `Bearer ${access_token`,
+},
+body: {
+  content: "Annoucement details"
 }
 
 ### Auth
