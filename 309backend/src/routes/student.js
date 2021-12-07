@@ -24,4 +24,27 @@ router.get("/:id", utils.checkDbConnection, async function (req, res) {
     }
 });
 
+router.patch("/", 
+    utils.checkDbConnection, 
+    utils.authenticateToken,
+    utils.validationHandler,
+    async function (req, res) {
+        try {
+            // update the student's profile information
+            const student = await Student.findOneAndUpdate({ _id: req.user.id }, 
+            { 
+                email: req.body.email,
+                first_name: req.body.first_name,
+                last_name: req.body.last_name
+            })
+            await student.save();
+            return res.json();
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal server error");
+        }
+    }
+)
+
 module.exports = router;
+
