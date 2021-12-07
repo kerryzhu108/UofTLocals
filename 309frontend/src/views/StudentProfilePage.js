@@ -31,6 +31,12 @@ class StudentProfile extends React.Component {
         const cookies = new Cookies()
         const access_token = cookies.get("access_token")
         const user_information = await getProfile(access_token)
+
+        // if the current user is not a student, redirect to homepage
+        if (user_information.type !== "student") {
+            window.location.href = '/'
+        }
+
         const comments = await getComments(user_information.id)
         if (!comments) {
             console.log("This student's comments cannot be found.")
@@ -49,7 +55,6 @@ class StudentProfile extends React.Component {
     async updateStudentProfile(app, event) {
         const cookies = new Cookies()
         const access_token = cookies.get("access_token")
-        console.log(access_token)
         await updateProfile(app, event, access_token)
 
         const user_information = await getProfile(access_token)
@@ -64,12 +69,7 @@ class StudentProfile extends React.Component {
     render() {
         return (
             <div>
-                <Header>
-                    <Link href="/landing-user" name="Browse" />
-                    <Link name="user" />
-                    <Link href="/" name="logout" />
-                </Header>
-
+                <Header/>
                 <div className='postsContainer'>
                     <h1>Welcome, @{ this.state.username }.</h1>
                     <h3>Edit My Profile</h3>
