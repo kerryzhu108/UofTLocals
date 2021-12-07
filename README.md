@@ -28,23 +28,56 @@ Editing their business is only possible when they are looking at their own busin
 ## Admin User
 Login with username: admin password: admin
 
+## Third party libraries
+
+universal-cookie: storing and retrieving a user's authentication token
+body-parser: to access req.files
+cloudinary: to turn images into urls for db storage (given by professor on piazza) 
 
 ## Routes
 
-access_token is retrieved from the login endpoint
+ACCESS_TOKEN is retrieved from the login endpoint
 All body content is in json unless otherwise mentioned
 
 ### Announcements
 Folder for managing business announcements
 
 POST /announcement
-"Creates a new announcement for a business, returns the announcement on success"
+"Creates a new announcement for a business, returns the created announcement on success"
 "Access token retreived from login endpoint"
 headers: {
-    Authorization: `Bearer ${access_token`,
+    Authorization: Bearer ACCESS_TOKEN,
 },
 body: {
-  content: "Annoucement details"
+  content: "Announcement details"
+}
+response: {
+    "content": "Announcement details",
+    "poster": {
+        "name": "Business Name"
+    },
+    "date": "Tue Dec 07 2021 15:52:38 GMT-0500 (Eastern Standard Time)",
+    "_id": "61afc996e48b56a8ceb8d03a",
+    "__v": 0
+}
+
+GRT /announcement/:id
+"Gets business announcement id"
+"Access token retreived from login endpoint"
+headers: {
+    Authorization: Bearer ACCESS_TOKEN,
+},
+body: {
+  content: "Announcement details"
+}
+response: {
+    "content": "Announcement details",
+    "poster": {
+        "name": "Business Name"
+    },
+    "date": "Tue Dec 07 2021 15:52:38 GMT-0500 (Eastern Standard Time)",
+    "_id": "61afc996e48b56a8ceb8d03a",
+    "__v": 0
 }
 
 ### Auth
@@ -63,7 +96,6 @@ Folder for managing registeration and sessions
 ### Root
 
 ### Student
-
 
 
 
