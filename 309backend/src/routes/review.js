@@ -14,7 +14,7 @@ router.post(
     utils.checkDbConnection,
     utils.authenticateToken,
     body("content").isString(),
-    body("rating").isInt({ min: 0, max: 5 }),
+    body("rating").isInt({ min: 1, max: 5 }),
     utils.validationHandler,
     async function (req, res) {
         try {
