@@ -1,1 +1,1 @@
-web: cd $WHICHEND && npm install && npm run-script
+web: cd $WHICHEND && npm install && npm start
