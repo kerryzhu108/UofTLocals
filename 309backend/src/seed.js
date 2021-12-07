@@ -4,6 +4,7 @@ const { Student } = require("./models/Student");
 const { Comment } = require("./models/Comment");
 
 const utils = require("./utils/utils");
+const { Review } = require("./models/Review");
 
 /**
  * Recreates database with sample data (only if RESETDB='true' in .env)
@@ -109,6 +110,14 @@ const seedDatabase = async () =>{
             business: business.id
         }).save()
 
+        const review = await new Review({
+            content: "Delicious pizza, cannot recommend it enough!",
+            poster: student,
+            created: Date(),
+            rating: 5,
+            business: business.id,
+        }).save();
+
         business.announcements.push(announcement1)
         business.announcements.push(announcement2)
         business.announcements.push(announcement3)
@@ -117,9 +126,11 @@ const seedDatabase = async () =>{
         student.comments.push(comment1);
         student.comments.push(comment2);
         student.comments.push(comment3);
+        student.reviews.push(review);
 
         business2.announcements.push(announcement4)
         business2.comments.push(comment3)
+        business.reviews.push(review);
         await business.save()
         await business2.save()
         await student.save();

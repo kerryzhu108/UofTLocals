@@ -35,7 +35,7 @@ router.post(
                 await announcement.populate({
                     path: "poster",
                     model: "Business",
-                    select: { _id: 0, name: 1 },
+                    select: { _id: 0, name: 1},
                 })
             );
         } catch (error) {
@@ -52,7 +52,7 @@ router.get("/:id", utils.checkDbConnection, async function (req, res) {
             populate: {
                 path: "poster",
                 model: "Business",
-                select: { name: 1, _id: 0 },
+                select: { name: 1, _id: 0, publicImageURL: 1 },
             },
         });
 

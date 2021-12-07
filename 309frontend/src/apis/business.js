@@ -99,6 +99,25 @@ export async function commentOnBusiness(id, content, access_token) {
     }
 }
 
+// Get all student reviews from business
+export async function getBusinessReviews(id) {
+    try {
+        var response = await fetch(domain + `review/business/${id}`, {
+            method: 'GET',
+            headers: headers,
+            mode: 'cors',
+            cache: 'default',
+        });
+
+        if (response.status !== 200) return null;
+        
+        response = await response.json();
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // Add announcement to business profile (requires a business access token)
 export async function addBusinessAnnouncement(content, access_token) {
     try {

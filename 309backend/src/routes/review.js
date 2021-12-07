@@ -8,6 +8,7 @@ const { Student } = require("./../models/Student");
 
 const router = express.Router();
 
+// Post a review to a business
 router.post(
     "/:id",
     utils.checkDbConnection,
@@ -76,7 +77,7 @@ router.get("/business/:id", utils.checkDbConnection, async function (req, res) {
             populate: {
                 path: "poster",
                 model: "Student",
-                select: { email: 1 },
+                select: { email: 1, username: 1, _id: 0, profileImageURL: 1 },
             },
         });
         if (!business) return res.status(404).send("Business not found");
