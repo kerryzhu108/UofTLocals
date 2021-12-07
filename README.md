@@ -5,34 +5,36 @@
 URL of website:
 
 Users can browse the website using different accounts or no account.
+
 ## No Account
-Browse landing page
-Filter businesess by name and catagory
-Get details of any busienss by clicking on its image (View only)
-Sign up or login through the top right button
+Without an account, any user of the site can browse the landing page, filter businesess by name and catagory, and get details of any busienss by clicking on its image (view only). Furthermore, any user of the site may sign up or login through the "LOGIN/SIGNUP" button at the top right of the homepage.
+
 ## Student User
-Login with username: user password: user
-Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Student"
-Leave reviews by clicking on the image of any business, reviews will have their name and profile image
-View profile, upload profile image, and see past comments by clicking on their username at the top right
-Inside their profile, students can also change their account information.
+Provided account: login with `username: user, password: user`
+Accounts are created through the sign up page, accessible from the "LOGIN/SIGNUP" button on the top right of the homepage, then through the link: "New member? Sign up as a Student".
+Student users logged in as a student user can view and leave reviews by clicking on the image of any business, reviews will have their name and profile image.
+Student users can view their profile by clicking on their username at the top right. On the student profile page, they can upload a profile image, and see their past comments and reviews.
+Furthermore, inside their profile, students can change certain aspects of their account, such as their first name, last name, and email. Users cannot change their username once their account has been created.
 
 ## Business User
-Login with username: user2 password: user2
-Created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Business"
-Can edit their business profile by clicking on their username
-Inside their own profile businesses can post new annoucements, respond to comments from students, and change their business description
-Can upload business cover image which will be reflected on the landing page with all the businesses
-Editing their business is only possible when they are looking at their own business
+Provided account: login with `username: user2 password: user2`
+Similar to student accounts, business accounts are created through the the "LOGIN/SIGNUP" button on the top right, then "New member? Sign up as a Business".
+Business users can edit their business profile by clicking on their username in the top right of the screen.
+Inside their own profile businesses can post new annoucements, respond to comments from students, and change their business description.
+Business users can upload business cover image which will be reflected on the landing page with all the businesses.
+Editing their business is only possible when they are looking at their own business.
 
 ## Admin User
 Login with username: admin password: admin
 
 ## Third party libraries
 
-universal-cookie: storing and retrieving a user's authentication token
-body-parser: to access req.files
-cloudinary: to turn images into urls for db storage (given by professor on piazza) 
+- `universal-cookie`: storing and retrieving a user's authentication token from Cookie.
+- `body-parser`: to parse JSON requests.
+- `jsonwebtoken`: To generate and authenticate JSON Web Tokens.
+- `cloudinary`: to turn images into urls for db storage (given by professor on piazza)
+- `bcrypt`: For password hashing into the database.
+- `express-validator`: For validating requests and ensuring they contain the correct information.
 
 ## Routes
 
@@ -62,12 +64,165 @@ response: {
 }
 
 GET /announcement/:id
-"Gets all annoucements for a business, :id is the business id which can be obtained from GET /businesses/all"
+"Gets all announcements for a business, :id is the business id which can be obtained from GET /businesses/all"
 response: [AnnouncementObj, AnnouncementObj, ...]
+}
 
 ### Auth
-Folder for managing registeration and sessions
+Folder for managing registration, login, and general authentication-based tasks. Note that this backend uses JSON Web Tokens for authentication and restricting access to certain endpoints.
 
+Tokens store the following information:
+```json
+{
+    "id": ObjectID,
+    "username": String,
+    "type": String
+}
+```
+
+Where type can be either "student", "business", or "admin".
+
+**POST** `/auth/login/student`
+
+Logs in a student and gives an access token for student-related tasks. Note that admin accounts are just specialized students. If an admin logs into this endpoint, their provided access token will allow for admin-related tasks.
+
+Body:
+```json
+{
+    "username": String,
+    "password": String
+}
+```
+
+Response:
+```json
+{
+    "id": ObjectID,
+    "username": String,
+    "tokens": {
+        "access": String
+    }
+}
+```
+
+**POST** `/auth/login/business`
+
+Logs in a business and gives an access token for business-related tasks.
+
+Body:
+```json
+{
+    "username": String,
+    "password": String
+}
+```
+
+Response:
+```json
+{
+    "id": ObjectID,
+    "username": String,
+    "tokens": {
+        "access" String
+    }
+}
+```
+
+**POST** `/auth/register/student`
+
+Registers a student account.
+
+Body:
+```json
+{
+    "email": String,
+    "username": String,
+    "password": String,
+    "first_name": String,
+    "last_name": String
+}
+```
+
+Response:Model
+```json
+{
+    StudentModel
+}
+```
+
+**POST** `/auth/register/business`
+
+Registers a business account.
+
+Body:
+```json
+{
+    "email": String,
+    "username": String,
+    "password": String,
+    "name": String,
+    "desc": String,
+}
+```
+
+Response:
+```json
+{
+    BusinessModel
+}
+```
+
+**GET** `/auth/profile`
+
+Returns information about the currently logged in user using the provided access token.
+
+Header:
+```json
+{
+    "Authorization": "Bearer ACCESS_TOKEN"
+}
+```
+
+Note that response depends on the type of user sending the access token. The backend handles this automatically.
+
+Response:
+If this is a student access token:
+```json
+{
+    "id": ObjectID,
+    "type": "student",
+    "name": String,
+    "email": String,
+    "firstname": String,
+    "lastname": String,
+    "profileImageURL": String
+}
+```
+
+If this is a business access token:
+```json
+{
+    "id": ObjectID,
+    "type": "business",
+    "name": String,
+    "email": String
+}
+```
+
+If this is an admin access token:
+```json
+{
+    "id": ObjectID,
+    "type": "admin",
+    "name": String,
+    "email": String,
+    "firstname": String,
+    "lastname": String,
+    "profileImageURL": String
+}
+```
+
+Note that the `type` field can be used to authenticate certain endpoints depending on the type of user. These requests rely on the access token generated by the backend and cannot be forged.
 
 ### Business
 Folder for managing business interactions
@@ -76,47 +231,99 @@ Folder for managing business interactions
 
 Gets all businesses in the database, returns list of all businesses if retrieved successfully. Empty body
 
+Response:
+{
+    businesses: [BusinessObj, BusinessObj, ...]
+}
+
 **GET** /business/allannouncements
 
 Gets all announcements in the database, returns a list of all announcements if retrieved successfully. Empty body
+
+Response:
+{
+    announcements: [AnnouncementObj, AnnouncementObj, ...]
+}
 
 **DELETE** /business/deletebusiness/:id
 
 Deletes a business from the database based on the id parameter provided, returns the business deleted if completed successfully. Empty body
 
+Response:
+{
+    business: BusinessObj
+}
+
 **DELETE** /business/delete/:pid
 
 Deletes an announcement from the announcements folder based on the pid parameter provided, returns the post deleted if completed successfully. Empty body
+
+Response:
+{
+    post: AnnouncementObj
+}
 
 **DELETE** /business/delete/:bid/:pid
 
 Removes a specific announcement from the business it belongs to and from the announcements folder, returns the updated business if completed successfully. Empty body
 
+Response:
+{
+    business: BusinessObj
+}
+
 **GET** /business/:id
 
 Gets information from a single business based on the id provided, returns the business if completed successfully. Empty body
 
+Response:
+{
+    business: BusinessObj
+}
+
 **PATCH** /business
 
 Changes the description of a business, returns {businessUpdated: true} if updated successfully. 
+
+Header:
+{
+    Authorization: Bearer ACCESS_TOKEN,
+}
+
 Body:
 {
     content: content (String)
+}
+
+Response:
+{
+    businessUpdated: true
 }
 
 **POST** /business/image/:userid
 
 Stores the image url to the cloudinary server, returns the URL of the image if successful. No body
 
+Response:
+{
+    url: business.publicImageURL
+}
+
+
 **POST** /business/reply
 
 Adds a reply to a user comment, returns {replied: true} if the comment was posted successfully. 
+
 Body:
 {
     commentid: commentid (String)
     content: content (String)
 }
 
+Response:
+{
+    replied: true
+}
 
 ### Comment
 
@@ -130,7 +337,7 @@ Body:
 
 GET /student/:id
 ":id is the student id, can be obtained from POST /auth/login/student"
-returns the user object along with their comments
+returns 
 
 
 # Phase 1
