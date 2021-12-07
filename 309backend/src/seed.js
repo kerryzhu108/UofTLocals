@@ -114,11 +114,15 @@ const seedDatabase = async () =>{
         business.announcements.push(announcement3)
         business.comments.push(comment1)
         business.comments.push(comment2)
+        student.comments.push(comment1);
+        student.comments.push(comment2);
+        student.comments.push(comment3);
 
         business2.announcements.push(announcement4)
         business2.comments.push(comment3)
         await business.save()
         await business2.save()
+        await student.save();
 
     } catch (error) {
         console.log(error)

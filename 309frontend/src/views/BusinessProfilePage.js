@@ -39,7 +39,8 @@ class BusinessProfilePage extends React.Component {
             boxText: "",
             businessTextBox: "No description",
             isOwner: false,
-            publicImageURL: ""
+            publicImageURL: "",
+            isLoading: true,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -146,11 +147,13 @@ class BusinessProfilePage extends React.Component {
             user: user_information,
             isOwner: user_information?.id === this.props.match.params.id,
             publicImageURL: business.publicImageURL,
+            isLoading: false,
         });
         console.log(this.state.publicImageURL)
     }
 
     render() {
+        if (this.state.isLoading) return null;
         return (
             <div>
                 <Header />
