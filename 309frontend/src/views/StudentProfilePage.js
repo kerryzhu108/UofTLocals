@@ -1,7 +1,6 @@
 import React from "react"
 import Cookies from "universal-cookie";
 
-import Link from "../components/Link";
 import Header from "../components/Header";
 import Comment from '../components/Comment';
 import defaultProfile from "../images/default-profile.png";
@@ -21,7 +20,7 @@ class StudentProfile extends React.Component {
             lastname: "Unknown",
             email: "Unknown",
             username: "Unknown",
-            id: "",
+            displayname: "Unknown",
             password: "",
             confirmation: "",
             comments: [],
@@ -52,8 +51,7 @@ class StudentProfile extends React.Component {
             username: user_information.name,
             comments: comments,
             imageURL: user_information.profileImageURL,
-            id: user_information.id,
-
+            displayname: user_information.firstname + " " + user_information.lastname
         })
     }
 
@@ -67,7 +65,8 @@ class StudentProfile extends React.Component {
             firstname: user_information.firstname,
             lastname: user_information.lastname,
             email: user_information.email,
-            username: user_information.name
+            username: user_information.name,
+            displayname: user_information.firstname + " " + user_information.lastname
         })
     }
 
@@ -80,9 +79,10 @@ class StudentProfile extends React.Component {
             <div>
                 <Header/>
                 <div className='postsContainer'>
-                    <h1>Welcome, @{ this.state.username }.</h1>
+                    <h2>Welcome, { this.state.displayname }.</h2>
+                    <p>(@{ this.state.username })</p>
                     { this.state.imageURL && <img src={this.state.imageURL} alt="profile image" id="profileImg"/>}
-                    <h3>Edit My Profile</h3>
+                    <h4>Edit My Profile</h4>
                     <p>
                         Please provide the following information to edit your profile.
                         Note that you may not modify your username.
@@ -110,7 +110,7 @@ class StudentProfile extends React.Component {
                         { this.state.comments.map((comment) => (
                             <Comment 
                                 key={ comment._id }
-                                username={ this.state.username + " for " + comment.business.name }
+                                username={ "@" + this.state.username + " reviewed: " + comment.business.name }
                                 profile={ defaultProfile }
                                 content={ comment.content }/>
                         ))}

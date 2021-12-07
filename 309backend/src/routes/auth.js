@@ -48,6 +48,7 @@ router.post(
 router.post(
     "/register/student",
     utils.checkDbConnection,
+    body("email").isEmail(),
     body("username").isString(),
     body("password").isString(),
     body("first_name").isString(),
