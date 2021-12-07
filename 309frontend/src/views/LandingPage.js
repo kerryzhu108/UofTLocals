@@ -26,6 +26,7 @@ class LandingPage extends React.Component {
         // fetch all active resturants and their descriptions from server
         let activeBusinesses = [];
         const businesses = await getBusinesses();
+        if (!businesses) { return }
         businesses.forEach((business) => {
             activeBusinesses.push({
                 name: business["name"],
