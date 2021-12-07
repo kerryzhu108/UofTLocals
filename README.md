@@ -44,7 +44,7 @@ Folder for managing business announcements
 
 POST /announcement
 "Creates a new announcement for a business, returns the created announcement on success"
-"Access token retreived from login endpoint"
+"Access token retreived from POST /auth/login/business or student endpoint"
 headers: {
     Authorization: Bearer ACCESS_TOKEN,
 },
@@ -61,24 +61,9 @@ response: {
     "__v": 0
 }
 
-GRT /announcement/:id
-"Gets business announcement id"
-"Access token retreived from login endpoint"
-headers: {
-    Authorization: Bearer ACCESS_TOKEN,
-},
-body: {
-  content: "Announcement details"
-}
-response: {
-    "content": "Announcement details",
-    "poster": {
-        "name": "Business Name"
-    },
-    "date": "Tue Dec 07 2021 15:52:38 GMT-0500 (Eastern Standard Time)",
-    "_id": "61afc996e48b56a8ceb8d03a",
-    "__v": 0
-}
+GET /announcement/:id
+"Gets all annoucements for a business, :id is the business id which can be obtained from GET /businesses/all"
+response: [AnnouncementObj, AnnouncementObj, ...]
 
 ### Auth
 Folder for managing registeration and sessions
@@ -143,6 +128,9 @@ Body:
 
 ### Student
 
+GET /student/:id
+":id is the student id, can be obtained from POST /auth/login/student"
+returns the user object along with their comments
 
 
 # Phase 1
