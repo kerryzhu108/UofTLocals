@@ -4,26 +4,44 @@ import "../css/AdminPageStyling.css";
 import Businesses from "../components/Businesses";
 import Post from "../components/Post";
 import SearchForm from "../components/SearchForm";
+import Cookies from 'universal-cookie';
 import {
     removeBusiness,
     removePost,
     sortation,
     myFunc
 } from "../actions/AdminPosts";
+import {getProfile} from '../apis/profile';
 import { getAnnouncements, getBusinesses } from "../apis/business.js";
 import help from "../images/help.png";
 
 class AdminPanel extends React.Component {
-    state = {
-        businesses: [],
-        posts: [],
-        apps_search: "",
-        businesses_search: "",
-        posts_search: "",
-        type: "",
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            businesses: [],
+            posts: [],
+            apps_search: "",
+            businesses_search: "",
+            posts_search: "",
+            type: "",
+            isLoading: true,
+            isAdmin: false
+        };
+    }
 
-    componentDidMount() {
+    async componentDidMount() {
+
+        const cookies = new Cookies();
+        const profile = await getProfile(cookies.get("access_token"));
+        var isAdmin = false;
+        console.log(profile);
+        if (profile) {
+            isAdmin = profile.type === "admin";
+        }
+
+        this.setState({isAdmin: isAdmin, isLoading: false});
+
         window.addEventListener("load", this.fetchResturants.bind(this));
     }
 
@@ -80,6 +98,13 @@ class AdminPanel extends React.Component {
     }
 
     render() {
+        if (this.state.isLoading) return null;
+        if (!this.state.isAdmin) return (
+            <div>
+                <p>Must be an admin user to access this page.</p>
+            </div>
+        )
+
         return (
             <div>
                 <Header />

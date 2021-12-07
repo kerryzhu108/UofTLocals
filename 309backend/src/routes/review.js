@@ -14,9 +14,12 @@ router.post(
     utils.checkDbConnection,
     utils.authenticateToken,
     body("content").isString(),
-    body("rating").isInt({ min: 0, max: 5 }),
+    body("rating").isInt({ min: 1, max: 5 }),
     utils.validationHandler,
     async function (req, res) {
+        // Ensure that this request is sent by a student
+        if (req.user.type !== "student") return res.status(403).send("Not a student");
+
         try {
             // Create a new announcement
             const review = new Review({

@@ -6,7 +6,7 @@ const { Business } = require("./../models/Business");
 const router = express.Router();
 
 router.get("/", async function (req, res) {
-    return res.send("Receiving data from the server!");
+    return res.send("UofT Locals REST API");
 });
 
 module.exports = router;
