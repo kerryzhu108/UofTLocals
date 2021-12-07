@@ -18,6 +18,10 @@ router.post(
     utils.authenticateToken,
     utils.validationHandler,
     async function (req, res) {
+
+        // Ensure that this request is sent by a student
+        if (request.user.type !== "student") return res.status(403).send("Not a student");
+
         try {
             let comment = new Comment({
                 content: req.body.content,
