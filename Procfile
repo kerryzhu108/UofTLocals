@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/web
 if [ "$WHICHEND" == "backend" ]; then
   cd 309backend && npm install && npm start
 else
