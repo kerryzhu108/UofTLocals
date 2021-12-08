@@ -7,6 +7,11 @@ import SignupBusiness from "./views/SignupBusiness";
 import StudentProfile from "./views/StudentProfilePage.js";
 import AdminPanel from "./views/AdminPanelPage.js";
 
+const dotenv = require("dotenv");
+dotenv.config();
+
+
+
 function App() {
     return (
         <Router>

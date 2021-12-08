@@ -26,6 +26,7 @@ class StudentProfile extends React.Component {
             confirmation: "",
             comments: [],
             reviews: [],
+            id: "",
             imageURL: "",
         }
     };
@@ -60,7 +61,8 @@ class StudentProfile extends React.Component {
             comments: comments,
             reviews: reviews,
             imageURL: user_information.profileImageURL,
-            displayname: user_information.firstname + " " + user_information.lastname
+            displayname: user_information.firstname + " " + user_information.lastname,
+            id: user_information.id
         })
     }
 
