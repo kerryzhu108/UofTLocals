@@ -216,7 +216,6 @@ class BusinessProfilePage extends React.Component {
             publicImageURL: business.publicImageURL,
             isLoading: false,
         });
-        console.log(this.state.publicImageURL);
     }
 
     getContentBox() {
@@ -233,7 +232,6 @@ class BusinessProfilePage extends React.Component {
                         />
                     )}
                     <p>{this.state.commentError}</p>
-                    {console.log(this.state.comments)}
                     {this.state.comments.map((comment) => (
                         comment.business && <Comment
                             key={comment._id}

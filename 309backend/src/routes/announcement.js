@@ -17,16 +17,19 @@ router.post(
         try {
             if (req.user.type !== "business") return res.status(403).send("Not a business user");
 
+            // Add this announcement to the logged in business'
+            // announcement array
+            const business = await Business.findById(req.user.id);
+            if (!business) return res.status(404).send("Business not found");
+
             // Create a new announcement
             const announcement = new Announcement({
                 content: req.body.content,
                 poster: req.user.id,
                 date: Date(),
+                poster_name: business.name,
             });
 
-            // Add this announcement to the logged in business'
-            // announcement array
-            const business = await Business.findById(req.user.id);
             business.announcements.push(announcement.id);
 
             // Save the changes
