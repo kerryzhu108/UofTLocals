@@ -38,10 +38,13 @@ router.get(
 router.delete(
     "/deletebusiness/:id",
     utils.checkDbConnection,
+    utils.authenticateToken,
     async function (req, res) {
         const id = req.params.id;
         // Validate id
         try {
+            if (req.user.type !== "admin") return res.status(403).send("Not an admin user");
+
             const business = await Business.findByIdAndRemove(id);
             if (!business) {
                 res.status(404).send();
@@ -59,9 +62,11 @@ router.delete(
 router.delete(
     "/delete/:pid",
     utils.checkDbConnection,
+    utils.authenticateToken,
     async function (req, res) {
         const pid = req.params.pid;
         try {
+            if (req.user.type !== "admin") return res.status(403).send("Not an admin user");
             const post = await Announcement.findByIdAndRemove(pid);
             if (!post) {
                 res.status(404).send("Resource not found");
@@ -78,10 +83,12 @@ router.delete(
 router.delete(
     "/delete/:bid/:pid",
     utils.checkDbConnection,
+    utils.authenticateToken,
     async function (req, res) {
         const pid = req.params.pid;
         const bid = req.params.bid;
         try {
+            if (req.user.type !== "admin") return res.status(403).send("Not an admin user");
             const post = await Announcement.findByIdAndRemove(pid);
             const business = await Business.findById(bid);
             if (!post || !business) {
