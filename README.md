@@ -453,10 +453,54 @@ Response:
 
 ### Student
 
-GET /student/:id
-":id is the student id, can be obtained from POST /auth/login/student"
-returns 
+**GET** `/student/:id`
 
+Gets information from a single student based on the id provided, returns the student if completed successfully. Empty body
+
+Response:
+```json
+{
+    "student": StudentObj
+}
+```
+
+**PATCH** `/student/:id`
+
+Updates account information of a student, returns the student if updated successfully. 
+
+Header:
+```json
+{
+    "Authorization": Bearer ACCESS_TOKEN
+}
+```
+
+Body:
+```json
+{
+    "email": String,
+    "first_name": String,
+    "last_name": String
+}
+```
+
+Response:
+```json
+{
+    "student": StudentObj
+}
+```
+
+**POST** `/student/image/:userid`
+
+Stores the image url to the cloudinary server, returns the URL of the image if successful. No body
+
+Response:
+```json
+{
+    "url": student.profileImageURL
+}
+```
 
 # Phase 1
 ## High level summary:
