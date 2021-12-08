@@ -107,7 +107,7 @@ const seedDatabase = async () =>{
             content: "Can't go wrong with Domino's, food tastes as expected.",
             poster: student,
             created: Date(),
-            business: business.id
+            business: business2.id
         }).save()
 
         const review = await new Review({
