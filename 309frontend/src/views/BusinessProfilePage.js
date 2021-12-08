@@ -212,8 +212,9 @@ class BusinessProfilePage extends React.Component {
                             color="green"
                         />
                     )}
+                    {console.log(this.state.comments)}
                     {this.state.comments.map((comment) => (
-                        <Comment
+                        comment.business && <Comment
                             key={comment._id}
                             profile={comment.poster.profileImageURL}
                             username={comment.poster.username}

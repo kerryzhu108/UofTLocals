@@ -2,7 +2,8 @@
 
 # Phase 2
 
-URL of website:
+URL of website: https://frontend309.herokuapp.com/
+Backend domain: https://backend309.herokuapp.com/
 
 Users can browse the website using different accounts or no account.
 
@@ -40,19 +41,41 @@ Login with username: admin password: admin
 
 ACCESS_TOKEN is retrieved from the login endpoint
 All body content is in json unless otherwise mentioned
+Backend domain is: https://backend309.herokuapp.com/
 
 ### Announcements
 Folder for managing business announcements
 
-POST /announcement
-"Creates a new announcement for a business, returns the created announcement on success"
-"Access token retreived from POST /auth/login/business or student endpoint"
-headers: {
-    Authorization: Bearer ACCESS_TOKEN,
-},
-body: {
-  content: "Announcement details"
+**POST** `/announcement`
+Creates a new announcement for a business, returns the created announcement on success
+Access token retreived from POST /auth/login/business or student endpoint
+
+Header:
+```json
+{
+    "Authorization": "Bearer ACCESS_TOKEN"
 }
+```
+Body:
+```json
+{
+    "content": String,
+}
+```
+Response:
+```json
+{
+    "content": String,
+    "poster": {
+        "name": String
+    },
+    "date": Date,
+    "_id": id,
+    "__v": int
+}
+```
+Example response:
+```json
 response: {
     "content": "Announcement details",
     "poster": {
@@ -62,11 +85,19 @@ response: {
     "_id": "61afc996e48b56a8ceb8d03a",
     "__v": 0
 }
+```
 
-GET /announcement/:id
-"Gets all announcements for a business, :id is the business id which can be obtained from GET /businesses/all"
-response: [AnnouncementObj, AnnouncementObj, ...]
-}
+**GET** `/announcement/:id`
+Gets all announcements for a business, :id is the business id which can be obtained from GET /businesses/all
+Response: 
+```json
+[
+    {AnnouncementObjFromAboveEndpoint},
+    {AnnouncementObjFromAboveEndpoint},
+    ...
+]
+```
+
 
 ### Auth
 Folder for managing registration, login, and general authentication-based tasks. Note that this backend uses JSON Web Tokens for authentication and restricting access to certain endpoints.
@@ -323,6 +354,10 @@ Response:
 
 Stores the image url to the cloudinary server, returns the URL of the image if successful. No body
 
+Body:
+form-data:
+image : imagefile.png
+
 Response:
 ```json
 {
@@ -494,6 +529,10 @@ Response:
 **POST** `/student/image/:userid`
 
 Stores the image url to the cloudinary server, returns the URL of the image if successful. No body
+
+Body:
+form-data:
+image : imagefile.png
 
 Response:
 ```json
