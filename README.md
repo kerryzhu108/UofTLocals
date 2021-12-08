@@ -3,6 +3,7 @@
 # Phase 2
 
 URL of website: https://frontend309.herokuapp.com/
+Backend domain: https://backend309.herokuapp.com/
 
 Users can browse the website using different accounts or no account.
 
@@ -353,6 +354,10 @@ Response:
 
 Stores the image url to the cloudinary server, returns the URL of the image if successful. No body
 
+Body:
+form-data:
+image : imagefile.png
+
 Response:
 ```json
 {
@@ -524,6 +529,10 @@ Response:
 **POST** `/student/image/:userid`
 
 Stores the image url to the cloudinary server, returns the URL of the image if successful. No body
+
+Body:
+form-data:
+image : imagefile.png
 
 Response:
 ```json
