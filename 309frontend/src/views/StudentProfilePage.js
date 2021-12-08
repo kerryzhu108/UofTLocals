@@ -117,14 +117,14 @@ class StudentProfile extends React.Component {
                             <p>Below is a list of all comments and reviews you have made on this site.</p>
                         }    
                         { this.state.comments.map((comment) => (
-                            <Comment 
+                            comment.business && <Comment 
                                 key={ comment._id }
                                 username={ "@" + this.state.username + " commented on: " + comment.business.name }
                                 profile={ defaultProfile }
                                 content={ comment.content }/>
                         ))}
                         { this.state.reviews.map((review) => (
-                            <Review 
+                            review.business && <Review 
                                 key={ review._id }
                                 username={ "@" + this.state.username + " reviewed: " + review.business.name }
                                 profile={ defaultProfile }

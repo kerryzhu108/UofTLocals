@@ -69,7 +69,6 @@ export function myFunc() {
 
 // Functionality for sorting the entries based on certain inputs
 export function sortation(val, event, panel) {
-    console.log(panel.state.businesses[1].announcements)
     if (val === "(A-Z)") {
         if (event.target.id === "bus") {
             panel.state.businesses.sort((a, b) => a.name.localeCompare(b.name))
