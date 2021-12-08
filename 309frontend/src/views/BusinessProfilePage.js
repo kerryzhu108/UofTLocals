@@ -49,7 +49,9 @@ class BusinessProfilePage extends React.Component {
             isLoading: true,
             displayType: "Comments",
             reviewRating: 0,
-            reviewError: ""
+            reviewError: "",
+            commentError: "",
+            announcementError: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -73,6 +75,11 @@ class BusinessProfilePage extends React.Component {
     }
 
     async handleStudentSubmit(event) {
+        if (!(/\S/.test(this.state.boxText))) {
+            this.setState({commentError: "Invalid comment"});
+            return;
+        }
+
         var currentComments = this.state.comments;
 
         const cookies = new Cookies();
@@ -93,6 +100,11 @@ class BusinessProfilePage extends React.Component {
     }
 
     async handleBusinessSubmit(event) {
+        if (!(/\S/.test(this.state.boxText))) {
+            this.setState({announcementError: "Invalid announcement"});
+            return;
+        }
+
         let currentAnnouncements = this.state.announcements;
 
         const cookies = new Cookies();
@@ -138,7 +150,15 @@ class BusinessProfilePage extends React.Component {
     }
 
     async handleReviewSubmit(event) {
-        if (this.state.reviewRating === 0) return;
+        if (!(/\S/.test(this.state.boxText))) {
+            this.setState({reviewError: "Invalid review"});
+            return;
+        }
+
+        if (this.state.reviewRating === 0) {
+            this.setState({reviewError: "Select a rating first"});
+            return;
+        }
         const id = this.props.match.params.id;
         const cookies = new Cookies();
         const review = await postBusinessReview(
@@ -212,6 +232,7 @@ class BusinessProfilePage extends React.Component {
                             color="green"
                         />
                     )}
+                    <p>{this.state.commentError}</p>
                     {console.log(this.state.comments)}
                     {this.state.comments.map((comment) => (
                         comment.business && <Comment
@@ -319,6 +340,7 @@ class BusinessProfilePage extends React.Component {
                                         onClick={this.handleBusinessSubmit}
                                     />
                                 )}
+                                <p>{this.state.announcementError}</p>
                             {this.state.announcements.map((announcement) => (
                                 <Comment
                                     key={announcement._id}

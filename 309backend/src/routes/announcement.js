@@ -37,7 +37,7 @@ router.post(
                 await announcement.populate({
                     path: "poster",
                     model: "Business",
-                    select: { _id: 0, name: 1},
+                    select: { _id: 0, name: 1, publicImageURL: 1},
                 })
             );
         } catch (error) {
