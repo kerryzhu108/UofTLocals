@@ -27,6 +27,7 @@ Editing their business is only possible when they are looking at their own busin
 
 ## Admin User
 Login with username: admin password: admin
+Similar to student accounts, but with access to the Admin Panel, reached by clicking "ADMIN" on the top right. On the Admin Panel, Admins can sort through all businesses and announcements, and can also delete both of them from the database. Beyond that, Admin interactions function the same as student interactions. Note that all deletion functionality is solely accessible by admins and cannot be done by any other user or remotely unless an admin token is provided.
 
 ## Third party libraries
 
@@ -284,6 +285,13 @@ Response:
 
 Deletes a business from the database based on the id parameter provided, returns the business deleted if completed successfully. Empty body
 
+Header:
+```json
+{
+    "Authorization": "Bearer ACCESS_TOKEN"
+}
+```
+
 Response:
 ```json
 {
@@ -295,6 +303,13 @@ Response:
 
 Deletes an announcement from the announcements folder based on the pid parameter provided, returns the post deleted if completed successfully. Empty body
 
+Header:
+```json
+{
+    "Authorization": "Bearer ACCESS_TOKEN"
+}
+```
+
 Response:
 ```json
 {
@@ -305,6 +320,13 @@ Response:
 **DELETE** `/business/delete/:bid/:pid`
 
 Removes a specific announcement from the business it belongs to and from the announcements folder, returns the updated business if completed successfully. Empty body
+
+Header:
+```json
+{
+    "Authorization": "Bearer ACCESS_TOKEN"
+}
+```
 
 Response:
 ```json
