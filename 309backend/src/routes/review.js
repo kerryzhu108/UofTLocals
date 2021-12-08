@@ -17,10 +17,10 @@ router.post(
     body("rating").isInt({ min: 1, max: 5 }),
     utils.validationHandler,
     async function (req, res) {
-        // Ensure that this request is sent by a student
-        if (req.user.type !== "student") return res.status(403).send("Not a student");
-
         try {
+            // Ensure that this request is sent by a student
+            if (req.user.type !== "student") return res.status(403).send("Not a student");
+
             // Create a new announcement
             const review = new Review({
                 content: req.body.content,
@@ -38,7 +38,13 @@ router.post(
 
             const student = await Student.findById(req.user.id);
             if (!student) return res.status(404).send("Student not found");
+
+            // Ensure that this business has not already been reviewed
+            // by this student.
+            if (student.reviewed_businesses.includes(req.params.id)) return res.status(400).send("Business already reviewed");
+
             student.reviews.push(review.id);
+            student.reviewed_businesses.push(req.params.id);
 
             // Save the changes
             await business.save();

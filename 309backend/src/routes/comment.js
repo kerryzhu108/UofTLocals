@@ -48,7 +48,7 @@ router.post(
                 await comment.populate({
                     path: "poster",
                     model: "Student",
-                    select: { username: 1, _id: 0 },
+                    select: { username: 1, _id: 0, profileImageURL: 1 },
                 })
             );
         } catch (error) {

@@ -127,6 +127,7 @@ const seedDatabase = async () =>{
         student.comments.push(comment2);
         student.comments.push(comment3);
         student.reviews.push(review);
+        student.reviewed_businesses.push(business.id);
 
         business2.announcements.push(announcement4)
         business2.comments.push(comment3)

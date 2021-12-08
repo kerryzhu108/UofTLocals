@@ -49,6 +49,7 @@ class BusinessProfilePage extends React.Component {
             isLoading: true,
             displayType: "Comments",
             reviewRating: 0,
+            reviewError: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -148,10 +149,11 @@ class BusinessProfilePage extends React.Component {
         );
 
         if (review) {
-            console.log(review);
             var currentReview = this.state.reviews;
             currentReview.push(review);
             this.setState({ reviews: currentReview, boxText: "" });
+        } else {
+            this.setState({reviewError: "Review already posted"});
         }
     }
 
@@ -245,6 +247,7 @@ class BusinessProfilePage extends React.Component {
                             color="green"
                         />
                     )}
+                    <p>{this.state.reviewError}</p>
                     {this.state.reviews.map((review) => (
                         <Review
                             key={review._id}

@@ -12,6 +12,7 @@ const studentSchema = new mongoose.Schema({
     password: { type: String, required: true },
     comments: { type: [mongoose.Types.ObjectId], ref: "Comment" }, // References of comments this student has made
     reviews: { type: [mongoose.Types.ObjectId], ref: "Review" },
+    reviewed_businesses: {type: [mongoose.Types.ObjectId], ref: "Business"},
     created: { type: Date },
     type: { type: String, default: "student" },
     profileImageURL: { type: String, default: "" }

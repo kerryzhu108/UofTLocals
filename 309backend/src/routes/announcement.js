@@ -15,6 +15,8 @@ router.post(
     utils.validationHandler,
     async function (req, res) {
         try {
+            if (req.user.type !== "business") return res.status(403).send("Not a business user");
+
             // Create a new announcement
             const announcement = new Announcement({
                 content: req.body.content,
