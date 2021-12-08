@@ -13,7 +13,7 @@ class LandingPage extends React.Component {
         this.state = {
             businesses: [],
             search: "",
-            type: "",
+            type: "Any",
             username: "Login",
         };
     }
@@ -93,14 +93,8 @@ class LandingPage extends React.Component {
                             ></input>
                         </div>
                         {this.state.businesses.map((business, id) => {
-                            const searchFilterCheck = business["name"]
-                                .toLowerCase()
-                                .includes(this.state.search.toLowerCase());
-                            const typeFilterCheck =
-                                business["type"]
-                                    .toLowerCase()
-                                    .includes(this.state.type.toLowerCase()) ||
-                                this.state.type === "Any";
+                            const searchFilterCheck = business["name"].toLowerCase().includes(this.state.search.toLowerCase());
+                            const typeFilterCheck = this.state.type.toLowerCase().includes(business["type"].toLowerCase()) || this.state.type === "Any";
                             if (searchFilterCheck && typeFilterCheck) {
                                 return (
                                     <ResturantCover
