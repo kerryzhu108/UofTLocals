@@ -40,9 +40,9 @@ class AdminPanel extends React.Component {
             isAdmin = profile.type === "admin";
         }
 
-        this.setState({isAdmin: isAdmin, isLoading: false});
+        await this.fetchResturants()
 
-        window.addEventListener("load", this.fetchResturants.bind(this));
+        this.setState({isAdmin: isAdmin, isLoading: false});
     }
 
     async fetchResturants() {
