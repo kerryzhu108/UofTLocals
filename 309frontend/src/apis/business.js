@@ -1,5 +1,7 @@
 import { domain, headers } from "../apis/headers.js";
+import Cookies from "universal-cookie";
 
+const cookies = new Cookies();
 //Gets all approved businesses
 export async function getBusinesses() {
     try {
@@ -192,9 +194,14 @@ export async function getAnnouncements() {
 // Deletes a singular business
 export async function deleteBusiness(bid) {
     try {
+        const access_token = cookies.get("access_token")
         fetch(domain + "business/deletebusiness/" + bid, {
             method: "DELETE",
-            headers: headers,
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+            },
             mode: "cors",
             cache: "default",
         }).then((response) => {
@@ -208,9 +215,14 @@ export async function deleteBusiness(bid) {
 // Deletes a singular post from the business and announcements folder
 export async function deletePost(bid, pid) {
     try {
+        const access_token = cookies.get("access_token")
         fetch(domain + "business/delete/" + bid + "/" + pid, {
             method: "DELETE",
-            headers: headers,
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+            },
             mode: "cors",
             cache: "default",
         }).then((response) => {
@@ -224,9 +236,14 @@ export async function deletePost(bid, pid) {
 // Deletes a posting from the announcement folder only (used when the corresponding business is already deleted)
 export async function deleteIndPost(pid) {
     try {
+        const access_token = cookies.get("access_token")
         fetch(domain + "business/delete/" + pid, {
             method: "DELETE",
-            headers: headers,
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+            },
             mode: "cors",
             cache: "default",
         }).then((response) => {
