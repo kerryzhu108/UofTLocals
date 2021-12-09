@@ -1,7 +1,7 @@
 # team36
 
 # Phase 2
-
+Refer to the READMEs in 309frontend and 309backend for setting up the project locally
 URL of website: https://frontend309.herokuapp.com/
 Backend domain: https://backend309.herokuapp.com/
 
