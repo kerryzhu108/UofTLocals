@@ -40,7 +40,7 @@ export const registerStudent = async (comp, event) => {
                 const msg = response[0].msg + ' for ' + response[0].param
                 alert(msg)
             } catch(error) {
-                response.text().then(text => { alert(text) })
+                alert(error)
             }
             return
         }
@@ -72,7 +72,8 @@ export const registerBusiness = async (comp, event) => {
                 "username": comp.state.username,
                 "password": comp.state.password,
                 "desc": comp.state.description,
-                "email": comp.state.email
+                "email": comp.state.email,
+                "type": comp.state.type
             })
         })
         if (response.status !== 200) {
@@ -83,8 +84,7 @@ export const registerBusiness = async (comp, event) => {
                 const msg = response[0].msg + ' for ' + response[0].param
                 alert(msg)
             } catch(error) {
-                console.log(response.text)
-                response.text().then(text => { alert(text) })
+                alert(error)
             }
             return
         }
